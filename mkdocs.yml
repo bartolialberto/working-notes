@@ -1,0 +1,8 @@
+site_name: Working Notes
+site_url: https://bartolialberto.github.io/working-notes/
+
+theme:
+  name: material
+
+nav:
+  - Home: index.md
