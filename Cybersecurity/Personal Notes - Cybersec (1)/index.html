@@ -8,22 +8,28 @@
       
       
       
+        <link rel="canonical" href="https://bartolialberto.github.io/working-notes/Cybersecurity/Personal%20Notes%20-%20Cybersec%20%281%29/">
       
       
+        <link rel="prev" href="../AI%20in%20cybersec/">
       
-      <link rel="icon" href="/working-notes/assets/images/favicon.png">
+      
+        <link rel="next" href="../Personal%20Notes%20-%20Cybersec%20%282%29/">
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
       <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.2.5">
     
     
       
-        <title>Working Notes</title>
+        <title>Driver abuse - Working Notes</title>
       
     
     
-      <link rel="stylesheet" href="/working-notes/assets/stylesheets/main.0e669242.min.css">
+      <link rel="stylesheet" href="../../assets/stylesheets/main.0e669242.min.css">
       
         
-        <link rel="stylesheet" href="/working-notes/assets/stylesheets/palette.85d0ee34.min.css">
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.85d0ee34.min.css">
       
       
 
@@ -42,7 +48,7 @@
       
     
     
-    <script>__md_scope=new URL("/working-notes/",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
 
@@ -66,6 +72,11 @@
     <label class="md-overlay" for="__drawer"></label>
     <div data-md-component="skip">
       
+        
+        <a href="#unveiling-byovd-threats-malwares-use-and-abuse-of-kernel-drivers" class="md-skip">
+          Skip to content
+        </a>
+      
     </div>
     <div data-md-component="announce">
       
@@ -78,7 +89,7 @@
 
 <header class="md-header md-header--shadow" data-md-component="header">
   <nav class="md-header__inner md-grid" aria-label="Header">
-    <a href="/working-notes/." title="Working Notes" class="md-header__button md-logo" aria-label="Working Notes" data-md-component="logo">
+    <a href="../.." title="Working Notes" class="md-header__button md-logo" aria-label="Working Notes" data-md-component="logo">
       
   
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
@@ -98,7 +109,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              
+              Driver abuse
             
           </span>
         </div>
@@ -172,7 +183,7 @@
 
 <nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
   <label class="md-nav__title" for="__drawer">
-    <a href="/working-notes/." title="Working Notes" class="md-nav__button md-logo" aria-label="Working Notes" data-md-component="logo">
+    <a href="../.." title="Working Notes" class="md-nav__button md-logo" aria-label="Working Notes" data-md-component="logo">
       
   
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
@@ -189,7 +200,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/working-notes/." class="md-nav__link">
+      <a href="../.." class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -206,17 +217,19 @@
       
   
   
+    
+  
   
     
     
     
-    <li class="md-nav__item md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
       
         
         
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" >
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" checked>
         
           <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
             
@@ -229,7 +242,7 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="true">
           <label class="md-nav__title" for="__nav_2">
             <span class="md-nav__icon md-icon"></span>
             Cybersecurity
@@ -242,7 +255,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/working-notes/Cybersecurity/AI%20in%20cybersec/" class="md-nav__link">
+      <a href="../AI%20in%20cybersec/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -260,9 +273,27 @@
                 
   
   
+    
   
-    <li class="md-nav__item">
-      <a href="/working-notes/Cybersecurity/Personal%20Notes%20-%20Cybersec%20%281%29/" class="md-nav__link">
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  <span class="md-ellipsis">
+    Driver abuse
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
         
   
   <span class="md-ellipsis">
@@ -271,6 +302,44 @@
   
 
       </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#unveiling-byovd-threats-malwares-use-and-abuse-of-kernel-drivers" class="md-nav__link">
+    Unveiling BYOVD Threats: Malware’s Use and Abuse of Kernel Drivers
+  </a>
+  
+    <nav class="md-nav" aria-label="Unveiling BYOVD Threats: Malware’s Use and Abuse of Kernel Drivers">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#background" class="md-nav__link">
+    Background
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
     </li>
   
 
@@ -282,7 +351,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/working-notes/Cybersecurity/Personal%20Notes%20-%20Cybersec%20%282%29/" class="md-nav__link">
+      <a href="../Personal%20Notes%20-%20Cybersec%20%282%29/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -302,7 +371,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/working-notes/Cybersecurity/Personal%20Notes%20-%20Cybersec%20%283%29/" class="md-nav__link">
+      <a href="../Personal%20Notes%20-%20Cybersec%20%283%29/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -322,7 +391,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/working-notes/Cybersecurity/Personal%20Notes%20-%20Cybersec%20%284%29/" class="md-nav__link">
+      <a href="../Personal%20Notes%20-%20Cybersec%20%284%29/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -342,7 +411,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/working-notes/Cybersecurity/Personal%20Notes%20-%20Cybersec%20%285%29/" class="md-nav__link">
+      <a href="../Personal%20Notes%20-%20Cybersec%20%285%29/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -362,7 +431,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/working-notes/Cybersecurity/Personal%20Notes%20-%20Cybersec%20%286%29/" class="md-nav__link">
+      <a href="../Personal%20Notes%20-%20Cybersec%20%286%29/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -382,7 +451,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/working-notes/Cybersecurity/Personal%20Notes%20-%20Cybersec%20%287%29/" class="md-nav__link">
+      <a href="../Personal%20Notes%20-%20Cybersec%20%287%29/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -402,7 +471,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/working-notes/Cybersecurity/Personal%20Notes%20-%20Cybersec/" class="md-nav__link">
+      <a href="../Personal%20Notes%20-%20Cybersec/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -463,7 +532,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/working-notes/LLM/Coding/" class="md-nav__link">
+      <a href="../../LLM/Coding/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -483,7 +552,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/working-notes/LLM/LLM%20Internals/" class="md-nav__link">
+      <a href="../../LLM/LLM%20Internals/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -503,7 +572,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/working-notes/LLM/LLM%20vs%20AI%20Agents/" class="md-nav__link">
+      <a href="../../LLM/LLM%20vs%20AI%20Agents/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -523,7 +592,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/working-notes/LLM/Training/" class="md-nav__link">
+      <a href="../../LLM/Training/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -543,7 +612,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/working-notes/LLM/Vulnerability/" class="md-nav__link">
+      <a href="../../LLM/Vulnerability/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -582,6 +651,34 @@
   
   
   
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#unveiling-byovd-threats-malwares-use-and-abuse-of-kernel-drivers" class="md-nav__link">
+    Unveiling BYOVD Threats: Malware’s Use and Abuse of Kernel Drivers
+  </a>
+  
+    <nav class="md-nav" aria-label="Unveiling BYOVD Threats: Malware’s Use and Abuse of Kernel Drivers">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#background" class="md-nav__link">
+    Background
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
 </nav>
                   </div>
                 </div>
@@ -592,8 +689,49 @@
             <div class="md-content" data-md-component="content">
               <article class="md-content__inner md-typeset">
                 
-  <h1>404 - Not found</h1>
+                  
 
+
+<h1 id="driver-abuse">Driver abuse</h1>
+<h2 id="unveiling-byovd-threats-malwares-use-and-abuse-of-kernel-drivers">Unveiling BYOVD Threats: Malware’s Use and Abuse of Kernel Drivers</h2>
+<p><a href="https://www.ndss-symposium.org/wp-content/uploads/2026-s1491-paper.pdf">https://www.ndss-symposium.org/wp-content/uploads/2026-s1491-paper.pdf</a> NDSS 2026</p>
+<ul>
+<li>Some drivers exist solely to implement system level features or to expose privileged operations to user-mode applications.  </li>
+<li>If these drivers contain vulnerabilities, malicious actors can exploit them to bypass security mechanisms, gain elevated privileges, and execute undetected malicious code in the OS kernel. Vulnerable drivers are routinely patched and replaced with new, more secure versions.   </li>
+<li>Bring Your Own Vulnerable Driver (BYOVD) is a sophisticated malware attack technique that leverages legitimate but vulnerable kernel drivers to compromise computer systems. In these attacks, malicious software brings along its own copy of a vulnerable third-party driver and loads it into the operating system – effectively reintroducing into the system an old vulnerability it already knows how to exploit   </li>
+<li>While BYOVD is becoming increasingly popular among malware authors, defense techniques are lagging behind. Modern EDR systems, although effective at monitoring user-mode activity, are often blind to actions that take place in the kernel.  </li>
+<li>For instance, when a malware sample loads and abuses the Zemana anti-malware driver to terminate Windows Defender, public sandboxes on VirusTotal detect only the driver load event, but fail to capture how it is used once loaded into the system. This limitation stems from a fundamental lack of visibility into internal kernel-level communications.</li>
+</ul>
+<h3 id="background">Background</h3>
+<ul>
+<li>Driver Signature Enforcement (DSE) ensures that each kernel driver loaded in the system is signed. To sign a driver, developers submit the binary to Microsoft’s Windows Hardware Dev Center, where it undergoes a suite of security and compatibility checks before Microsoft applies its digital signature  </li>
+<li>While there have been cases of malicious drivers signed by Microsoft [16], this is a risky approach for malware developers. Instead, attackers often exploit legitimate signed drivers with vulnerabilities that expose kernel functions to user-mode programs.  </li>
+<li>Malware authors target drivers that allow arbitrary memory access or dangerous actions like process termination, kernel memory mapping, privileged file access, and I/O monitoring, executing user-specified code at the kernel level.   </li>
+<li>
+<p>A common way to trigger a vulnerability in a driver is to send a properly crafted request. Windows supports two different types of communications with kernel drivers: Minifilter APIs and I/O Request Packet (IRP). </p>
+</li>
+<li>
+<p>Once a driver with the desired characteristics is identified, the malware must drop it on disk and then load it after successfully infecting the system. This procedure is due to the fact that typical methods used to load drivers (e.g., sc.exe, NtLoadDriver, or CreateService) require a file path pointing to a location on disk and cannot be performed from memory.</p>
+</li>
+<li>
+<p>However, loading a driver in Windows requires the process to already run with administrative privileges. This raises a crucial question: why would malware bother loading a driver if it already has administrative privileges?  </p>
+</li>
+<li>
+<p>The answer lies in the design of modern Windows operating systems. Some processes and system components are so essential to maintaining the security and integrity of the system that even administrators are prohibited from modifying them. Only the kernel has the necessary privileges to modify these highly protected system parts. </p>
+</li>
+<li>
+<p>Protected Processes Termination (PPL) provides a flexible protection model designed to isolate processes. They are extensively used to isolate different operating system components, such as process management, the LSASS, Microsoft Defender.  </p>
+</li>
+<li>Modern EDRs are implemented by using a combination of user-mode PPL processes (that contain the detection logic), and kernel-mode drivers (that provide access to privileged resources).   </li>
+<li>Malware can no longer terminate user-space EDR components (even when running with administrative privileges), thanks to their protection under the PPL mechanism.  </li>
+<li>An attacker could find a way to limit the EDR functionalities through other kinds of vulnerabilities, exploit flaws in the PPL implementation, or perform a BYOVD attack to abuse an existing driver that allows a user-mode process to kill even PPL processes. </li>
+</ul>
+
+
+
+
+
+                
               </article>
             </div>
           
@@ -625,10 +763,10 @@
       <div class="md-dialog__inner md-typeset"></div>
     </div>
     
-    <script id="__config" type="application/json">{"base": "/working-notes/", "features": [], "search": "/working-notes/assets/javascripts/workers/search.dfff1995.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
+    <script id="__config" type="application/json">{"base": "../..", "features": [], "search": "../../assets/javascripts/workers/search.dfff1995.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
     
     
-      <script src="/working-notes/assets/javascripts/bundle.78eede0e.min.js"></script>
+      <script src="../../assets/javascripts/bundle.78eede0e.min.js"></script>
       
     
   </body>

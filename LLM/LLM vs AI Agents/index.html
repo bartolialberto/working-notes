@@ -1,0 +1,1317 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+        <link rel="canonical" href="https://bartolialberto.github.io/working-notes/LLM/LLM%20vs%20AI%20Agents/">
+      
+      
+        <link rel="prev" href="../LLM%20Internals/">
+      
+      
+        <link rel="next" href="../Training/">
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.2.5">
+    
+    
+      
+        <title>LLM vs AI Agents - Working Notes</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.0e669242.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.85d0ee34.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="teal" data-md-color-accent="indigo">
+  
+    
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#how-an-llm-invokes-a-software" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../.." title="Working Notes" class="md-header__button md-logo" aria-label="Working Notes" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2Z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Working Notes
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              LLM vs AI Agents
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41Z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="Working Notes" class="md-nav__button md-logo" aria-label="Working Notes" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
+
+    </a>
+    Working Notes
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Personal Notes
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" >
+        
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Cybersecurity
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            Cybersecurity
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Cybersecurity/AI%20in%20cybersec/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    AI in Cybersec
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Cybersecurity/Personal%20Notes%20-%20Cybersec%20%281%29/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Driver abuse
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Cybersecurity/Personal%20Notes%20-%20Cybersec%20%282%29/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    IoC
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Cybersecurity/Personal%20Notes%20-%20Cybersec%20%283%29/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Attack Economics
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Cybersecurity/Personal%20Notes%20-%20Cybersec%20%284%29/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Phishing
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Cybersecurity/Personal%20Notes%20-%20Cybersec%20%285%29/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Secure Software Development
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Cybersecurity/Personal%20Notes%20-%20Cybersec%20%286%29/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Technical quirks
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Cybersecurity/Personal%20Notes%20-%20Cybersec%20%287%29/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Crime
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Cybersecurity/Personal%20Notes%20-%20Cybersec/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Persistence in Windows
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+    
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" checked>
+        
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    LLM
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            LLM
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Coding/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    LLM and Coding
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../LLM%20Internals/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    LLM Internals
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  <span class="md-ellipsis">
+    LLM vs AI Agents
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  <span class="md-ellipsis">
+    LLM vs AI Agents
+  </span>
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#how-an-llm-invokes-a-software" class="md-nav__link">
+    How an LLM invokes a software
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#web-search" class="md-nav__link">
+    Web search
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#tool-use-pattern" class="md-nav__link">
+    Tool-use pattern
+  </a>
+  
+    <nav class="md-nav" aria-label="Tool-use pattern">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#key-differences" class="md-nav__link">
+    Key differences
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#chain-of-prompting" class="md-nav__link">
+    Chain-of-Prompting
+  </a>
+  
+    <nav class="md-nav" aria-label="Chain-of-Prompting">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#chain-of-prompting-in-practice" class="md-nav__link">
+    Chain-of-Prompting in practice
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#static-hand-written-chains-no-selection-needed" class="md-nav__link">
+    Static, hand-written chains (no selection needed)
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#router-dispatcher-pattern-selecting-among-predefined-chains" class="md-nav__link">
+    Router / dispatcher pattern (selecting among predefined chains)
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#dynamic-chain-construction-no-fixed-library-at-all" class="md-nav__link">
+    Dynamic chain construction (no fixed library at all)
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#instruction-hierarchy" class="md-nav__link">
+    Instruction Hierarchy
+  </a>
+  
+    <nav class="md-nav" aria-label="Instruction Hierarchy">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#attacks-to-an-llm" class="md-nav__link">
+    Attacks to an LLM
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#ai-agents-react" class="md-nav__link">
+    AI agents - ReAct
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Training/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Training an LLM
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Vulnerability/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Vulnerability search
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#how-an-llm-invokes-a-software" class="md-nav__link">
+    How an LLM invokes a software
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#web-search" class="md-nav__link">
+    Web search
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#tool-use-pattern" class="md-nav__link">
+    Tool-use pattern
+  </a>
+  
+    <nav class="md-nav" aria-label="Tool-use pattern">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#key-differences" class="md-nav__link">
+    Key differences
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#chain-of-prompting" class="md-nav__link">
+    Chain-of-Prompting
+  </a>
+  
+    <nav class="md-nav" aria-label="Chain-of-Prompting">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#chain-of-prompting-in-practice" class="md-nav__link">
+    Chain-of-Prompting in practice
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#static-hand-written-chains-no-selection-needed" class="md-nav__link">
+    Static, hand-written chains (no selection needed)
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#router-dispatcher-pattern-selecting-among-predefined-chains" class="md-nav__link">
+    Router / dispatcher pattern (selecting among predefined chains)
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#dynamic-chain-construction-no-fixed-library-at-all" class="md-nav__link">
+    Dynamic chain construction (no fixed library at all)
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#instruction-hierarchy" class="md-nav__link">
+    Instruction Hierarchy
+  </a>
+  
+    <nav class="md-nav" aria-label="Instruction Hierarchy">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#attacks-to-an-llm" class="md-nav__link">
+    Attacks to an LLM
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#ai-agents-react" class="md-nav__link">
+    AI agents - ReAct
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+<h1 id="llm-vs-ai-agents">LLM vs AI Agents</h1>
+<p>While a LLM serves as the core engine, tools like Claude, Gemini, ChatGPT (chatbots), Claude Code (agentic coding), NotebookLM (retrieval-grounded) are comprehensive AI tools built by layering additional modules onto that core model.</p>
+<p>Standalone LLMs have several <strong>inherent limitations</strong>:</p>
+<ul>
+<li><strong>Static Knowledge:</strong> Their internal knowledge is fixed at the time of training.  </li>
+<li><strong>Action Limitation:</strong> They cannot inherently send emails, fetch real-time data, or interact with other software.  </li>
+<li><strong>Reasoning Gaps:</strong> They can be "distracted" by useless information or fail at multi-step logic without a structured reasoning framework.</li>
+</ul>
+<p>An AI tool is composed of several additional modules, primarily an <strong>orchestrator</strong> (also called a <strong>router</strong>) that:</p>
+<ul>
+<li>determines how many times the LLM has to be invoked, with which inputs and how the outputs have to be used;   </li>
+<li>determines which external commands have to be invoked, with which inputs and how the outputs have to be used;  </li>
+<li>determines how the text produced by an LLM invocation has to be used for the next LLM or external command invocation;  </li>
+<li>enforces safety/resource limits (number of iterations, safety guardrails, permission checks on tool calls)</li>
+</ul>
+<h2 id="how-an-llm-invokes-a-software">How an LLM invokes a software</h2>
+<p>An LLM <strong>cannot</strong> invoke an external software command. The actual invocation is done by an <strong>orchestrator</strong>. </p>
+<p>The invocation is triggered when the LLM generates a specific <strong>predefined marker</strong> or <strong>command string</strong> instead of standard natural language. This occurs when the LLM determines that its internal knowledge is insufficient and external data or computation is required. During text generation, the LLM outputs a structured string, such as <code>{tool: calculator, expression: 10 * 4 * 2}</code>. The orchestrator detects this specific pattern, pauses text generation, and executes the requested command.</p>
+<p>LLMs are not naturally trained to produce these markers, they are typically <strong>fine-tuned</strong> using supervised data where parts of the desired output are replaced with these commands. Alternatively, they can be <strong>prompted</strong> with a list of available function APIs and instructions on how to call them.</p>
+<p>The <strong>input</strong> for the command is constructed dynamically by the LLM based on the tool, the user's query and the current context. For example, if a user says, <code>"Find my bear in the living room,"</code> and the tool is <code>find_object(item, location)</code>, the LLM extracts "<code>bear</code>" and "<code>living room</code>" from the conversation history to populate the command.</p>
+<p>Once the external software executes the command, the <strong>result</strong> of the command (e.g., the answer from a calculator or a database snippet or a value returned from an API) is integrated back into the workflow by the orchestrator. The result is usually fed back to the LLM so that the LLM then continues predicting the next tokens based on this new, grounded information. </p>
+<p>If the external software returns an error or no response, the orchestrator or the LLM must be capable of realizing the failure and either trying a different approach or informing the user, though "hallucinating" a response despite a tool failure is a known risk.</p>
+<h2 id="web-search">Web search</h2>
+<p>This is an example of a chatbot that receives a question whose response requires executing and summarizing a web search<em>.</em> An <strong>orchestrator</strong> invokes several times the LLM and external commands for the actual execution of web searches.</p>
+<p>We will consider this example: <code>"What's the current inflation rate in the US, and how does it compare to a year ago?".</code> This clearly needs live data.</p>
+<table>
+<thead>
+<tr>
+<th>#</th>
+<th>Call</th>
+<th>Purpose</th>
+<th>Can be skipped/merged?</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>Query planning</td>
+<td>Decide to search + generate queries</td>
+<td>Sometimes merged into the main model deciding to invoke a "search" tool directly (tool-use pattern)</td>
+</tr>
+<tr>
+<td>2</td>
+<td>Relevance filtering</td>
+<td>Pick best sources from raw results</td>
+<td>Often replaced by simple heuristics (top-N by rank)</td>
+</tr>
+<tr>
+<td>3</td>
+<td>Per-source extraction</td>
+<td>Compress each page to relevant facts</td>
+<td>Often skipped; raw snippets fed directly to Call 4 instead</td>
+</tr>
+<tr>
+<td>4</td>
+<td>Final synthesis</td>
+<td>Write the actual answer</td>
+<td>Never skipped — this is the core call</td>
+</tr>
+</tbody>
+</table>
+<h4 id="step-1-llm-call-query-planning-search-query-generation">Step 1 - LLM call: Query planning / search query generation</h4>
+<p>The orchestrator decides <em>whether</em> to search, and if so, it generates one or more effective search queries (the user's raw question is often a bad search query as-is).</p>
+<p><strong>LLM Input</strong>:</p>
+<p><code>System: You are a query planner. Given a user question, decide if a web  search is needed. If so, output 1-3 concise search queries as JSON.</code></p>
+<p><code>User question: "What's the current inflation rate in the US, and how does it compare to a year ago?"</code></p>
+<p><strong>LLM Output</strong>:</p>
+<p><code>{</code><br />
+<code>"needs_search": true,</code><br />
+<code>"queries": [</code><br />
+<code>"US inflation rate August 2026",</code><br />
+<code>"US inflation rate one year ago comparison"</code><br />
+<code>]</code><br />
+<code>}</code></p>
+<h4 id="step-2-external-command-execute-the-searches">Step 2 - External Command: Execute the search(es)</h4>
+<p>The orchestrator invokes an external command, (e.g., Bing API, Google Custom Search) with each query from Call 1. Returns, say, 10 results per query: titles, URLs, snippets.</p>
+<h4 id="step-3-llm-call-relevance-filtering-re-ranking">Step 3 - LLM call: Relevance filtering / re-ranking</h4>
+<p>Assuming the command returned \~20 raw results, the orchestrator decides which 3-5 are actually worth reading in full, since fetching and processing every page is expensive. Then, it invokes the LLM with a dedicated prompt.</p>
+<p><strong>LLM Input</strong>:</p>
+<p><code>System: Given these search results, select the 4 most relevant and authoritative sources for answering the question below. Return their indices only.</code></p>
+<p><code>Question: "What's the current inflation rate in the US..."</code></p>
+<p><code>Results:</code><br />
+<code>1. [BLS.gov] "Consumer Price Index Summary" - bls.gov/news.release/cpi.nlm...</code><br />
+<code>2. [Reuters] "US inflation eases to X% in July" - reuters.com/...</code><br />
+<code>3. [random blog] "My thoughts on the economy" - medium.com/...</code><br />
+<code>... (17 more)</code></p>
+<p><strong>LLM Output</strong>:</p>
+<p><code>{"selected_indices": [1, 2, 5, 8]}</code></p>
+<h4 id="step-4-external-command-fetch-full-page-content">Step 4 - External Command — Fetch full page content</h4>
+<p>The orchestrator fetches the actual page content for the 4 selected URLs (via <code>web_fetch</code>-style tool), possibly stripping HTML/boilerplate. </p>
+<h4 id="step-5-llm-call-per-source-extractionsummarization">Step 5 - LLM call: Per-source extraction/summarization</h4>
+<p>The orchestrator asks the LLM to extract just the relevant facts from each fetched page, so that the final synthesis LLM call will have a context small and focused. Alternatively, one could skip this and just truncate/concatenate raw snippets instead, trading quality for fewer LLM calls.</p>
+<p><strong><code>LLM Input</code></strong> <em>(run once per source, so potentially 4 separate calls here)</em><code>:</code></p>
+<p><code>System: Extract only the facts relevant to this question from the following article. Be concise.</code></p>
+<p><code>Question: "What's the current inflation rate in the US..."</code></p>
+<p><code>Article (BLS.gov): [~2000 words of CPI report text]</code></p>
+<p><strong><code>LLM Output</code></strong> <em>(per source)</em><code>:</code></p>
+<p><code>The BLS reports the Consumer Price Index rose 2.7% year-over-year</code> <br />
+<code>in July 2026, compared to 3.1% the same month last year.</code></p>
+<h4 id="step-6-llm-call-final-synthesis-answer-generation">Step 6 - LLM call: Final synthesis / answer generation</h4>
+<p>This is the "real" answer-writing LLM call — the one the user experiences as "the response."</p>
+<p><strong>LLM Input</strong>:</p>
+<p><code>System: Answer the user's question using only the provided source summaries. Cite sources by name inline.</code></p>
+<p><code>User question: "What's the current inflation rate in the US, and how does it compare to a year ago?"</code></p>
+<p><code>Source summaries:</code><br />
+<code>[BLS.gov]: CPI rose 2.7% YoY in July 2026, vs 3.1% a year earlier.</code><br />
+<code>[Reuters]: Inflation eased for the third consecutive month, driven by...</code><br />
+<code>[source 3]: ...</code><br />
+<code>[source 4]: ...</code></p>
+<p><strong><code>LLM Output</code></strong><code>:</code></p>
+<p><code>As of July 2026, the U.S. inflation rate (CPI) stands at 2.7% year-over-year, according to the Bureau of Labor Statistics. That's down from 3.1% a year ago, continuing a three-month easing trend  reported by Reuters, largely attributed to...</code></p>
+<p>This is the text actually shown to the user.</p>
+<h2 id="tool-use-pattern">Tool-use pattern</h2>
+<p>Many modern chatbots use a different technique, based on the tool-use pattern. This is simpler to build and more flexible: the LLM adapts its own strategy — searching again if results are poor, stopping early if the first search already answers the question.</p>
+<table>
+<thead>
+<tr>
+<th></th>
+<th>Multi-stage pipeline</th>
+<th>Tool-use pattern</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Number of calls</td>
+<td>3-6, mostly fixed</td>
+<td>2 to N, dynamic — model decides when it has enough info</td>
+</tr>
+<tr>
+<td>Flexibility</td>
+<td>Rigid, predetermined steps</td>
+<td>Model can decide to search again, fetch a full page, or stop early</td>
+</tr>
+<tr>
+<td>Cost control</td>
+<td>Easier — can use cheap models for intermediate steps</td>
+<td>Harder — every call uses the same (often expensive) capable model</td>
+</tr>
+<tr>
+<td>Query generation</td>
+<td>Separate dedicated call</td>
+<td>Folded into Call 1 (model writes the query itself as part of tool_use)</td>
+</tr>
+<tr>
+<td>Relevance filtering</td>
+<td>Separate call</td>
+<td>Folded into Call 2 (model reads raw results and picks what matters itself)</td>
+</tr>
+<tr>
+<td>Per-source extraction</td>
+<td>Separate calls (parallel)</td>
+<td>Folded into Call 2 (model reads snippets/pages directly)</td>
+</tr>
+<tr>
+<td>Final synthesis</td>
+<td>Separate call</td>
+<td>Same Call 2</td>
+</tr>
+</tbody>
+</table>
+<p>Before any conversation happens, the orchestrator defines what tools are available, as a schema (not natural language). This schema is sent alongside every request to the LLM.</p>
+<p><code>{</code><br />
+<code>"name": "web_search",</code><br />
+<code>"description": "Search the web for current information",</code><br />
+<code>"input_schema": {</code><br />
+<code>"type": "object",</code><br />
+<code>"properties": {</code><br />
+<code>"query": { "type": "string", "description": "The search query" }</code><br />
+<code>},</code><br />
+<code>"required": ["query"]</code><br />
+<code>}</code><br />
+<code>}</code></p>
+<h4 id="step-1-llm-call">Step 1 -  LLM Call</h4>
+<p><strong>LLM Input</strong> (full message sent to the model):</p>
+<p><code>System: You are a helpful assistant with access to a web_search tool. Use it when you need current information you don't already know.</code></p>
+<p><code>Tools available: [web_search schema above]</code></p>
+<p><code>Conversation:</code><br />
+<code>User: What's the current inflation rate in the US, and how does it compare to a year ago?</code></p>
+<p><strong>LLM Output</strong> (the model's raw response — note it's not plain text, it's a structured object):</p>
+<p><code>{</code><br />
+<code>"stop_reason": "tool_use",</code><br />
+<code>"content": [</code><br />
+<code>{</code><br />
+<code>"type": "text",</code><br />
+<code>"text": "I'll look up the current inflation data for you."</code><br />
+<code>},</code><br />
+<code>{</code><br />
+<code>"type": "tool_use",</code><br />
+<code>"id": "toolu_01A2b3",</code><br />
+<code>"name": "web_search",</code><br />
+<code>"input": { "query": "US inflation rate 2026 vs year ago" }</code><br />
+<code>}</code><br />
+<code>]</code><br />
+<code>}</code></p>
+<p>Two things happen in this single call: the model produces a short natural-language lead-in <em>and</em> a structured tool-call request, in the same generation pass. The <code>stop_reason: "tool_use"</code> tells the orchestrating code "<em>pause here, I need a tool result before I can continue</em>."</p>
+<h4 id="step-2-external-command-execute-the-searches_1">Step 2 - External Command: Execute the search(es)</h4>
+<p>The orchestrator sees <code>stop_reason: "tool_use"</code>, extracts the <code>input.query</code>, and actually calls the search API. Returns something like:</p>
+<p><code>[</code><br />
+<code>{"title": "Consumer Price Index Summary", "url": "bls.gov/...",</code> <br />
+<code>"snippet": "CPI rose 2.7% over the 12 months ending July 2026..."},</code><br />
+<code>{"title": "US inflation eases to 2.7% in July", "url": "reuters.com/...",</code> <br />
+<code>"snippet": "Inflation continued its downward trend, easing from..."},</code><br />
+<code>{"title": "...", "url": "...", "snippet": "..."}</code><br />
+<code>]</code></p>
+<h4 id="step-3-llm-call">Step 3 - LLM Call</h4>
+<p>The orchestrator appends the tool result to the <strong>same conversation</strong> and sends it back to the LLM. The LLM invocation includes the <em>entire prior conversation</em> (the model has no memory between calls — the full history must be resent each time, as covered earlier for the Artifacts API).</p>
+<p><strong>LLM Input</strong>:</p>
+<p><code>System: You are a helpful assistant with access to a web_search tool...</code></p>
+<p><code>Conversation:</code><br />
+<code>User: What's the current inflation rate in the US, and how does it compare to a year ago?</code></p>
+<p><code>Assistant: [tool_use: web_search(query="US inflation rate 2026 vs year ago")]</code></p>
+<p><code>Tool result (id: toolu_01A2b3):</code><br />
+<code>[</code><br />
+<code>{"title": "Consumer Price Index Summary", "url": "bls.gov/...",</code> <br />
+<code>"snippet": "CPI rose 2.7% over the 12 months ending July 2026..."},</code><br />
+<code>{"title": "US inflation eases to 2.7% in July", "url": "reuters.com/...",</code> <br />
+<code>"snippet": "Inflation continued its downward trend, easing from..."},</code><br />
+<code>...</code><br />
+<code>]</code></p>
+<p><strong>LLM Output</strong>:</p>
+<p><code>{</code><br />
+<code>"stop_reason": "end_turn",</code><br />
+<code>"content": [</code><br />
+<code>{</code><br />
+<code>"type": "text",</code><br />
+<code>"text": "As of July 2026, U.S. inflation (CPI) is 2.7% year-over-year, according to the Bureau of Labor Statistics. That's down from roughly 3.1% a year earlier, continuing a multi-month easing trend reported by Reuters."</code><br />
+<code>}</code><br />
+<code>]</code><br />
+<code>}</code></p>
+<p>This time <code>stop_reason: "end_turn"</code> signals the model is done — no more tool calls needed, this text goes straight to the user.</p>
+<p>The loop isn't hardcoded to exactly 2 calls — it repeats until the model stops requesting tools. E.g., if the snippets weren't detailed enough, Call 2's output might itself be another <code>tool_use</code> block (e.g., calling <code>web_fetch</code> on the BLS URL for the full report), producing a Call 3 with that page's content, and so on. Each iteration of this loop is one LLM call. Simple questions resolve in 2 calls (1 tool-request + 1 final-answer); complex research questions might take 5-10 iterations if the model chooses to search multiple times, fetch full pages, or refine queries based on what it finds.</p>
+<h3 id="key-differences">Key differences</h3>
+<p>The tool-use pattern is simpler to build and more flexible: the LLM adapts its own strategy — searching again if results are poor, stopping early if the first search already answers the question, but it's harder to control cost/latency precisely since you don't know upfront how many iterations it'll take.</p>
+<p>Furthermore, every LLM call typically has to use a model capable enough to reason about tool selection — you can't easily swap in a cheap model for "just the filtering step" the way you could in the explicit pipeline.</p>
+<table>
+<thead>
+<tr>
+<th></th>
+<th>Multi-stage pipeline</th>
+<th>Tool-use pattern</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Query generation</td>
+<td>Separate dedicated call</td>
+<td>Folded into Call 1 (model writes the query itself as part of tool_use)</td>
+</tr>
+<tr>
+<td>Relevance filtering</td>
+<td>Separate call</td>
+<td>Folded into Call 2 (model reads raw results and picks what matters itself)</td>
+</tr>
+<tr>
+<td>Per-source extraction</td>
+<td>Separate calls (parallel)</td>
+<td>Folded into Call 2 (model reads snippets/pages directly)</td>
+</tr>
+<tr>
+<td>Final synthesis</td>
+<td>Separate call</td>
+<td>Same Call 2</td>
+</tr>
+<tr>
+<td>Number of calls</td>
+<td>3-6, mostly fixed</td>
+<td>2 to N, dynamic — model decides when it has enough info</td>
+</tr>
+<tr>
+<td>Flexibility</td>
+<td>Rigid, predetermined steps</td>
+<td>Model can decide to search again, fetch a full page, or stop early</td>
+</tr>
+<tr>
+<td>Cost control</td>
+<td>Easier — can use cheap models for intermediate steps</td>
+<td>Harder — every call uses the same (often expensive) capable model</td>
+</tr>
+</tbody>
+</table>
+<h2 id="chain-of-prompting">Chain-of-Prompting</h2>
+<p>Chain of Prompting requires an <strong>orchestrator</strong> software that breaks down a complex problem into a sequence of smaller sub-problems, each addressed in <strong>separate runs</strong> of the LLM. The orchestrator manages the flow of data between the multiple LLM calls. The output of one run (the answer to a sub-problem) is used as context for the next run, so that the context for each step is small and focused. Steps can be run in parallel (e.g., checking 50 functions independently). <strong>Verification checkpoints</strong> can be inserted so errors don't silently compound through the chain</p>
+<p>General heuristic:</p>
+<ul>
+<li>If the problem is a <strong>single chain of logical implications</strong>  </li>
+<li>CoT is natural and sufficient.  </li>
+<li>If the problem is a <strong>search over a large space</strong> combined with a <strong>need to verify hypotheses against ground truth</strong> (code execution, a proof checker, a compiler)  </li>
+<li>Chain-of-prompting (often paired with tool use) tends to outperform pure CoT.</li>
+</ul>
+<p>In practice, sophisticated systems often combine both: chain-of-prompting at the macro level, with a CoT reasoning trace happening <em>within</em> each individual stage.</p>
+<p>As an example, consider the task of finding a vulnerability in a codebase. Here, a single linear CoT tends to break down, because the task isn't a deduction chain:</p>
+<ul>
+<li>It is a <strong>search problem</strong> across a large space (many files, many possible vulnerability classes).  </li>
+<li>It needs <strong>verification against ground truth</strong> (does the exploit actually trigger? what does the compiler/interpreter say?).  </li>
+<li>Different parts of the analysis are logically independent (a SQL injection check and a buffer overflow check don't depend on each other's reasoning).</li>
+</ul>
+<p>A more effective structure is <strong>chain-of-prompting</strong>, where each stage is a separate, focused prompt/tool call with its own context:</p>
+<ul>
+<li><strong>Stage 1 — Recon</strong>: <code>"List all user-input entry points in this codebase</code>"<br />
+  → produces a list of functions/routes.  </li>
+<li><strong>Stage 2 — Triage</strong>: For each entry point, a separate prompt: "<code>Does this function sanitize its input before using it in [SQL query / file path / shell command]?</code>"<br />
+  → flags suspicious ones.  </li>
+<li><strong>Stage 3 — Deep dive</strong>: For each flagged function, a focused prompt with just that function's code and its call graph: "<code>Trace how user_input flows through this function. Is it possible to inject unescaped content into the query at line 42?</code>"  </li>
+<li><strong>Stage 4 — Verification</strong>: Feed the hypothesis to a tool (static analyzer, sandboxed execution, or a test harness) to <strong>confirm</strong> the vulnerability is real, not just plausible-sounding.  </li>
+<li><strong>Stage 5 — Report</strong>: Synthesize confirmed findings into a report.</li>
+</ul>
+<h3 id="chain-of-prompting-in-practice">Chain-of-Prompting in practice</h3>
+<ul>
+<li><em>Consider chain-of-prompting. How is it implemented in real systems?</em>  </li>
+<li><em>Does a system have a predefined collection of prompt chains and chooses the most suitable for the specific problem?</em>  </li>
+<li><em>If so, how does it identify the most suitable?</em></li>
+</ul>
+<p>Real systems implement chain-of-prompting in a few distinct architectural patterns. Many real systems do maintain a predefined library of chains, with selection typically done via a lightweight classification step (either an LLM call or an embedding-similarity lookup). However the field has been trending toward more dynamic plan generation, where the boundary between "picking a chain" and "writing a new chain" gets blurry.</p>
+<h3 id="static-hand-written-chains-no-selection-needed">Static, hand-written chains (no selection needed)</h3>
+<p>The simplest and still most common approach in production: a developer writes a <strong>fixed pipeline</strong> for a <strong>known task type</strong>. There's no "choosing" at runtime because the chain <em>is</em> the application.</p>
+<p>Example: a customer-support triage tool might always run:</p>
+<ol>
+<li>classify intent  </li>
+<li>retrieve relevant docs  </li>
+<li>draft reply  </li>
+<li>check draft against policy.</li>
+</ol>
+<p>Every ticket goes through the same fixed sequence. You compose a DAG of prompt/tool steps at design time.</p>
+<p>This works well when the task is known in advance and doesn't vary much in shape.</p>
+<h3 id="router-dispatcher-pattern-selecting-among-predefined-chains">Router / dispatcher pattern (selecting among predefined chains)</h3>
+<p>In this case the system has a <strong>library of chains</strong>, each specialized for a task type, and a <strong>router</strong> decides which one to invoke. The router itself is typically one of:</p>
+<ul>
+<li><strong>A classifier prompt</strong>: a lightweight LLM call (often a smaller/cheaper model) that takes the user's request and outputs a label like <code>"code_debugging"</code>, <code>"math_proof"</code>, <code>"data_analysis"</code>, which then maps to a specific chain via a lookup table.  </li>
+<li><strong>Embedding similarity / semantic routing</strong>: the incoming request is embedded and compared (via cosine similarity) against embeddings of example requests representing each chain's domain — whichever chain's exemplar is closest gets selected. This is fast and doesn't need an extra LLM call, but is less flexible than a classifier prompt.  </li>
+<li><strong>Rule-based/heuristic routing</strong>: simple keyword or regex matching (e.g., "if the request mentions a filename ending in <code>.sql</code>, invoke the SQL-review chain"). Cheap, predictable, but brittle.</li>
+</ul>
+<p>The "chains" are sometimes framed as <em>tools</em> or <em>skills</em> the orchestrator can invoke, by deciding which tool fits the request based on the request itself.</p>
+<p>A few common approaches used to build a router:</p>
+<ul>
+<li><strong>Confidence thresholds</strong>: if the classifier/router's confidence for any chain is below some threshold, fall back to a generic/default chain (or ask a clarifying question) rather than guessing.  </li>
+<li><strong>Cost/latency tradeoffs</strong>: cheaper routing methods (keyword rules, embeddings) are used for high-volume/low-stakes routing; more expensive routing (a full LLM classification call) is reserved for ambiguous or high-stakes requests.  </li>
+<li><strong>Human-in-the-loop fallback</strong>: some systems route to a "none of the above, ask a human or ask for clarification" path when no chain scores well — better than forcing a bad-fit chain.  </li>
+<li><strong>Evaluation against labeled examples</strong>: teams typically build a small benchmark of "which chain should handle this request?" examples and measure routing accuracy before deploying, since a bad router silently degrades every downstream chain's performance.</li>
+</ul>
+<h3 id="dynamic-chain-construction-no-fixed-library-at-all">Dynamic chain construction (no fixed library at all)</h3>
+<p>Rather than choosing from predefined chains, many modern agentic systems have the model <strong>generate the plan itself</strong> at inference time — essentially writing a custom chain of prompts/tool calls specific to the problem, rather than picking one from a fixed menu. The model is asked to <em>decompose</em> the task into steps itself (<strong>"planner" LLM call</strong>), effectively writing a custom chain on the fly.</p>
+<ol>
+<li>An initial prompt asks the model to output a step-by-step plan (e.g., "<code>Step 1: find all API endpoints. Step 2: check each for auth. Step 3: ...</code>").  </li>
+<li>Each step is then executed as its own sub-prompt (sometimes by the same model, sometimes handed to a smaller/cheaper model), with results fed back into a shared scratchpad or memory.  </li>
+<li>The plan can be <strong>revised mid-execution</strong> if a step reveals something unexpected (e.g., "<code>step 3 found no auth vulnerabilities, but discovered a possible SSRF issue — inserting a new investigative step</code>").</li>
+</ol>
+<p>This is more flexible than a static chain but harder to guarantee correctness for, since the model can produce a bad plan.</p>
+<p>Many production systems mitigate this by combining approaches: a <strong>constrained planner</strong> that must choose steps from a known set of tools/chains (bounding the space of possible "wrong turns") but can compose them in a novel order.</p>
+<h2 id="instruction-hierarchy">Instruction Hierarchy</h2>
+<p>Most modern LLMs, especially in chat or agent use cases, process structured inputs consisting of:</p>
+<ul>
+<li><code>System Message</code>s define the general instructions, safety guidelines, and constraints for the LLM, as well as tools available to it. They define the <strong>expected behavior</strong> and the overall <strong>control flow</strong>. These messages can only be provided by the application developer.  </li>
+<li><code>User Messages</code> are an end user’s inputs to the model.  </li>
+<li><code>Model Outputs</code> refer to responses from the LLM, which may consist of text, images, audio, calls to a tool, and more.  </li>
+<li><code>Tool Outputs</code> may contain internet search results, execution results from a code interpreter, or results from a third-party API query.</li>
+</ul>
+<p>Each serves a different purpose and is formatted with special tokens to enable the LLM to delineate between different message types.</p>
+<p>The context provided to an LLM may contain multiple conflicting instructions, for example user messages could contain instructions that conflict with the expected behavior described by system messages.</p>
+<p>Ideally, a privilege hierarchy should be established for these types of messages: system messages should take precedence over user messages and user messages should take precedence over third-party conten. The LLM should refuse to act in a way that subverts such a hierarchy. This objective is approximated with a specific training (fine tuning).</p>
+<p>From a different point of view, the LLM acts as an operating system in which every instruction is executed as if it was in kernel mode, i.e., untrusted third-parties can run arbitrary code with access to private data and functions. Modern LLM are specifically trained to defer to higher-privileged instructions. Training can only approximate this desired behavior, though.</p>
+<h3 id="attacks-to-an-llm">Attacks to an LLM</h3>
+<p>A typical use case of an LLM product involves up to three parties:</p>
+<ul>
+<li>the application builder, who provides the LLM’s instructions and drives the control flow,  </li>
+<li>the main user of the product,  </li>
+<li>third-party inputs from web search results or other tool use to be consumed by the LLM as extra context. </li>
+</ul>
+<p>Attacks arise when <strong>conflicts</strong> between these parties arise, e.g., when users or adversaries try to override existing instructions. These conflicts can manifest in different forms:</p>
+<ul>
+<li><strong>Prompt injections</strong>, where adversaries insert instructions that subvert the intent of the system designer. Prompt injections do not target the models themselves, but rather the applications built on top of them (e.g., if an application has access to confidential data or can take actions in the world, prompt injections can cause catastrophic harms such as exfiltrating user data or hijacking the LLM’s actions).  </li>
+<li><strong>Direct</strong> prompt injections occur when the end user of an application provides the injection into the input.  </li>
+<li><strong>Indirect</strong> prompt injections occur when a third-party input (e.g., from browsing or tool use) contains the prompt injection.  </li>
+<li><strong>Jailbreak</strong>, which specifically aims to escape the safety behavior that is trained into an LLM. As such, they often don’t specifically conflict with a model’s previous instructions. There are a myriad of variants aimed at performing malicious tasks.  </li>
+<li><strong>System Message Extraction</strong> The <code>System Message</code> defines the expected behavior of the model, and it may contain well-curated business logic, private information such as passwords, or safety related instructions. The prompt could thus be considered intellectual property, and having knowledge of the prompt can aid in other attacks. System message extraction attacks aim to reveal the entirety of the system message or a specific secret from it. </li>
+</ul>
+<h2 id="ai-agents-react">AI agents - ReAct</h2>
+<p>AI agents are based on the framework outlined above, with an orchestrator, an LLM, external commands.</p>
+<p>Some systems break the request into subtasks that can potentially be executed in parallel by specialized "<strong>worker</strong>" agents (which might itself be a fixed chain, or another LLM with a narrow prompt/toolset). An orchestrator plans, spawns subagents to research pieces potentially in parallel, then synthesizes their output.</p>
+<p>The overall framework is sometimes called <strong>ReAct</strong> (Reason + Act). The LLM "reasons" to create a "Plan," but it then "Acts" by generating a tool-calling command to obtain information. The overall execution functions as a chain of separate prompts managed by an orchestrator, because ReAct waits for an "Observation" (the result of the tool call) before continuing to the next reasoning step. It relies on <strong>specifically aligned models</strong> that have been fine-tuned to:</p>
+<ul>
+<li>recognize tool-use scenarios, and  </li>
+<li>incentivized to reason through them step-by-step.</li>
+</ul>
+<p>The specific training includes the generation of tool markers: standard LLMs are not naturally trained to output the specific markers or command strings (e.g., <code>{tool: calculator}</code>) required to trigger external APIs. Therefore, models are often fine-tuned on annotated data so they "realize" exactly when and how to call a tool.</p>
+<table>
+<thead>
+<tr>
+<th>Feature</th>
+<th>Chain of Thought (CoT)</th>
+<th>Chain of Prompting (CoP)</th>
+<th>ReAct</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Model Runs</strong></td>
+<td>Single prediction</td>
+<td>Multiple separate runs</td>
+<td>Multiple rounds (Loop)</td>
+</tr>
+<tr>
+<td><strong>External Actions</strong></td>
+<td>None (Internal only)</td>
+<td>Possible, but focused on sub-tasks</td>
+<td><strong>Core requirement</strong>(Tool calling)</td>
+</tr>
+<tr>
+<td><strong>Primary Goal</strong></td>
+<td>Explain logic before answering</td>
+<td>Tackle complex tasks step-by-step</td>
+<td>Use reasoning to drive actions</td>
+</tr>
+</tbody>
+</table>
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    <script id="__config" type="application/json">{"base": "../..", "features": [], "search": "../../assets/javascripts/workers/search.dfff1995.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.78eede0e.min.js"></script>
+      
+    
+  </body>
+</html>

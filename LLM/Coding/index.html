@@ -1,0 +1,803 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+        <link rel="canonical" href="https://bartolialberto.github.io/working-notes/LLM/Coding/">
+      
+      
+        <link rel="prev" href="../../Cybersecurity/Personal%20Notes%20-%20Cybersec/">
+      
+      
+        <link rel="next" href="../LLM%20Internals/">
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.2.5">
+    
+    
+      
+        <title>LLM and Coding - Working Notes</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.0e669242.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.85d0ee34.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="teal" data-md-color-accent="indigo">
+  
+    
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#understanding-coding" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../.." title="Working Notes" class="md-header__button md-logo" aria-label="Working Notes" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2Z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Working Notes
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              LLM and Coding
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41Z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="Working Notes" class="md-nav__button md-logo" aria-label="Working Notes" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
+
+    </a>
+    Working Notes
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Personal Notes
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" >
+        
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Cybersecurity
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            Cybersecurity
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Cybersecurity/AI%20in%20cybersec/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    AI in Cybersec
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Cybersecurity/Personal%20Notes%20-%20Cybersec%20%281%29/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Driver abuse
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Cybersecurity/Personal%20Notes%20-%20Cybersec%20%282%29/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    IoC
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Cybersecurity/Personal%20Notes%20-%20Cybersec%20%283%29/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Attack Economics
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Cybersecurity/Personal%20Notes%20-%20Cybersec%20%284%29/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Phishing
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Cybersecurity/Personal%20Notes%20-%20Cybersec%20%285%29/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Secure Software Development
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Cybersecurity/Personal%20Notes%20-%20Cybersec%20%286%29/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Technical quirks
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Cybersecurity/Personal%20Notes%20-%20Cybersec%20%287%29/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Crime
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Cybersecurity/Personal%20Notes%20-%20Cybersec/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Persistence in Windows
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+    
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" checked>
+        
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    LLM
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            LLM
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+    
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  <span class="md-ellipsis">
+    LLM and Coding
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  <span class="md-ellipsis">
+    LLM and Coding
+  </span>
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#understanding-coding" class="md-nav__link">
+    Understanding coding
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#productivity-claims" class="md-nav__link">
+    Productivity Claims
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#productivity-surveys" class="md-nav__link">
+    Productivity Surveys
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#agentic-engineering-guide" class="md-nav__link">
+    Agentic Engineering Guide
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../LLM%20Internals/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    LLM Internals
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../LLM%20vs%20AI%20Agents/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    LLM vs AI Agents
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Training/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Training an LLM
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Vulnerability/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Vulnerability search
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#understanding-coding" class="md-nav__link">
+    Understanding coding
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#productivity-claims" class="md-nav__link">
+    Productivity Claims
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#productivity-surveys" class="md-nav__link">
+    Productivity Surveys
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#agentic-engineering-guide" class="md-nav__link">
+    Agentic Engineering Guide
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+<h1 id="llm-and-coding">LLM and Coding</h1>
+<h2 id="understanding-coding">Understanding coding</h2>
+<p><a href="https://www.cs.unc.edu/techreports/86-020.pdf">No Silver Bullet: Essence and Accidents of Software Engineering</a> <strong>Accidental</strong> complexity relates to problems that engineers create and can fix. For example, modern programming languages have abstracted away the details of writing and optimizing assembly language source code and eliminated the delays caused by batch processing. <strong>Essential</strong> complexity is caused by the problem to be solved, and nothing can remove it; if users want a program to do 30 different things, then those 30 things are essential and the program must do those 30 different things (<a href="https://en.wikipedia.org/wiki/Fred_Brooks">Fred Brooks</a>)</p>
+<ul>
+<li><em>The essence of a software entity is a construct of interlocking concepts: data sets, relationships among data items, algorithms, and invocations of functions. This essence is abstract, in that the conceptual construct is the same under many different representations. It is nonetheless highly precise and richly detailed.</em>  </li>
+<li><em>I believe the hard part of building software to be the specification, design, and testing of this conceptual construct, not the labor of representing it and testing the fidelity of the representation. We still make syntax errors, to be sure; but they are fuzz compared to the conceptual errors in most systems.</em>  </li>
+<li><em>If this is true, building software will always be hard. There is inherently no silver bullet.</em> </li>
+</ul>
+<p><a href="https://queue.acm.org/detail.cfm?ref=rss&amp;id=3807963#:~:text=This%20article%20examines,the%20headlines%20suggest">Eight Myths on Software Engineering and GenAI: Examining the most common misconception</a> Developers don’t actually spend most of their time writing code, with studies at Microsoft and elsewhere showing it’s closer to 14 percent. That means AI code generation, even when it works well, touches a surprisingly small slice of the actual job….The overall development cycle is only as fast as its slowest phase, and coding is often not the slowest phase (ACM Queue, May 2026)</p>
+<p><a href="https://andrewmurphy.io/blog/if-you-thought-the-speed-of-writing-code-was-your-problem-you-have-bigger-problems">If you thought the speed of writing code was your problem - you have bigger problems</a> When you optimise a step that is not the bottleneck, you don't get a faster system. You get a more broken one….Where's the actual bottleneck? If it's not writing code (and it almost never is), then where should you be looking? Walk the value stream. Follow a feature from "someone had an idea" to "a user got value from it."...The bottleneck is understanding the problem. No amount of faster typing fixes that (Andrew Murphy, March 2026).</p>
+<p><a href="https://swizec.com/blog/the-future-of-software-engineering-is-sre/">The future of software engineering is SRE</a> Writing code was always the easy part of this job. The hard part was keeping your code running for the long time. Software engineering is programming over time. It's about how systems change…People don't buy software, they hire a service…And that takes work. A lot of work. Because the first 90% to get a working demo is easy. It's the other 10% that matters (Swizec Teller, January 2026).</p>
+<p><a href="https://blog.katanaquant.com/p/your-llm-doesnt-write-correct-code">Your LLM Doesn't Write Correct Code. It Writes Plausible Code.</a> One of the simplest tests you can run on a database: Doing a primary key lookup on 100 rows. SQLite takes 0.09 ms. An LLM-generated Rust rewrite takes 1,815.43 ms. It’s not a misplaced comma! The rewrite is 20,171 times slower on one of the most basic database operations….LLMs optimize for plausibility over correctness. In this case, plausible is about 20,000 times slower than correct (Horoshi, March 2026).</p>
+<p><a href="https://pluralistic.net/2026/01/06/1000x-liability/#graceful-failure-modes">Code is a liability (not an asset)</a> Tech bosses don't understand this. They think AI is great because it produces 10,000 times more code than a programmer, but that just means it's producing 10,000 times more liabilities…Writing code that works, without consideration of how it will fail, is a recipe for catastrophe…AI can write code, but AI can't do software engineering (Cory Doctorow, January 2026).</p>
+<p><a href="https://berthub.eu/articles/posts/ai-for-decision-makers/">AI: Considerations for people who make decisions</a> Bert Hubert (July 2026)</p>
+<ul>
+<li>Someone who has never been able to program returns to the office on Monday with a fairly functional app. That’s genuinely astonishing…At the same time, there is no guarantee that such an app will turn out to be maintainable, complete, useful, or secure upon closer inspection. In fact, it usually isn’t.  </li>
+<li>And that brings us to a central problem: a great deal of AI is being evaluated by people who simply aren’t qualified to evaluate it. Who can tell whether an app is actually good? That would be … the people who deploy and maintain these kinds of applications in practice…. Do the backups work? Is logging useful? Do users actually understand how to use the app? Can the help desk diagnose problems and resolve them? Does it crash on certain Samsung or Apple phones? Or, as happened with a recent Rabobank app update, does it get confused when you rotate your phone? Is the code readable and maintainable? Is the data storage GDPR-compliant? Where is the data actually stored?  </li>
+<li>It takes experience and expertise to judge whether an application is any good. AI enables many people to build things they could never have built before. Unfortunately, those same people then often decide for themselves that what they’ve built is good. That’s particularly problematic when the person in question occupies a senior leadership position.</li>
+</ul>
+<h2 id="productivity-claims">Productivity Claims</h2>
+<p><a href="https://mikelovesrobots.substack.com/p/wheres-the-shovelware-why-ai-coding">Where's the Shovelware? Why AI Coding Claims Don't Add Up</a> If so many developers are so extraordinarily productive using these tools, where is the flood of shovelware? We should be seeing apps of all shapes and sizes, video games, new websites, mobile apps, software-as-a-service apps — we should be drowning in choice. We should be in the middle of an indie software revolution. We should be seeing 10,000 Tetris clones on Steam…Nobody is shipping more than before (Mike Judge, September 2025).</p>
+<p><a href="https://colton.dev/blog/curing-your-ai-10x-engineer-imposter-syndrome/">No, AI is not Making Engineers 10x as Productive</a> 10x productivity means ten times the outcomes, not ten times the lines of code. This means what you used to ship in a quarter you now ship in a week and a half. These numbers should make even the truest AI believer pause. The amount of product ideation, story point negotiation, bugfixing, code review, waiting for deployments, testing, and QA in that go into what was traditionally 3 months of work is now getting done in 7 work days? For that to happen each and every one of these bottlenecks has to also seen have 10x productivity gains. Any software engineer who has worked on actual code in an actual company knows this isn't possible (Colton Voege, August 2025).</p>
+<h2 id="productivity-surveys">Productivity Surveys</h2>
+<p><a href="https://venturebeat.com/ai/stack-overflow-data-reveals-the-hidden-productivity-tax-of-almost-right-ai-code">Stack Overflow data reveals the hidden productivity tax of 'almost right' AI code</a> The 2025 survey of over 49,000 developers across 177 countries reveals a troubling paradox in enterprise AI adoption. AI usage continues climbing—84% of developers now use or plan to use AI tools, up from 76% in 2024. Yet trust in these tools has cratered….Only 33% of developers trust AI accuracy in 2025, down from 43% in 2024 and 42% in 2023. AI favorability dropped from 77% in 2023 to 72% in 2024 to just 60% this year…Developers cite "AI solutions that are almost right, but not quite" as their top frustration.</p>
+<p><a href="https://redmonk.com/rstephens/2024/11/26/dora2024/">DORA Report 2024 – A Look at Throughput and Stability</a> This report is showing that AI has a negative impact on throughput, stability, and time spent on valuable work.These statistics seem to be saying that code generation is not the bottleneck… We can make individuals more productive at creating more code, but that is not the same as making our entire SDLC more effective and more stable….We thought the bottleneck was developers writing code, but in fact the bottleneck is putting good code into production.</p>
+<ul>
+<li><a href="https://dora.dev/research/2025/dora-report/">Update 2026</a> AI now has positive impact on time spent on valuable work and slightly positive on throughput of individuals. But it still has negative impact on stability. A notable portion (30%) reports little to no trust in the code generated by the AI.</li>
+</ul>
+<p><a href="https://metr.org/blog/2025-07-10-early-2025-ai-experienced-os-dev-study/">Measuring the Impact of Early-2025 AI on Experienced Open-Source Developer Productivity - METR</a> When developers are allowed to use AI tools, they take 19% longer to complete issues—a significant slowdown that goes against developer beliefs and expert forecasts. This gap between perception and reality is striking: developers expected AI to speed them up by 24%, and even after experiencing the slowdown, they still believed AI had sped them up by 20%.</p>
+<ul>
+<li><a href="https://metr.org/blog/2026-05-11-ai-usage-survey/#summary">Update May 2026</a>: We attempt to capture gains due to AI in terms of ‘value’ (how much more value are you creating with AI), rather than ‘speed’ (how long would it have taken you to do these tasks without AI). These can give different answers in principle, in particular if using AI changes the distribution of tasks you work on. For example, researchers could use AI to quickly build an interactive dashboard for their data, which would have taken significantly longer without AI but isn’t that important for their project. Participants self-reported a median 1.4–2x change in the value in their work due to AI tools. The median self-reported speed change is 3x.</li>
+</ul>
+<h2 id="agentic-engineering-guide">Agentic Engineering Guide</h2>
+<p><a href="https://simonwillison.net/guides/agentic-engineering-patterns/">Agentic Engineering Patterns - Simon Willison</a> Coding practices and patterns to help get the best results out of this new era of coding agent development we find ourselves entering. I’m using Agentic Engineering to refer to building software using coding agents—tools like Claude Code and OpenAI Codex, where the defining feature is that they can both generate and execute code—allowing them to test that code and iterate on it independently of turn-by-turn guidance from their human supervisor.</p>
+<p><a href="https://simonwillison.net/guides/agentic-engineering-patterns/code-is-cheap/">Writing code is cheap now</a> (Simon Willison) Delivering new code has dropped in price to almost free... but delivering good code remains significantly more expensive than that. Here's what I mean by "good code":</p>
+<ul>
+<li>The code works. It does what it's meant to do, without bugs.  </li>
+<li>We know the code works. We've taken steps to confirm to ourselves and to others that the code is fit for purpose.  </li>
+<li><a href="https://simonwillison.net/2025/Dec/18/code-proven-to-work/">Your job is to deliver code you have proven to work</a> There’s one depressing anecdote that I keep on seeing: the junior engineer, empowered by some class of LLM tool, who deposits giant, untested PRs on their coworkers…and expects the “code review” process to handle the rest. This is rude, a waste of other people’s time.…We need to deliver code that works—and we need to include proof that it works as well. Not doing that directly shifts the burden of the actual work to whoever is expected to review our code.  </li>
+<li>It solves the right problem.  </li>
+<li>It handles error cases gracefully and predictably: it doesn't just consider the happy path. Errors should provide enough information to help future maintainers understand what went wrong.  </li>
+<li>It’s simple and minimal - it does only what’s needed, in a way that both humans and machines can understand now and maintain in the future.  </li>
+<li>It's protected by tests. The tests show that it works now and act as a regression suite to avoid it quietly breaking in the future.  </li>
+<li>It's documented at an appropriate level, and that documentation reflects the current state of the system - if the code changes an existing behavior the existing documentation needs to be updated to match.  </li>
+<li>The design affords future changes.  </li>
+<li>All of the other relevant "ilities" - accessibility, testability, reliability, security, maintainability, observability, scalability, usability - the non-functional quality measures that are appropriate for the particular class of software being developed.</li>
+</ul>
+<p>Coding agent tools can help with most of this, but there is still a substantial burden on the developer driving those tools to ensure that the produced code is good code for the subset of good that's needed for the current project.  </p>
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    <script id="__config" type="application/json">{"base": "../..", "features": [], "search": "../../assets/javascripts/workers/search.dfff1995.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.78eede0e.min.js"></script>
+      
+    
+  </body>
+</html>

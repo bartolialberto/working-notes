@@ -1,0 +1,1007 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+        <link rel="canonical" href="https://bartolialberto.github.io/working-notes/LLM/LLM%20Internals/">
+      
+      
+        <link rel="prev" href="../Coding/">
+      
+      
+        <link rel="next" href="../LLM%20vs%20AI%20Agents/">
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.2.5">
+    
+    
+      
+        <title>LLM Internals - Working Notes</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.0e669242.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.85d0ee34.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="teal" data-md-color-accent="indigo">
+  
+    
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#how-an-llm-decides-to-terminate-a-response" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../.." title="Working Notes" class="md-header__button md-logo" aria-label="Working Notes" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2Z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Working Notes
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              LLM Internals
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41Z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="Working Notes" class="md-nav__button md-logo" aria-label="Working Notes" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
+
+    </a>
+    Working Notes
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Personal Notes
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" >
+        
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Cybersecurity
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            Cybersecurity
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Cybersecurity/AI%20in%20cybersec/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    AI in Cybersec
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Cybersecurity/Personal%20Notes%20-%20Cybersec%20%281%29/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Driver abuse
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Cybersecurity/Personal%20Notes%20-%20Cybersec%20%282%29/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    IoC
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Cybersecurity/Personal%20Notes%20-%20Cybersec%20%283%29/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Attack Economics
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Cybersecurity/Personal%20Notes%20-%20Cybersec%20%284%29/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Phishing
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Cybersecurity/Personal%20Notes%20-%20Cybersec%20%285%29/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Secure Software Development
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Cybersecurity/Personal%20Notes%20-%20Cybersec%20%286%29/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Technical quirks
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Cybersecurity/Personal%20Notes%20-%20Cybersec%20%287%29/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Crime
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Cybersecurity/Personal%20Notes%20-%20Cybersec/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Persistence in Windows
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+    
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" checked>
+        
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    LLM
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            LLM
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Coding/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    LLM and Coding
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  <span class="md-ellipsis">
+    LLM Internals
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  <span class="md-ellipsis">
+    LLM Internals
+  </span>
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#how-an-llm-decides-to-terminate-a-response" class="md-nav__link">
+    How an LLM decides to terminate a response
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#how-an-llm-summarizes-text" class="md-nav__link">
+    How an LLM summarizes text
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#chain-of-thought-reasoning-chain" class="md-nav__link">
+    Chain of Thought (Reasoning Chain)
+  </a>
+  
+    <nav class="md-nav" aria-label="Chain of Thought (Reasoning Chain)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#consequence-of-the-prompt-training-free" class="md-nav__link">
+    Consequence of the Prompt (Training-free)
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#constructed-at-training-time-training-based" class="md-nav__link">
+    Constructed at Training Time (Training-based)
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#example-solving-a-math-theorem-with-cot" class="md-nav__link">
+    Example: Solving a math theorem with CoT
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#llm-architecture" class="md-nav__link">
+    LLM Architecture
+  </a>
+  
+    <nav class="md-nav" aria-label="LLM Architecture">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#ffn-feedforward-network" class="md-nav__link">
+    FFN (feedforward network)
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#attention" class="md-nav__link">
+    Attention
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#number-of-parameters" class="md-nav__link">
+    Number of parameters
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../LLM%20vs%20AI%20Agents/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    LLM vs AI Agents
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Training/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Training an LLM
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Vulnerability/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Vulnerability search
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#how-an-llm-decides-to-terminate-a-response" class="md-nav__link">
+    How an LLM decides to terminate a response
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#how-an-llm-summarizes-text" class="md-nav__link">
+    How an LLM summarizes text
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#chain-of-thought-reasoning-chain" class="md-nav__link">
+    Chain of Thought (Reasoning Chain)
+  </a>
+  
+    <nav class="md-nav" aria-label="Chain of Thought (Reasoning Chain)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#consequence-of-the-prompt-training-free" class="md-nav__link">
+    Consequence of the Prompt (Training-free)
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#constructed-at-training-time-training-based" class="md-nav__link">
+    Constructed at Training Time (Training-based)
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#example-solving-a-math-theorem-with-cot" class="md-nav__link">
+    Example: Solving a math theorem with CoT
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#llm-architecture" class="md-nav__link">
+    LLM Architecture
+  </a>
+  
+    <nav class="md-nav" aria-label="LLM Architecture">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#ffn-feedforward-network" class="md-nav__link">
+    FFN (feedforward network)
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#attention" class="md-nav__link">
+    Attention
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#number-of-parameters" class="md-nav__link">
+    Number of parameters
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+  <h1>LLM Internals</h1>
+
+<h2 id="how-an-llm-decides-to-terminate-a-response">How an LLM decides to terminate a response</h2>
+<p>An LLM generally decides a response is complete by using specific internal markers or external constraints. These mechanisms ensure the model doesn't generate text indefinitely or end a sentence abruptly before it is finished.</p>
+<p>The most common way an LLM "knows" to stop is through a special vocabulary symbol called an <strong>end-of-sequence token</strong> (often denoted as <code>⟨EOS⟩</code>, <code>⟨/s⟩</code>, or <code>[EOS]</code>).</p>
+<ul>
+<li><strong>During Training:</strong> These markers are inserted at the very end of sequences in the training dataset.  </li>
+<li><strong>During Generation:</strong> Because the LLM is trained to predict the next token, it will eventually predict the <code>⟨EOS⟩</code> token as the most probable next step when the context suggests a natural conclusion. Once this symbol is generated, the sampling process immediately terminates.</li>
+</ul>
+<p>In practical applications (like chatbots), developers often implement rules to stop generation regardless of the model's internal state to manage costs and response times.</p>
+<ul>
+<li><strong>Maximum Length:</strong> The model is forced to stop once it reaches a predetermined number of tokens.  </li>
+<li><strong>Time/Resource Limits:</strong> Decoding may be terminated after a certain time limit to ensure the system remains responsive for users.  </li>
+<li><strong>Beam Search Completion:</strong> In search algorithms that explore multiple paths (beam search), the process stops when a specified number of "complete" hypotheses (those ending in an EOS token) have been found.</li>
+</ul>
+<p>Some advanced systems monitor the model's output in real-time to decide when to stop:</p>
+<ul>
+<li><strong>Probability Thresholds:</strong> Generation can be halted if the probability of the next predicted token falls below a certain "confidence" threshold.  </li>
+<li><strong>Repetition Detection:</strong> A specialized module can trigger a stop if it detects the model has entered a loop, repeating the same phrases or tokens beyond a predefined limit.</li>
+</ul>
+<p>In summary, while the core LLM "engine" typically uses <strong>EOS tokens</strong> to signal completion based on patterns learned during training, the broader tools you interact with (like ChatGPT) layer on <strong>length and time constraints</strong> to ensure efficient and coherent performance.</p>
+<h2 id="how-an-llm-summarizes-text">How an LLM summarizes text</h2>
+<p><strong>Summarization is an intrinsic ability</strong> of a Large Language Model (LLM), arising naturally from its fundamental training process rather than from additional external modules. By learning to guess the next word in a sequence across trillions of tokens of text, the model acquires a vast amount of language knowledge and world facts. Because text often contains condensed versions of information, the model naturally learns the patterns required to distill long sequences into shorter ones.</p>
+<p>This capability is <strong>refined</strong> in the training phases that follow pre-training (<strong>fine tuning</strong>), where summarization is cast as a task: the model is shown pairs of inputs and desired outputs<br />
+(e.g., <strong>input</strong> <code>"Summarize this: …."</code>, <strong>output</strong> <code>[desired Summary]</code>; <strong>input</strong> <code>“...tl;dr”</code>, <strong>output</strong> <code>[desired Summary]</code>”).</p>
+<h2 id="chain-of-thought-reasoning-chain">Chain of Thought (Reasoning Chain)</h2>
+<p><strong>Chain of Thought</strong> (also called <strong>reasoning chain</strong>) is a <strong>prompting method</strong> where the LLM is instructed to <strong>generate intermediate reasoning steps before providing the final answer</strong>.</p>
+<p>The model is run just once<strong>,</strong> and all intermediate reasoning steps are generated in a single prediction along with the final answer. The LLM decomposes complex problems into smaller, sequential reasoning steps, making the process more transparent and increasing accuracy for tasks like math or logical deduction.</p>
+<p>CoT can be triggered by providing a few demonstrations of step-by-step problem solving (<strong>few-shot CoT</strong>) or by simply adding the instruction "<code>Let's think step by step</code>" to the prompt (<strong>zero-shot CoT</strong>).</p>
+<p>CoT <strong>emerges from pretraining alone</strong>, it is elicited via prompting — no special training strictly required. The <strong>quality</strong> and <strong>reliability</strong> of the reasoning depends heavily on what training the model received, though. </p>
+<p>Modern LLMs are <strong>specifically trained</strong> to do CoT well (“<strong>reasoning models</strong>”). In modern LLMs, a prompt phrase like "<code>let's think step by step</code>" mostly nudges the <em>presentation</em> (more explicit step delimiters, more signposting of "why" at each stage) rather than changing the underlying reasoning path.</p>
+<h3 id="consequence-of-the-prompt-training-free">Consequence of the Prompt (Training-free)</h3>
+<p>For standard, off-the-shelf LLMs, reasoning chains are often triggered entirely by the prompt without any specific training for that task. This is achieved through:</p>
+<ul>
+<li><strong>Zero-shot CoT Prompting:</strong> This activates the model's "thinking" ability simply by adding a sentence like <code>"Let’s think step by step"</code> to the end of a prompt. This instruction provokes the LLM to generate reasoning steps before reaching a final answer without needing any prior examples in the prompt.  </li>
+<li><strong>Few-shot CoT Prompting:</strong> The prompt includes a few demonstration examples that show a problem-solving process broken into intermediate steps. The LLM learns from these demonstrations to mimic the underlying thought process.</li>
+</ul>
+<p>The "reasoning" is considered an <strong>emergent ability</strong>. The model indeed learned general knowledge about the world during pre-training, and the prompt acts as a way to "activate and reorganize" that knowledge efficiently. This worked because pretraining on massive text corpora already exposes a model to enormous amounts of step-by-step reasoning (math solutions, code walkthroughs, explanatory writing), so the <em>capability</em> to produce reasoning-like text is latent in the base model. Prompting just elicits it.</p>
+<p>Importantly, this emergent behavior was observed to appear reliably only at sufficient model scale — smaller models often didn't benefit from CoT prompting the way larger ones did, suggesting it's tied to capabilities that emerge from scale/pretraining rather than requiring a dedicated training phase.</p>
+<h3 id="constructed-at-training-time-training-based">Constructed at Training Time (Training-based)</h3>
+<p>Reliable, high-quality, self-correcting CoT (the kind seen in current "reasoning models", i.e., modern LLMs): <strong>requires dedicated post-training</strong>.</p>
+<p>This is typically done with Reinforcement Learning against verifiable correctness signals, which is a distinct training phase — related to but <strong>not</strong> identical to the <strong>alignment training</strong> focused on helpfulness/harmlessness/honesty. Alignment training in the RLHF-for-safety sense (as opposed to RL-for-reasoning) mostly shapes <em>how</em> the model reasons about sensitive topics (calibration, refusal behavior, avoiding harmful reasoning chains) rather than <em>whether</em> it can reason step-by-step at all.</p>
+<h3 id="example-solving-a-math-theorem-with-cot">Example: Solving a math theorem with CoT</h3>
+<p>Take a simple but illustrative case — proving that <strong>√2 is irrational</strong>.</p>
+<p>A CoT might look like:</p>
+<ol>
+<li><em><code>Assume for contradiction</code></em> <code>that √2 is rational. Then √2 = a/b for integers a, b with no common factors (fraction in lowest terms).</code>  </li>
+<li><code>Squaring both sides: 2 = a²/b², so a² = 2b².</code>  </li>
+<li><code>This means a² is even, which implies a itself must be even (since odd² is always odd).</code>  </li>
+<li><code>So write a = 2k. Substituting: (2k)² = 2b² → 4k² = 2b² → b² = 2k².</code>  </li>
+<li><code>This means b² is even, so b is also even.</code>  </li>
+<li><code>But if both a and b are even, they share a common factor of 2 — contradicting our assumption that a/b was in lowest terms.</code>  </li>
+<li><code>Contradiction reached, so the original assumption is false. Therefore √2 is irrational.</code> ∎</li>
+</ol>
+<p>This works well as one continuous CoT because each step depends tightly on the previous one, the "state" (what we know so far) is small enough to hold in a single context, and there's no need to explore multiple independent branches or verify against external tools.</p>
+<h2 id="llm-architecture">LLM Architecture</h2>
+<h3 id="ffn-feedforward-network">FFN (feedforward network)</h3>
+<p>Il vettore del punto:</p>
+<ol>
+<li>viene proiettato in uno spazio a dimensione molto più alta (tipicamente 4x, tramite una prima matrice)  </li>
+<li>passa attraverso una non-linearità (ReLU/GELU/SwiGLU)  </li>
+<li>viene riproiettato nella dimensione originale (seconda matrice)</li>
+</ol>
+<p>il risultato è sommato al punto di partenza.</p>
+<p>L'interpretazione intuitiva che ne deriva è quella di una <strong>memoria chiave-valore</strong>:</p>
+<ol>
+<li>La prima matrice contiene una "chiave" per ogni riga. Una chiave descrive “proprietà” specifiche nel punto in ingresso. Il prodotto tra la riga ed un punto è uno scalare e risponde alla domanda "quanto è vero, per questo punto, che ha la proprietà X?" (es. "<em>ha a che fare con il calcio</em>", "<em>è un participio passato</em>", "<em>è l'inizio di un nome proprio</em>").  </li>
+<li>La non-linearità (ReLU, ecc.) azzera tutti i match deboli, cioè lascia attive solo le chiavi che corriapondono ai "veri riconoscimenti".  </li>
+<li>la seconda matrice contiene le "direzioni predefinite" corrispondenti che vengono sommate al punto quando la chiave si attiva (la proprietà è presente).</li>
+</ol>
+<p>Le chiavi e le direzioni sono apprese durante il training e restano fisse in fase di inferenza — non cambiano in base al contesto, cambia solo <em>quanto</em> vengono attivate.</p>
+<p><strong>Perché la prima matrice "riconosce proprietà (chiavi)"</strong> Ogni riga della prima matrice è un vettore nello stesso spazio del punto in ingresso. Il prodotto scalare tra quella riga ed il punto in ingresso è, geometricamente, una misura di <strong>quanto i due vettori puntano nella stessa direzione</strong>: se il punto in ingresso è molto "allineato" con quella riga, il prodotto scalare è alto; se sono quasi ortogonali, il prodotto scalare è vicino a zero (o negativo). Quindi <strong>ogni riga della prima matrice definisce una direzione specifica:</strong> durante il training quella riga si è "sintonizzata" per puntare esattamente nella direzione che <strong>i punti aventi una certa proprietà</strong> tendono ad assumere (es."<em>ha a che fare con il calcio</em>", "<em>è un participio passato</em>", "<em>è l'inizio di un nome proprio</em>"). La proprietà è tipicamente astratta e non intuitiva: è stata identificata nel processo di training come direzione che minimizza l’errore.</p>
+<p><strong>Perché la seconda matrice "sono direzioni predefinite da sommare"</strong> Qui il ruolo è simmetrico ma inverso: mentre la prima matrice <strong>legge</strong> (misura quanto una proprietà è presente), la seconda matrice <strong>scrive</strong> (dice cosa fare se quella proprietà è presente). La riga <em>k</em> della seconda matrice è un vettore appreso durante il training che rappresenta "<em>l'aggiustamento da applicare al punto ogni volta che la chiave k si attiva</em>": se la chiave "<em>participio passato</em>" si accende, allora la riga di valore corrispondente potrebbe spingere il punto in una direzione dello spazio che il modello ha imparato essere utile per rappresentare quel concetto nei layer successivi.</p>
+<p>Le due matrici sono <strong>completamente disaccoppiate</strong>: la riga <em>k</em> di W1 (la chiave, usata per la <em>rilevazione</em>) e la riga <em>k</em> di W2 (il valore, usato per la <em>scrittura</em>) sono due vettori appresi in modo indipendente, senza alcun vincolo che li leghi. Non c'è nessuna regola che dica "se la chiave punta in direzione D1, il valore deve anch'esso puntare verso D1" — potrebbero essere completamente scorrelate, e nella pratica lo sono quasi sempre.</p>
+<p>Questo è esattamente ciò che rende l'FFN qualcosa di più espressivo di una semplice "amplificazione": non sta dicendo <em>"se vedo D1, rendi D1 più forte"</em>, sta implementando una vera e propria <strong>regola condizionale appresa</strong>: <em>"se rilevo la proprietà X (misurata dal prodotto scalare con la chiave), allora applica l'aggiustamento Y (la riga di valore)"</em> — dove X e Y possono essere concettualmente del tutto diversi.</p>
+<p>Un esempio concreto per rendere l'idea: una chiave potrebbe attivarsi fortemente quando riconosce "<em>negazione seguita da un verbo al participio passato</em>" (es. "<em>non è stato fatto</em>") — questa è la direzione D1 che il prodotto scalare rileva. Il valore associato a quella chiave, però, potrebbe spingere il punto verso una direzione dello spazio che codifica "<em>questo è probabilmente il soggetto di una forma passiva</em>" — un concetto grammaticale completamente diverso da D1, utile per i layer successivi del Transformer. La chiave fa da "sensore", il valore fa da "azione conseguente" — e il modello, durante il training, è libero di imparare qualsiasi coppia sensore→azione risulti utile per ridurre la loss finale, per quanto le due possano sembrare scorrelate a un osservatore umano.</p>
+<p>E’ precisamente questo disaccoppiamento chiave/valore che permette a un singolo layer FFN di implementare <strong>migliaia di regole "se X allora Y" indipendenti in parallelo</strong> — non un semplice filtro che amplifica ciò che è già presente, ma una vera e propria lookup table appresa durante il training: condizione → conseguenza.</p>
+<h3 id="attention">Attention</h3>
+<p>X input matrix: ogni riga è un token nello spazio degli embedding.</p>
+<ul>
+<li>Numero di righe \= seq_len (lunghezza richiesta analizzata: inferiore alla lunghezza massima del contesto).  </li>
+<li>Numero colonne \= d_model (dimensione degli embedding).</li>
+</ul>
+<p>WQ, WK, WV: matrici di pesi, della stessa dimensione.</p>
+<ul>
+<li>Numero di righe \= d_model (dimensione degli embedding).  </li>
+<li>Numero di colonne \= d_head (d_model diviso per il numero di attention heads).</li>
+</ul>
+<p>Q \= X x WQ, K \= X * WK , V \= X * WV</p>
+<ul>
+<li>Numero di righe \= seq_len  </li>
+<li>Numero colonne \= d_head  </li>
+<li>Ogni riga è un token nello spazio degli “embedding compressi” alla dimensione d_head.</li>
+</ul>
+<p>Ogni riga di Q e di K è associata ad un token di ingresso; definisce una direzione nello spazio compresso degli embedding (query) ed il corrispondente contributo del token in quella direzione (key). Direzione e contributo non sono fissati dal solo token ma dal token nella frase, in quanto si ottengono a partire da X. </p>
+<p>Ogni riga di V è associata ad un token di ingresso; ne rappresenta il contenuto informativo da trasportare in output ed è calcolato in parallelo a Q e K, in modo indipendente da essi.  Anche questo valore informativo dipende dall’intera frase, in quanto è calcolato a partire da X.</p>
+<p>Lo “score” di ogni token di ingresso si calcola come Scores \= Softmax(Q * KT/ sqrt(d_head)). Alla matrice Q * KT si applica una maschera triangolare inferiore prima del calcolo di Softmax. In altre parole, un token di ingresso produce una query nello spazio degli embedding compressi; ogni token della sequenza (incluso se stesso) produce una key nello stesso spazio; la riga di Q·Kᵀ che corrisponde al token di ingresso quantifica quanto sono allineate con la sua query le key di tutti i token ammessi dalla maschera (se stesso e i token precedenti).  </p>
+<p>Il valore di attention per ogni token è ottenuto come Scores * V. Ogni riga corrisponde ad un token ed il numero di colonne è d_head (embedding compressi).</p>
+<p>Ogni attention head produce una matrice Scores * V, usando una terna di matrici WQ, WK, WV diversa da quella di ogni altra head. Queste matrici sono affiancate per colonne, ottenendo una matrice intermedia con seq_len e d_model colonne. Le righe di questa matrice hanno dimensione d_model ma non sono embedding, in quanto sono state costruite concatenando degli embedding compressi. </p>
+<p>La matrice intermedia è quindi moltiplicata per una matrice di pesi WO appresa in training, di dimensione seq_len x d_model. La matrice risultante ha ancora dimensione seq_len x d_model e viene sommata alla matrice di ingresso X.</p>
+<p>L’effetto è che ad ogni riga di X viene sommato un “piccolo spostamento riga”, che rappresenta il valore di attention dei token diversi da quello della riga.</p>
+<h3 id="number-of-parameters">Number of parameters</h3>
+<p>Usiamo Llama 3.1 8B.</p>
+<ul>
+<li>d_model \= 4096  </li>
+<li>32 attention head  </li>
+<li>quindi d_head \= 4096 / 32 \= 128.</li>
+</ul>
+<p><strong>Attention layer</strong></p>
+<p><strong>Wq, Wk, Wv</strong> — ciascuna di dimensione (d_model × d_head) \= (4096 × 128):</p>
+<p>4096 × 128 \= 524.288 parametri per matrice</p>
+<p>Per una testa: 524.288 × 3 \= 1.572.864 parametri</p>
+<p>Per 32 teste: 1.572.864 × 32 \= <strong>50.331.648 parametri</strong> (≈ 50,3M)</p>
+<p><strong>Wo</strong> — l'unica matrice condivisa, dimensione (d_model × d_model) \= (4096 × 4096):</p>
+<p>4096 × 4096 \= <strong>16.777.216 parametri</strong> (≈ 16,8M)</p>
+<p><strong>Totale:</strong> 50.331.648 + 16.777.216 \= <strong>67.108.864 parametri</strong> (≈ 67,1M per layer)</p>
+<p><strong>FFN</strong></p>
+<p>Llama 3.1 usa una variante gated (SwiGLU) con 3 matrici invece di 2, e una dimensione intermedia reale di <strong>14.336</strong> (non un semplice ×4 di 4096):</p>
+<p>4096 × 14.336 \= <strong>58.720.256 parametri</strong> per matrice</p>
+<p>Con 3 matrici (gate, up, down): 58.720.256 × 3 \= <strong>176.160.768 parametri</strong> (≈ 176,2M per layer)</p>
+<p><strong>Confronto</strong></p>
+<table>
+<thead>
+<tr>
+<th>Modulo</th>
+<th>Parametri</th>
+<th>Quota</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Attention (Wq+Wk+Wv×32 teste + Wo)</td>
+<td>≈ 67,1M</td>
+<td>\~28%</td>
+</tr>
+<tr>
+<td>FFN</td>
+<td>≈ 176,2M</td>
+<td>\~72%</td>
+</tr>
+</tbody>
+</table>
+<p><strong>FFN ha circa 2,6 volte i parametri dell'attention.</strong></p>
+<p><strong>M</strong>oltiplicando (67,1M + 176,2M) ≈ 243,3M per i <strong>32 layer</strong> di Llama 3.1 8B si ottiene ≈ 7,8 miliardi di parametri — molto vicino agli 8B dichiarati nel nome del modello (la differenza residua è dovuta agli embedding di ingresso/uscita e alle normalizzazioni, non conteggiati qui).</p>
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    <script id="__config" type="application/json">{"base": "../..", "features": [], "search": "../../assets/javascripts/workers/search.dfff1995.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.78eede0e.min.js"></script>
+      
+    
+  </body>
+</html>

@@ -1,0 +1,1214 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+        <link rel="canonical" href="https://bartolialberto.github.io/working-notes/Cybersecurity/Personal%20Notes%20-%20Cybersec%20%283%29/">
+      
+      
+        <link rel="prev" href="../Personal%20Notes%20-%20Cybersec%20%282%29/">
+      
+      
+        <link rel="next" href="../Personal%20Notes%20-%20Cybersec%20%284%29/">
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.2.5">
+    
+    
+      
+        <title>Attack Economics - Working Notes</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.0e669242.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.85d0ee34.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="teal" data-md-color-accent="indigo">
+  
+    
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#where-do-all-the-attacks-go" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../.." title="Working Notes" class="md-header__button md-logo" aria-label="Working Notes" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2Z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Working Notes
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Attack Economics
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41Z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="Working Notes" class="md-nav__button md-logo" aria-label="Working Notes" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
+
+    </a>
+    Working Notes
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Personal Notes
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+    
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" checked>
+        
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Cybersecurity
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            Cybersecurity
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../AI%20in%20cybersec/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    AI in Cybersec
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Personal%20Notes%20-%20Cybersec%20%281%29/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Driver abuse
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Personal%20Notes%20-%20Cybersec%20%282%29/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    IoC
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  <span class="md-ellipsis">
+    Attack Economics
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  <span class="md-ellipsis">
+    Attack Economics
+  </span>
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#where-do-all-the-attacks-go" class="md-nav__link">
+    Where Do All the Attacks Go?
+  </a>
+  
+    <nav class="md-nav" aria-label="Where Do All the Attacks Go?">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#why-most-users-are-not-harmed" class="md-nav__link">
+    Why most users are not harmed
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#threat-model" class="md-nav__link">
+    Threat model
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#expected-loss" class="md-nav__link">
+    Expected Loss
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#expected-gain" class="md-nav__link">
+    Expected Gain
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#attack-selection" class="md-nav__link">
+    Attack Selection
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#counterintuitive-consequences" class="md-nav__link">
+    Counterintuitive consequences
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#contrast-with-threat-model-individual-attacker" class="md-nav__link">
+    Contrast with threat model individual attacker
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#when-does-targeting-make-sense-for-an-attacker" class="md-nav__link">
+    When Does Targeting Make Sense for an Attacker?
+  </a>
+  
+    <nav class="md-nav" aria-label="When Does Targeting Make Sense for an Attacker?">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#competing-against-scalable-attacks" class="md-nav__link">
+    Competing against Scalable attacks
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#security-cybercrime-and-scale" class="md-nav__link">
+    Security, cybercrime and scale
+  </a>
+  
+    <nav class="md-nav" aria-label="Security, cybercrime and scale">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#financially-motivated-attacks" class="md-nav__link">
+    Financially motivated attacks
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#scalable-attacks" class="md-nav__link">
+    Scalable attacks
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#finding-viable-targets-is-hard" class="md-nav__link">
+    Finding viable targets is hard
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#which-attacks-can-be-neglected" class="md-nav__link">
+    Which attacks can be neglected?
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Personal%20Notes%20-%20Cybersec%20%284%29/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Phishing
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Personal%20Notes%20-%20Cybersec%20%285%29/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Secure Software Development
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Personal%20Notes%20-%20Cybersec%20%286%29/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Technical quirks
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Personal%20Notes%20-%20Cybersec%20%287%29/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Crime
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Personal%20Notes%20-%20Cybersec/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Persistence in Windows
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
+        
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    LLM
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            LLM
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../LLM/Coding/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    LLM and Coding
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../LLM/LLM%20Internals/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    LLM Internals
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../LLM/LLM%20vs%20AI%20Agents/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    LLM vs AI Agents
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../LLM/Training/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Training an LLM
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../LLM/Vulnerability/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Vulnerability search
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#where-do-all-the-attacks-go" class="md-nav__link">
+    Where Do All the Attacks Go?
+  </a>
+  
+    <nav class="md-nav" aria-label="Where Do All the Attacks Go?">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#why-most-users-are-not-harmed" class="md-nav__link">
+    Why most users are not harmed
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#threat-model" class="md-nav__link">
+    Threat model
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#expected-loss" class="md-nav__link">
+    Expected Loss
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#expected-gain" class="md-nav__link">
+    Expected Gain
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#attack-selection" class="md-nav__link">
+    Attack Selection
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#counterintuitive-consequences" class="md-nav__link">
+    Counterintuitive consequences
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#contrast-with-threat-model-individual-attacker" class="md-nav__link">
+    Contrast with threat model individual attacker
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#when-does-targeting-make-sense-for-an-attacker" class="md-nav__link">
+    When Does Targeting Make Sense for an Attacker?
+  </a>
+  
+    <nav class="md-nav" aria-label="When Does Targeting Make Sense for an Attacker?">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#competing-against-scalable-attacks" class="md-nav__link">
+    Competing against Scalable attacks
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#security-cybercrime-and-scale" class="md-nav__link">
+    Security, cybercrime and scale
+  </a>
+  
+    <nav class="md-nav" aria-label="Security, cybercrime and scale">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#financially-motivated-attacks" class="md-nav__link">
+    Financially motivated attacks
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#scalable-attacks" class="md-nav__link">
+    Scalable attacks
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#finding-viable-targets-is-hard" class="md-nav__link">
+    Finding viable targets is hard
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#which-attacks-can-be-neglected" class="md-nav__link">
+    Which attacks can be neglected?
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+<h1 id="attack-economics">Attack Economics</h1>
+<h2 id="where-do-all-the-attacks-go">Where Do All the Attacks Go?</h2>
+<p><a href="https://www.microsoft.com/en-us/research/wp-content/uploads/2016/02/WhereDoAllTheAttacksGo.pdf">Florencio, Herley 2013</a> - Economics of Information Security and Privacy III </p>
+<h3 id="why-most-users-are-not-harmed">Why most users are not harmed</h3>
+<ul>
+<li>The fact that a majority of Internet users appear unharmed each year is difficult to reconcile with a weakest-link analysis. If security is only as strong as the weakest-link then all who choose weak passwords, re-use credentials across accounts, fail to heed security warnings or neglect patches and updates should be hacked, regularly and repeatedly. Clearly this fails to happen. Two billion people use the Internet; the majority can in no sense be described as secure, and yet they apparently derive more use from it than harm. How can this be? Where do all the attacks go?  </li>
+<li>We seek to explain this enormous gap between potential and actual harm. The answer, we find, lies in the fact that an Internet attacker, who attacks en masse (<em>targeted attacks are thus not included in this analysis</em>), faces a sum-of-effort rather than a weakest-link defense. Large-scale attacks must be profitable in expectation, not merely in particular scenarios. For example, knowing the dog’s name may open an occasional bank account, but the cost of determining one million users’ dogs’ names is far greater than that information is worth. The strategy that appears simple in isolation leads to bankruptcy in expectation. Many attacks cannot be made profitable, even when many profitable targets exist.   </li>
+<li>The model where a single user Alice faces an attacker Charles fails to capture the anonymous and broadcast nature of web attacks. Indeed, it is numerically impossible: two billion users cannot possibly each have an attacker who identifies and exploits their weakest-link. Instead, we use a cloud threat model where a population of users is attacked by a population of attackers.   </li>
+<li>A crowd of users presents a sum-of-effort rather than a weakest-link defense. Many attacks, while they succeed in particular scenarios, are not profitable when averaged over a large population. This is true even when many profitable targets exist and explains why so many attacks types end up causing so little actually observed harm. Thus, how common a security strategy is, matters at least as much as how weak it is. Even truly weak strategies go unpunished so long as the cost of the failures exceeds the gain from the successes.</li>
+</ul>
+<h3 id="threat-model">Threat model</h3>
+<ul>
+<li>Threat models often describe the technical capabilities of an attacker. A defender Alice is pitted against an attacker Charles, who can attack in any manner consistent with the threat model.  </li>
+<li>There are several things wrong with this threat model.  </li>
+<li>It makes no reference of the value of the resource to Alice, or to Charles.  </li>
+<li>It makes no reference to the cost of defence to Alice, or of the attack to Charles.  </li>
+<li>It makes no reference to the fact that Charles is generally uncertain about the value of the asset and the extent of the defence (i.e., he doesn’t know whether benefit exceeds cost until he attacks successfully).  </li>
+<li>It makes no provision for the possibility that exogenous events save Alice, even when her own defence fails (e.g., her bank catches fraudulent transfers).   </li>
+<li>It ignores the fact that Charles must compete against other attackers   </li>
+<li>It ignores the fact that Charles must compete against other attackers   </li>
+<li>It ignores scale: assuming that Internet users greatly outnumber attackers it is simply numerically impossible for every user to have an attacker who identifies and exploits her weakest-link.</li>
+</ul>
+<p>Some high-value users may face this threat model, but it is not possible that all do.</p>
+<ul>
+<li>In our threat model a <strong>population</strong> of Internet users are attacked by a <strong>population</strong> of hackers. We call the Internet users Alice(i) for i \= 0, 1, · · · , N−1 and the attackers Charles(j) for j \= 0, 1, · · · , M−1. Clearly N &gt;&gt;  M : Internet users outnumber attackers.  </li>
+<li>Each Alice(i) is subjected to attack by many of the attackers.  </li>
+<li>Each attacker goes after as many Internet users as he can reach.  </li>
+<li>Cost is the main reason for this approach: it costs little more to attack millions than it does to attack thousands.  </li>
+<li>
+<p>The attackers’ goal is purely financial. None of the Alice(i)’s are personally known to any of the Charles(j)’s </p>
+</li>
+<li>
+<p>The attacks we study happen in a competitive <strong>economic</strong> landscape. An attack is not merely a technical exploit but a business proposition. If it succeeds (and makes a profit) it is repeated over and over (and copied by others). If it fails (does not make a profit) it is abandoned and the energy is spent elsewhere.  </p>
+</li>
+<li>Attackers are playing a “numbers game”: they seek victims in the population rather than targeting individuals. For example, if Charles(j) targets Paypal accounts, he isn’t seeking particular accounts but rather any accounts that he happens to compromise.  </li>
+<li>
+<p>Charles(j) doesn’t know the value, or security investment of any particular Internet user in advance. He discovers this only by attacking.  </p>
+</li>
+<li>
+<p>This threat model has some obvious short-comings. It excludes:  </p>
+</li>
+<li>Cases where the attacker and defender are known to each other  </li>
+<li>
+<p>Cases where the attacker is <strong>targeting</strong> Alice(i) alone or values her assets beyond their economic value (e.g. APT). </p>
+</li>
+<li>
+<p>There are many possible attacks, call them attack(0), attack(1), · · · , attack(Q− 1) (<em>I think an attack in this context more or less corresponds to a sequence of attack techniques in MITRE ATT\&amp;CK</em>).  </p>
+</li>
+<li>We consider “parallel” attacks:  </li>
+<li>Cj (N, k) is the <strong>cost</strong> to Charles(j) of reaching N users with attack(k).  </li>
+<li>Attacking each user with attack(k) individually, one after the other, has much bigger cost:<img alt="" src="data:image/png;base64,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" /></li>
+</ul>
+<h3 id="expected-loss">Expected Loss</h3>
+<ul>
+<li>Li is the <strong>loss</strong> that Alice(i) endures when she succumbs to any attack. This loss is independent of the attack type.   </li>
+<li>The <strong>effort</strong> that Alice(i) devotes to defending against attack(k) is ei(k). Pr{ei(k)} is the <strong>probability</strong> that she succumbs to this attack (if attacked) at this level of effort. We assume that Pr{ei(k)} is a monotonically decreasing function of ei(k). The greater effort Alice(i) spends on attack(k), the lower her probability of succumbing.  </li>
+<li>
+<p>There is some chance that, even though she succumbs to attack, Alice(i) suffers no loss because she is saved because of exogenous events. For example, her bank password falls to Charles(j) but her bank detects the fraud and saves her from harm. Here, we use Pr{SP} to denote the probability that her Service Provider saves Alice(i) from harm. (<em>this might correspond also to a backup that recovers everything after a ransomware</em>).</p>
+</li>
+<li>
+<p>The <strong>expected loss</strong> for Alice is the probability that exogenous events do not save her, times the probability that she succumbs to any of the attacks, times her loss, plus the sum of what she spends defending against all attacks: </p>
+</li>
+</ul>
+<p><img alt="" src="data:image/png;base64,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" /></p>
+<h3 id="expected-gain">Expected Gain</h3>
+<ul>
+<li>Gi is the <strong>gain</strong> (if successful) from Alice(i)   </li>
+<li>The <strong>expected gain with attack(k)</strong> is the probability that exogenous events do not stop his fraud, times the sum of the probable gain over all attacked users, minus the total cost of the attack<br />
+<img alt="" src="data:image/png;base64,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" />  </li>
+<li>
+<p>The summation is over as many users as Charles(j) attacks. We do not assume that all users are attacked, only that the number of attacked users is large enough for statistical arguments to apply. </p>
+</li>
+<li>
+<p>We assume that Gi \&lt;=Li  </p>
+</li>
+<li>Other cases might exist that are not explored here. For example Charles(j) might benefit without harming Alice(i), in which case  Gi &gt;&gt; Li</li>
+</ul>
+<h3 id="attack-selection">Attack Selection</h3>
+<ul>
+<li>Each attacker chooses the attack that maximizes his expected gain.  </li>
+<li>The selected attack must satisfy the following condition:</li>
+</ul>
+<p><img alt="" src="data:image/png;base64,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" /></p>
+<ul>
+<li>Thus, <strong>if a sufficient number of users have a good defense for attack(k)</strong> (average probability of success is “sufficiently low”), <strong>then attack(k) is unprofitable</strong>.  </li>
+<li>Choosing that attack(k) is <strong>not</strong> a <strong>rational choice</strong> for the attacker.  </li>
+<li>
+<p>Different attackers might choose different attacks, for example because they have a different cost structure. However, it is likely that some attacks give the best returns to many attackers and some other attacks are best for almost none.</p>
+</li>
+<li>
+<p>A given attack(k) must be <strong>profitable at scale</strong>. Not on specific targets, or in specific conditions.  </p>
+</li>
+<li>An attack(k) that is not profitable at scale will be rarely seen because choosing that attack(k) is not economically rational.</li>
+</ul>
+<h3 id="counterintuitive-consequences">Counterintuitive consequences</h3>
+<ul>
+<li>A certain attack(k) may not be profitable at scale even if:  </li>
+<li>Some users devote zero or very low defense for attack(k) (free rider effect)  <ul>
+<li>The attacker does not know in advance which are the users where attack(k) will succeed.  </li>
+</ul>
+</li>
+<li>It occasionally works with low cost (e.g., users with very bad passwords or information exposed on the Internet without any protection). Attack cost C(1,k) is small and the probability of success is not zero  <ul>
+<li>The attacker does not know in advance which are the users where attack(k) will succeed.  </li>
+<li>The attack cost will be N*C(1,k), which is bigger than C(N,k).  </li>
+</ul>
+</li>
+<li>
+<p>It occasionally gives access to high value assets (e.g., email passwords that unlock high value).  </p>
+<ul>
+<li>Most Gi are small, some Gi are large. The attacker does not know in advance which ones.</li>
+</ul>
+</li>
+<li>
+<p>A certain attack(k) may be rarely/never seen even for other reasons:  </p>
+</li>
+<li>There are economically better alternatives (attacks with lower cost; attacks to assets with higher expected value).  </li>
+<li>Its probability of success is very low because it is applicable to a tiny fraction of all the users (e.g., rarely used software). Diversity is important.  </li>
+<li>See also next paper:  <ul>
+<li>The problem for the attacker is that <strong>profitability is not directly observable</strong>. It is not obvious who will succumb to most attacks and who will prove profitable.  </li>
+<li>The cost of false positives (unprofitable targets) can consume the gain from true positives. When this happens, attacks that are perfectly feasible from a technical standpoint become impossible to run profitably.</li>
+</ul>
+</li>
+</ul>
+<h3 id="contrast-with-threat-model-individual-attacker">Contrast with threat model individual attacker</h3>
+<ul>
+<li>In a different threat model where one attacker faces one target, the attacker selects the attack(k) that maximizes:<br />
+<img alt="" src="data:image/png;base64,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" />  </li>
+<li>This is maximized by the attack(k) with the highest probability of success/cost ratio:<img alt="" src="data:image/png;base64,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" />  </li>
+<li><strong>In this threat model the target cannot neglect any defense (weakest-link)</strong>  </li>
+<li>Devoting zero effort to attack(k) means that the probability of success for attack(k) is close to 1. Thus, if the cost for executing that attack is sufficiently low, then that attack(k) will be selected.</li>
+</ul>
+<h2 id="when-does-targeting-make-sense-for-an-attacker">When Does Targeting Make Sense for an Attacker?</h2>
+<p><a href="https://www.microsoft.com/en-us/research/wp-content/uploads/2016/02/WhenDoesTargetingMakeSense.pdf">Herley 2013</a> - IEEE Security &amp; Privacy ( Volume: 11, <a href="https://ieeexplore.ieee.org/xpl/tocresult.jsp?isnumber=6493314&amp;punumber=8013">Issue: 2</a>, March-April 2013) </p>
+<ul>
+<li><strong>Scalable</strong> attacks have costs that grow much slower than linearly in the number, N, of users attacked. Doubling the number attacked causes the costs to increase by far less than a factor of two  </li>
+<li><strong>Non-scalable</strong> attacks are everything else. Generally they have a linear cost dependence on N. Doubling the number attacked doubles the cost.  </li>
+<li>
+<p>This segmentation is obviously a simplification. Even spam has a linear cost component (e.g. gathering target addresses, finding enough machines and IP addresses to do the sending). However, first-copy costs dominate, so that doubling the size of the attack has little effect on the overall cost. Equally, attacks that are scalable may need to be followed by a non-scalable component. While phishing may harvest passwords in bulk, the process of cashing out might be non-scalable and one-by-one. </p>
+</li>
+<li>
+<p>Attacks that involve knowledge about the target are not scalable.  </p>
+</li>
+<li>As a consequence, scalable attacks are:  </li>
+<li><strong>non-adaptive</strong>. Personalization and customization are very limited in a scalable cost model. This is why 419 (Nigerian-style) and lottery scam emails generally begin “Dear Sir/Madam” or “Attn: Beneficiary.” A script can accommodate segments of the population (e.g. a malicious server might attempt different exploits depending on the browser version) but individual-level customization is out <em>(today there are more practical options for customization, due to LLMs)</em>.   </li>
+<li>
+<p><strong>non-selective</strong>. They attack anyone and everyone. </p>
+</li>
+<li>
+<p>Because of their cost structure, scalable attacks generally reach orders of magnitude more users.  </p>
+</li>
+<li>
+<p>Since the marginal cost per additional user is close to zero, it makes no sense to leave reachable targets un-attacked.</p>
+</li>
+<li>
+<p>Having costs that grow slower than linearly is the exception rather than the rule. The vast majority of attacks do not have this property. On the other hand, there is an almost unlimited suite of non-scalable attacks, but on a per-user basis they are far more expensive.  </p>
+</li>
+<li>Spam-based attacks, for example, seem to be able to attack users for pennies per million. Non-scalable attacks could easily cost six or seven orders of magnitude more than this per attacked user. Their greater cost suggests that non-scalable attacks must be reserved for cases where the value of the target is extremely high.</li>
+</ul>
+<h3 id="competing-against-scalable-attacks">Competing against Scalable attacks</h3>
+<ul>
+<li>Attack revenue is NYV whereN \= number of targets, Y \= fraction of targets that succumb (yield), V \= average value extracted from those that succumb  </li>
+<li>The nonscalable attacker has a structural disadvantage because for a given cost N_NS \&lt;\&lt; N_S. It must thus compensate in YV. This can only happen when V_NS &gt;&gt; V_S:  </li>
+<li>If V_NS=V_S then it must be Y_NS&gt;&gt;Y_S. But V_S is very low and N_S is orders of magnitudes greater than N_NS. Thus in this case it is unlikely that the nonscalable attack is a rational choice.  </li>
+<li>
+<p>It must be V_NS &gt;&gt; V_S, so that at least some of the orders of magnitude lost in reach (N_S vs N_NS) are made up in extracted value.</p>
+</li>
+<li>
+<p>A non-scalable attack requires two things to compete successfully.  </p>
+</li>
+<li>First, there must be some users who have much higher extractable value than the average. If the attacker’s cost per user is orders of magnitude higher then he needs to extract orders of magnitude more when he succeeds.  </li>
+<li>
+<p>Second, it must be observable who those high-value users are. It does the attacker no good to know that they exist, if he doesn’t know where. </p>
+</li>
+<li>
+<p>Concentration and observability of the extractable value are absolute requirements for the non-scalable attacker.  </p>
+</li>
+<li>Suppose that value is uniformly distributed: every user has equal value. Non-scalable attacks make no sense in this case since the scalable attacks gather them at far lower cost.  </li>
+<li>Suppose that value is concentrated, but entirely unobservable. Again, the non-scalable attacker can’t compete if there are good victims out there, but they just can’t be found.   </li>
+<li>A little better is any distribution where the variance is high, so that at least some users have significantly higher value. Best are heavy-tail distributions where a large portion of the overall value lies with a few individuals. Many phenomena follow power law distributions (e.g. Pareto).  </li>
+<li>In these distributions, however, the mean is higher than the median, so most people have below average value. In other words, for the distributions that favor non-scalable attacks, the vast majority of people have below average value. Since the non-scalable attacker needs much higher than average value, he must leave the vast majority of users alone. </li>
+</ul>
+<h2 id="security-cybercrime-and-scale">Security, cybercrime and scale</h2>
+<p><a href="https://dl.acm.org/doi/epdf/10.1145/2654847">Herley 2014</a>, Communications of the ACM, Volume 57, Issue 9, Sep 2014</p>
+<h3 id="financially-motivated-attacks">Financially motivated attacks</h3>
+<ul>
+<li>To be sustainable there must first be a supply of profitable targets and a way to find them. Hence, the attacker must do three things:  </li>
+<li>decide who and what to attack,  </li>
+<li>successfully attack, or get access to, a resource,  </li>
+<li>monetize that access  </li>
+<li>Turning access into money is much more difficult than it looks.  </li>
+<li>
+<p><em>(This is no longer true today, because of cryptocurrencies and ransomware/double extortion)</em></p>
+</li>
+<li>
+<p>When attacks are financially motivated, the average gain for each attacker, E{G}, must be greater than the cost, C: E{G} – C &gt; 0.  </p>
+</li>
+<li>C must include all costs, including that of finding viable victims and of monetizing access.  </li>
+<li>
+<p>The gain must be averaged across all attacks, not only the successful ones.</p>
+</li>
+<li>
+<p>The problem for the attacker is that <strong>profitability is not directly observable</strong>. It is not obvious who will succumb to most attacks and who will prove profitable.  </p>
+</li>
+<li>
+<p>The cost of false positives (unprofitable targets) can consume the gain from true positives. When this happens, attacks that are perfectly feasible from a technical standpoint become impossible to run profitably.</p>
+</li>
+<li>
+<p><strong>Most assets escape exploitation not because they are impregnable but because they are not targeted.</strong>  </p>
+</li>
+<li>This happens not at random but predictably <strong>when the expected monetization value is less than the cost of the attack</strong>. </li>
+</ul>
+<h3 id="scalable-attacks">Scalable attacks</h3>
+<ul>
+<li>It is clear that the majority of users are regularly attacked by attacks that involve very low cost per attacked user.  </li>
+<li>
+<p>I find it useful to segment attacks by <strong>how their costs grow</strong>. Scalable attacks are one-to-many attacks with the property that cost (per attacked user) grows slower than linearly; for example, doubling the number of users attacked increases the cost very little: C(2N) \&lt;\&lt; 2 C(N).</p>
+</li>
+<li>
+<p><strong>Scalable attacks are a minority of attack types</strong>. It is the exception rather than the rule that costs have only weak dependence on the number attacked. <strong>Anything that cannot be automated completely or involves per-target effort is thus non-scalable</strong>.   </p>
+</li>
+<li>Physical side-channel attacks (requiring proximity) are out, as getting close to one million users costs a lot more than getting close to one.  </li>
+<li>Labor-intensive social engineering attacks are non-scalable. After an initial scalable spam campaign, the Nigerian scam (and variants) devolves into a non-scalable effort in manipulation.  </li>
+<li>Spear-phishing attacks that make use of information about the target are non-scalable. While the success rate on well-researched spear-phishing attacks may be much higher than the scatter-shot (such as “Dear Paypal customer”) approaches, they are non-scalable.  </li>
+<li>Attacks that involve knowledge of the target are usually non-scalable; for example, guessing passwords based on knowledge of the user’s dog’s name, favorite sports team, or cartoon character involves significant non-scalable effort. Equally, attacks on backup authentication questions that involve researching where a user went to highschool are non-scalable.  </li>
+<li><em>(Some of these considerations might no longer apply today, due to LLMs and large botnets.)</em>  </li>
+<li><strong>ASLR converts scalable attacks to non scalable.</strong></li>
+</ul>
+<h3 id="finding-viable-targets-is-hard">Finding viable targets is hard</h3>
+<ul>
+<li>Assume Mallory can estimate  a probability, or likelihood, of profit, given everything he observes about a potential target. This is the probability that the target succumbs and access can be monetized (for greater than average cost). Call this P{viable|obs.}.  </li>
+<li>We assume the cost of gathering the observables is small relative to the cost of the attack. This makes the problem a binary classification, so receiver operator characteristic (ROC) curves are the natural analysis tool.  </li>
+<li>
+<p>The paper shows that finding viable targets in a cost-effective way is very hard. A classifier with 99% accuracy is likely to be needed and a population with a large absolute value of viable targets is also needed.</p>
+</li>
+<li>
+<p>The attacker needs concrete observable features to estimate viability. If he does not get it right often enough, he makes a loss. The problem of how viable niches for a particular attack can be identified is worth serious research. If they can be identified, members of these niches (rather than the whole population) are those who must invest extra in the defense.</p>
+</li>
+</ul>
+<h3 id="which-attacks-can-be-neglected">Which attacks can be neglected?</h3>
+<ul>
+<li>
+<p>I concentrate on attacks that are financially motivated, where expected gain is greater than cost.</p>
+</li>
+<li>
+<p>Scalable attacks represent an easy case.Their ability to reach vast populations means no one is unaffected. In the question of trade-offs it is difficult to make the case that scalable attacks are good candidates to be ignored. Fortunately, they fall into a small number of types and have serious restrictions, as we saw earlier. Everyone needs to defend against them.</p>
+</li>
+<li>
+<p>Non-scalable attacks present our opportunity; it is here we must look for candidates to ignore. Cybercriminals probably do most damage with attacks they can repeat and for which they can reliably find and monetize targets. I suggest probable harm to the population as a basis for prioritizing attacks:  </p>
+</li>
+<li>Attacks where viable and non-viable targets cannot be distinguished pose the least economic threat. If viability is entirely unobservable, then Mallory can do no better than attack at random.  </li>
+<li>Non-scalable attacks with low densities of viable targets are smaller threats than those where it is high <em>(see mathematical treatment in the paper)</em>.  </li>
+<li>The more difficult an attack is to monetize the smaller the threat it poses.</li>
+</ul>
+<p><em>(note that cryptocurrencies and ransomware/double extortion, not known at the time this paper was written, fit all these criteria)</em></p>
+<h2 id="_1"></h2>
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    <script id="__config" type="application/json">{"base": "../..", "features": [], "search": "../../assets/javascripts/workers/search.dfff1995.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.78eede0e.min.js"></script>
+      
+    
+  </body>
+</html>

@@ -8,22 +8,28 @@
       
       
       
+        <link rel="canonical" href="https://bartolialberto.github.io/working-notes/Cybersecurity/Personal%20Notes%20-%20Cybersec/">
       
       
+        <link rel="prev" href="../Personal%20Notes%20-%20Cybersec%20%287%29/">
       
-      <link rel="icon" href="/working-notes/assets/images/favicon.png">
+      
+        <link rel="next" href="../../LLM/Coding/">
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
       <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.2.5">
     
     
       
-        <title>Working Notes</title>
+        <title>Persistence in Windows - Working Notes</title>
       
     
     
-      <link rel="stylesheet" href="/working-notes/assets/stylesheets/main.0e669242.min.css">
+      <link rel="stylesheet" href="../../assets/stylesheets/main.0e669242.min.css">
       
         
-        <link rel="stylesheet" href="/working-notes/assets/stylesheets/palette.85d0ee34.min.css">
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.85d0ee34.min.css">
       
       
 
@@ -42,7 +48,7 @@
       
     
     
-    <script>__md_scope=new URL("/working-notes/",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
 
@@ -66,6 +72,11 @@
     <label class="md-overlay" for="__drawer"></label>
     <div data-md-component="skip">
       
+        
+        <a href="#sok-systematization-detection-and-hunting-of-windows-malware-persistence-techniques" class="md-skip">
+          Skip to content
+        </a>
+      
     </div>
     <div data-md-component="announce">
       
@@ -78,7 +89,7 @@
 
 <header class="md-header md-header--shadow" data-md-component="header">
   <nav class="md-header__inner md-grid" aria-label="Header">
-    <a href="/working-notes/." title="Working Notes" class="md-header__button md-logo" aria-label="Working Notes" data-md-component="logo">
+    <a href="../.." title="Working Notes" class="md-header__button md-logo" aria-label="Working Notes" data-md-component="logo">
       
   
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
@@ -98,7 +109,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              
+              Persistence in Windows
             
           </span>
         </div>
@@ -172,7 +183,7 @@
 
 <nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
   <label class="md-nav__title" for="__drawer">
-    <a href="/working-notes/." title="Working Notes" class="md-nav__button md-logo" aria-label="Working Notes" data-md-component="logo">
+    <a href="../.." title="Working Notes" class="md-nav__button md-logo" aria-label="Working Notes" data-md-component="logo">
       
   
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
@@ -189,7 +200,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/working-notes/." class="md-nav__link">
+      <a href="../.." class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -206,17 +217,19 @@
       
   
   
+    
+  
   
     
     
     
-    <li class="md-nav__item md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
       
         
         
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" >
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" checked>
         
           <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
             
@@ -229,7 +242,7 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="true">
           <label class="md-nav__title" for="__nav_2">
             <span class="md-nav__icon md-icon"></span>
             Cybersecurity
@@ -242,7 +255,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/working-notes/Cybersecurity/AI%20in%20cybersec/" class="md-nav__link">
+      <a href="../AI%20in%20cybersec/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -262,7 +275,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/working-notes/Cybersecurity/Personal%20Notes%20-%20Cybersec%20%281%29/" class="md-nav__link">
+      <a href="../Personal%20Notes%20-%20Cybersec%20%281%29/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -282,7 +295,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/working-notes/Cybersecurity/Personal%20Notes%20-%20Cybersec%20%282%29/" class="md-nav__link">
+      <a href="../Personal%20Notes%20-%20Cybersec%20%282%29/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -302,7 +315,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/working-notes/Cybersecurity/Personal%20Notes%20-%20Cybersec%20%283%29/" class="md-nav__link">
+      <a href="../Personal%20Notes%20-%20Cybersec%20%283%29/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -322,7 +335,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/working-notes/Cybersecurity/Personal%20Notes%20-%20Cybersec%20%284%29/" class="md-nav__link">
+      <a href="../Personal%20Notes%20-%20Cybersec%20%284%29/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -342,7 +355,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/working-notes/Cybersecurity/Personal%20Notes%20-%20Cybersec%20%285%29/" class="md-nav__link">
+      <a href="../Personal%20Notes%20-%20Cybersec%20%285%29/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -362,7 +375,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/working-notes/Cybersecurity/Personal%20Notes%20-%20Cybersec%20%286%29/" class="md-nav__link">
+      <a href="../Personal%20Notes%20-%20Cybersec%20%286%29/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -382,7 +395,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/working-notes/Cybersecurity/Personal%20Notes%20-%20Cybersec%20%287%29/" class="md-nav__link">
+      <a href="../Personal%20Notes%20-%20Cybersec%20%287%29/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -400,9 +413,27 @@
                 
   
   
+    
   
-    <li class="md-nav__item">
-      <a href="/working-notes/Cybersecurity/Personal%20Notes%20-%20Cybersec/" class="md-nav__link">
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  <span class="md-ellipsis">
+    Persistence in Windows
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
         
   
   <span class="md-ellipsis">
@@ -411,6 +442,65 @@
   
 
       </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#sok-systematization-detection-and-hunting-of-windows-malware-persistence-techniques" class="md-nav__link">
+    SoK: Systematization, Detection, and Hunting of Windows Malware Persistence Techniques
+  </a>
+  
+    <nav class="md-nav" aria-label="SoK: Systematization, Detection, and Hunting of Windows Malware Persistence Techniques">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#prevalence" class="md-nav__link">
+    Prevalence
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#how" class="md-nav__link">
+    How
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#evasion" class="md-nav__link">
+    Evasion
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#detection" class="md-nav__link">
+    Detection
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
     </li>
   
 
@@ -463,7 +553,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/working-notes/LLM/Coding/" class="md-nav__link">
+      <a href="../../LLM/Coding/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -483,7 +573,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/working-notes/LLM/LLM%20Internals/" class="md-nav__link">
+      <a href="../../LLM/LLM%20Internals/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -503,7 +593,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/working-notes/LLM/LLM%20vs%20AI%20Agents/" class="md-nav__link">
+      <a href="../../LLM/LLM%20vs%20AI%20Agents/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -523,7 +613,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/working-notes/LLM/Training/" class="md-nav__link">
+      <a href="../../LLM/Training/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -543,7 +633,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/working-notes/LLM/Vulnerability/" class="md-nav__link">
+      <a href="../../LLM/Vulnerability/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -582,6 +672,55 @@
   
   
   
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#sok-systematization-detection-and-hunting-of-windows-malware-persistence-techniques" class="md-nav__link">
+    SoK: Systematization, Detection, and Hunting of Windows Malware Persistence Techniques
+  </a>
+  
+    <nav class="md-nav" aria-label="SoK: Systematization, Detection, and Hunting of Windows Malware Persistence Techniques">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#prevalence" class="md-nav__link">
+    Prevalence
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#how" class="md-nav__link">
+    How
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#evasion" class="md-nav__link">
+    Evasion
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#detection" class="md-nav__link">
+    Detection
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
 </nav>
                   </div>
                 </div>
@@ -592,8 +731,58 @@
             <div class="md-content" data-md-component="content">
               <article class="md-content__inner md-typeset">
                 
-  <h1>404 - Not found</h1>
+                  
 
+
+<h1 id="persistence-in-windows">Persistence in Windows</h1>
+<h2 id="sok-systematization-detection-and-hunting-of-windows-malware-persistence-techniques">SoK: Systematization, Detection, and Hunting of Windows Malware Persistence Techniques</h2>
+<p><a href="https://dl.acm.org/doi/proceedings/10.1145/3779208">ASIA CCS '26: Proceedings of the ACM Asia Conference on Computer and Communications Security</a> June 2026</p>
+<ul>
+<li>The AV-TEST Institute records over 250K new malware samples every day.  </li>
+<li><a href="https://www.av-test.org/en/statistics/malware/">https://www.av-test.org/en/statistics/malware/</a>  </li>
+<li>
+<p><a href="https://portal.av-atlas.org">https://portal.av-atlas.org</a> </p>
+</li>
+<li>
+<p>We present the largest documented set of persistence techniques (72 in total)   </p>
+</li>
+<li>48,873 detonated Windows malware samples.</li>
+</ul>
+<h3 id="prevalence">Prevalence</h3>
+<ul>
+<li>Only 55.2% of samples are persistent.  </li>
+<li>Contrary to the general expectation that the vast majority of active malware requires persistence.  </li>
+<li>Absence of running malware does not prove that no execution occurred—malware may exfiltrate data and delete itself without being resident </li>
+</ul>
+<h3 id="how">How</h3>
+<ul>
+<li>Over 30% employ two or more persistence techniques  </li>
+<li>Removing a single vector may not fully eradicate the malware.  </li>
+<li>We identified 42 distinct methods out of 72 documented, highlighting a long-tail distribution. The top 10 techniques cover many families, but full detection requires attention to rarer methods.  </li>
+<li>Malware families often switch persistence techniques over time.  </li>
+<li>Knowing the family and its typical behavior doesn’t guarantee knowledge of the specific technique used.   </li>
+<li>Only 43.2% aim for execution at boot.  </li>
+<li>Although persistence is often equated with boot-time execution, many samples prefer to trigger on system events, schedules, or user actions. </li>
+</ul>
+<h3 id="evasion">Evasion</h3>
+<ul>
+<li>Although monitoring Windows API calls is effective for most techniques we documented, attackers can exploit less commonly monitored Windows subsystems to achieve the same effect more stealthily.   </li>
+<li>Another common evasion strategy is the obfuscation of Registry and file system paths.</li>
+</ul>
+<h3 id="detection">Detection</h3>
+<ul>
+<li>While persistence detection is generally considered a solved problem, we reveal that industry-standard persistence detection tools produce a significant number of false positives and false negatives.   </li>
+<li>Our analysis of state-of-the-art tools reveals that:  </li>
+<li><a href="https://mandiant.github.io/capa/#examples">Capa</a> 72.5% false positives, 42.1% false negative rate (FNR). Triage unknown files, guide reverse engineering, and hunt across a corpus for novel malware. In contrast to YARA, which primarily searches for sequences of bytes, capa rules describe features at the code-level.   </li>
+<li><a href="https://learn.microsoft.com/en-us/sysinternals/downloads/autoruns">Autoruns</a> 24.9% FNR. This utility, which has the most comprehensive knowledge of auto-starting locations of any startup monitor, shows you what programs are configured to run during system bootup or login…Autoruns reports Explorer shell extensions, toolbars, browser helper objects, Winlogon notifications, auto-start services, and much more.   </li>
+<li><a href="https://github.com/last-byte/PersistenceSniper">Persistence Sniper</a> a 34.9% FNR. Powershell module that can be used by Blue Teams, Incident Responders and System Administrators to hunt persistences implanted in Windows machines.  </li>
+</ul>
+
+
+
+
+
+                
               </article>
             </div>
           
@@ -625,10 +814,10 @@
       <div class="md-dialog__inner md-typeset"></div>
     </div>
     
-    <script id="__config" type="application/json">{"base": "/working-notes/", "features": [], "search": "/working-notes/assets/javascripts/workers/search.dfff1995.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
+    <script id="__config" type="application/json">{"base": "../..", "features": [], "search": "../../assets/javascripts/workers/search.dfff1995.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
     
     
-      <script src="/working-notes/assets/javascripts/bundle.78eede0e.min.js"></script>
+      <script src="../../assets/javascripts/bundle.78eede0e.min.js"></script>
       
     
   </body>
