@@ -8,21 +8,27 @@
       
       
       
+        <link rel="canonical" href="https://bartolialberto.github.io/working-notes/Corso%20Principi%20IA%20per%20Ingegneria/AI%20Intro%20-%20Parte%201/">
       
       
-      <link rel="icon" href="/working-notes/assets/images/favicon.png">
+        <link rel="prev" href="../AI%20Intro%20-%20Allucinazione/">
+      
+      
+        <link rel="next" href="../AI%20Intro%20-%20Parte%202/">
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
       <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.1.5">
     
     
       
-        <title>Working Notes</title>
+        <title>Parte 1 - Machine Learning - Working Notes</title>
       
     
     
-      <link rel="stylesheet" href="/working-notes/assets/stylesheets/main.7a7fce14.min.css">
+      <link rel="stylesheet" href="../../assets/stylesheets/main.7a7fce14.min.css">
       
         
-        <link rel="stylesheet" href="/working-notes/assets/stylesheets/palette.a0c5b2b5.min.css">
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.a0c5b2b5.min.css">
       
       
 
@@ -38,7 +44,7 @@
       
     
     
-    <script>__md_scope=new URL("/working-notes/",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
 
@@ -62,6 +68,11 @@
     <label class="md-overlay" for="__drawer"></label>
     <div data-md-component="skip">
       
+        
+        <a href="#machine-learning" class="md-skip">
+          Skip to content
+        </a>
+      
     </div>
     <div data-md-component="announce">
       
@@ -74,7 +85,7 @@
 
 <header class="md-header md-header--shadow" data-md-component="header">
   <nav class="md-header__inner md-grid" aria-label="Header">
-    <a href="/working-notes/." title="Working Notes" class="md-header__button md-logo" aria-label="Working Notes" data-md-component="logo">
+    <a href="../.." title="Working Notes" class="md-header__button md-logo" aria-label="Working Notes" data-md-component="logo">
       
   
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
@@ -93,7 +104,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              
+              Parte 1 - Machine Learning
             
           </span>
         </div>
@@ -160,7 +171,7 @@
 
 <nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
   <label class="md-nav__title" for="__drawer">
-    <a href="/working-notes/." title="Working Notes" class="md-nav__button md-logo" aria-label="Working Notes" data-md-component="logo">
+    <a href="../.." title="Working Notes" class="md-nav__button md-logo" aria-label="Working Notes" data-md-component="logo">
       
   
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
@@ -179,7 +190,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/working-notes/." class="md-nav__link">
+      <a href="../.." class="md-nav__link">
         Personal Notes
       </a>
     </li>
@@ -192,14 +203,16 @@
 
   
   
+    
+  
   
     
-    <li class="md-nav__item md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
       
       
       
       
-      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" >
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" checked>
       
       
       
@@ -208,7 +221,7 @@
           <span class="md-nav__icon md-icon"></span>
         </label>
       
-      <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+      <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="true">
         <label class="md-nav__title" for="__nav_2">
           <span class="md-nav__icon md-icon"></span>
           Corso Principi IA per Ingegneria
@@ -221,7 +234,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/working-notes/Corso%20Principi%20IA%20per%20Ingegneria/AI%20Intro%20-%20Allucinazione/" class="md-nav__link">
+      <a href="../AI%20Intro%20-%20Allucinazione/" class="md-nav__link">
         Allucinazione istruttiva
       </a>
     </li>
@@ -233,11 +246,62 @@
               
   
   
+    
   
-    <li class="md-nav__item">
-      <a href="/working-notes/Corso%20Principi%20IA%20per%20Ingegneria/AI%20Intro%20-%20Parte%201/" class="md-nav__link">
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          Parte 1 - Machine Learning
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
         Parte 1 - Machine Learning
       </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#machine-learning" class="md-nav__link">
+    Machine Learning
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#neural-networks" class="md-nav__link">
+    Neural Networks
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#advanced-topics" class="md-nav__link">
+    Advanced Topics
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
     </li>
   
 
@@ -249,7 +313,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/working-notes/Corso%20Principi%20IA%20per%20Ingegneria/AI%20Intro%20-%20Parte%202/" class="md-nav__link">
+      <a href="../AI%20Intro%20-%20Parte%202/" class="md-nav__link">
         Parte 2 - LLM
       </a>
     </li>
@@ -298,7 +362,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/working-notes/Cybersecurity/AI%20in%20cybersec/" class="md-nav__link">
+      <a href="../../Cybersecurity/AI%20in%20cybersec/" class="md-nav__link">
         AI in Cybersec
       </a>
     </li>
@@ -312,7 +376,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/working-notes/Cybersecurity/Personal%20Notes%20-%20Cybersec%20%281%29/" class="md-nav__link">
+      <a href="../../Cybersecurity/Personal%20Notes%20-%20Cybersec%20%281%29/" class="md-nav__link">
         Driver abuse
       </a>
     </li>
@@ -326,7 +390,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/working-notes/Cybersecurity/Personal%20Notes%20-%20Cybersec%20%282%29/" class="md-nav__link">
+      <a href="../../Cybersecurity/Personal%20Notes%20-%20Cybersec%20%282%29/" class="md-nav__link">
         IoC
       </a>
     </li>
@@ -340,7 +404,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/working-notes/Cybersecurity/Personal%20Notes%20-%20Cybersec%20%283%29/" class="md-nav__link">
+      <a href="../../Cybersecurity/Personal%20Notes%20-%20Cybersec%20%283%29/" class="md-nav__link">
         Attack Economics
       </a>
     </li>
@@ -354,7 +418,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/working-notes/Cybersecurity/Personal%20Notes%20-%20Cybersec%20%284%29/" class="md-nav__link">
+      <a href="../../Cybersecurity/Personal%20Notes%20-%20Cybersec%20%284%29/" class="md-nav__link">
         Phishing
       </a>
     </li>
@@ -368,7 +432,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/working-notes/Cybersecurity/Personal%20Notes%20-%20Cybersec%20%285%29/" class="md-nav__link">
+      <a href="../../Cybersecurity/Personal%20Notes%20-%20Cybersec%20%285%29/" class="md-nav__link">
         Secure Software Development
       </a>
     </li>
@@ -382,7 +446,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/working-notes/Cybersecurity/Personal%20Notes%20-%20Cybersec%20%286%29/" class="md-nav__link">
+      <a href="../../Cybersecurity/Personal%20Notes%20-%20Cybersec%20%286%29/" class="md-nav__link">
         Technical quirks
       </a>
     </li>
@@ -396,7 +460,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/working-notes/Cybersecurity/Personal%20Notes%20-%20Cybersec%20%287%29/" class="md-nav__link">
+      <a href="../../Cybersecurity/Personal%20Notes%20-%20Cybersec%20%287%29/" class="md-nav__link">
         Crime
       </a>
     </li>
@@ -410,7 +474,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/working-notes/Cybersecurity/Personal%20Notes%20-%20Cybersec/" class="md-nav__link">
+      <a href="../../Cybersecurity/Personal%20Notes%20-%20Cybersec/" class="md-nav__link">
         Persistence in Windows
       </a>
     </li>
@@ -459,7 +523,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/working-notes/LLM/Coding/" class="md-nav__link">
+      <a href="../../LLM/Coding/" class="md-nav__link">
         LLM and Coding
       </a>
     </li>
@@ -473,7 +537,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/working-notes/LLM/LLM%20Internals/" class="md-nav__link">
+      <a href="../../LLM/LLM%20Internals/" class="md-nav__link">
         LLM Internals
       </a>
     </li>
@@ -487,7 +551,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/working-notes/LLM/LLM%20vs%20AI%20Agents/" class="md-nav__link">
+      <a href="../../LLM/LLM%20vs%20AI%20Agents/" class="md-nav__link">
         LLM vs AI Agents
       </a>
     </li>
@@ -501,7 +565,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/working-notes/LLM/Training/" class="md-nav__link">
+      <a href="../../LLM/Training/" class="md-nav__link">
         Training an LLM
       </a>
     </li>
@@ -515,7 +579,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/working-notes/LLM/Vulnerability/" class="md-nav__link">
+      <a href="../../LLM/Vulnerability/" class="md-nav__link">
         Vulnerability search
       </a>
     </li>
@@ -547,6 +611,35 @@
   
   
   
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#machine-learning" class="md-nav__link">
+    Machine Learning
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#neural-networks" class="md-nav__link">
+    Neural Networks
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#advanced-topics" class="md-nav__link">
+    Advanced Topics
+  </a>
+  
+</li>
+      
+    </ul>
+  
 </nav>
                   </div>
                 </div>
@@ -557,8 +650,32 @@
             <div class="md-content" data-md-component="content">
               <article class="md-content__inner md-typeset">
                 
-  <h1>404 - Not found</h1>
+                  
 
+
+<h1 id="parte-1-machine-learning">Parte 1 - Machine Learning</h1>
+<h2 id="machine-learning">Machine Learning</h2>
+<ul>
+<li><a href="https://developers.google.com/machine-learning/crash-course">Machine Learning Crash Course Google</a>  </li>
+<li><a href="https://developers.google.com/machine-learning/crash-course/fairness">Fairness and Bias</a></li>
+</ul>
+<h2 id="neural-networks">Neural Networks</h2>
+<ul>
+<li>The basics of neural networks, and the math behind how they learn (<a href="https://www.3blue1brown.com/?topic=neural-networks">3Blue1Brown</a>)  </li>
+<li><a href="https://developers.google.com/machine-learning/crash-course/neural-networks">Machine Learning Crash Course Google - Neural Networks</a>  </li>
+<li><a href="https://playground.tensorflow.org">Tensorflow playground</a> - Tinker with a neural network in your browser.</li>
+</ul>
+<h2 id="advanced-topics">Advanced Topics</h2>
+<ul>
+<li><a href="https://www.deeplearningbook.org">Deep Learning Book</a> - Goodfellow, Bengio, Courville  </li>
+<li><a href="https://colah.github.io/posts/2014-03-NN-Manifolds-Topology/">Neural Networks, Manifolds, and Topology</a> </li>
+</ul>
+
+
+
+
+
+                
               </article>
             </div>
           
@@ -590,10 +707,10 @@
       <div class="md-dialog__inner md-typeset"></div>
     </div>
     
-    <script id="__config" type="application/json">{"base": "/working-notes/", "features": [], "search": "/working-notes/assets/javascripts/workers/search.208ed371.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
+    <script id="__config" type="application/json">{"base": "../..", "features": [], "search": "../../assets/javascripts/workers/search.208ed371.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
     
     
-      <script src="/working-notes/assets/javascripts/bundle.407015b8.min.js"></script>
+      <script src="../../assets/javascripts/bundle.407015b8.min.js"></script>
       
     
   </body>

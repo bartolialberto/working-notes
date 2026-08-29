@@ -1,0 +1,991 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+        <link rel="canonical" href="https://bartolialberto.github.io/working-notes/Corso%20Principi%20IA%20per%20Ingegneria/AI%20Intro%20-%20Parte%202/">
+      
+      
+        <link rel="prev" href="../AI%20Intro%20-%20Parte%201/">
+      
+      
+        <link rel="next" href="../../Cybersecurity/AI%20in%20cybersec/">
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.1.5">
+    
+    
+      
+        <title>Parte 2 - LLM - Working Notes</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.7a7fce14.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.a0c5b2b5.min.css">
+      
+      
+
+    
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="teal" data-md-color-accent="">
+  
+    
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#llm-internals" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../.." title="Working Notes" class="md-header__button md-logo" aria-label="Working Notes" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2Z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Working Notes
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Parte 2 - LLM
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41Z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="Working Notes" class="md-nav__button md-logo" aria-label="Working Notes" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
+
+    </a>
+    Working Notes
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        Personal Notes
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+    
+  
+  
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" checked>
+      
+      
+      
+        <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+          Corso Principi IA per Ingegneria
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="true">
+        <label class="md-nav__title" for="__nav_2">
+          <span class="md-nav__icon md-icon"></span>
+          Corso Principi IA per Ingegneria
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../AI%20Intro%20-%20Allucinazione/" class="md-nav__link">
+        Allucinazione istruttiva
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../AI%20Intro%20-%20Parte%201/" class="md-nav__link">
+        Parte 1 - Machine Learning
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+    
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          Parte 2 - LLM
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        Parte 2 - LLM
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#llm-internals" class="md-nav__link">
+    LLM Internals
+  </a>
+  
+    <nav class="md-nav" aria-label="LLM Internals">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#personal-notes" class="md-nav__link">
+    Personal notes:
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#llm-nella-vostra-vita-professionale-e-personale" class="md-nav__link">
+    LLM nella vostra vita professionale e personale
+  </a>
+  
+    <nav class="md-nav" aria-label="LLM nella vostra vita professionale e personale">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#economic-impact" class="md-nav__link">
+    Economic impact
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#invention-vs-innovation" class="md-nav__link">
+    Invention vs Innovation
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#hallucinations" class="md-nav__link">
+    Hallucinations
+  </a>
+  
+    <nav class="md-nav" aria-label="Hallucinations">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#a-personal-experience" class="md-nav__link">
+    A personal experience
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#summarization-and-research" class="md-nav__link">
+    Summarization and Research
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#accuracy" class="md-nav__link">
+    Accuracy
+  </a>
+  
+    <nav class="md-nav" aria-label="Accuracy">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#a-personal-experience_1" class="md-nav__link">
+    A personal experience:
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#reliability" class="md-nav__link">
+    Reliability
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#advanced-topics" class="md-nav__link">
+    Advanced Topics
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#multimodal-audio-and-video" class="md-nav__link">
+    Multimodal (Audio and Video)
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
+      
+      
+      
+        <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+          Cybersecurity
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_3">
+          <span class="md-nav__icon md-icon"></span>
+          Cybersecurity
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Cybersecurity/AI%20in%20cybersec/" class="md-nav__link">
+        AI in Cybersec
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Cybersecurity/Personal%20Notes%20-%20Cybersec%20%281%29/" class="md-nav__link">
+        Driver abuse
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Cybersecurity/Personal%20Notes%20-%20Cybersec%20%282%29/" class="md-nav__link">
+        IoC
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Cybersecurity/Personal%20Notes%20-%20Cybersec%20%283%29/" class="md-nav__link">
+        Attack Economics
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Cybersecurity/Personal%20Notes%20-%20Cybersec%20%284%29/" class="md-nav__link">
+        Phishing
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Cybersecurity/Personal%20Notes%20-%20Cybersec%20%285%29/" class="md-nav__link">
+        Secure Software Development
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Cybersecurity/Personal%20Notes%20-%20Cybersec%20%286%29/" class="md-nav__link">
+        Technical quirks
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Cybersecurity/Personal%20Notes%20-%20Cybersec%20%287%29/" class="md-nav__link">
+        Crime
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Cybersecurity/Personal%20Notes%20-%20Cybersec/" class="md-nav__link">
+        Persistence in Windows
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" >
+      
+      
+      
+        <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="0">
+          LLM
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_4">
+          <span class="md-nav__icon md-icon"></span>
+          LLM
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../LLM/Coding/" class="md-nav__link">
+        LLM and Coding
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../LLM/LLM%20Internals/" class="md-nav__link">
+        LLM Internals
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../LLM/LLM%20vs%20AI%20Agents/" class="md-nav__link">
+        LLM vs AI Agents
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../LLM/Training/" class="md-nav__link">
+        Training an LLM
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../LLM/Vulnerability/" class="md-nav__link">
+        Vulnerability search
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#llm-internals" class="md-nav__link">
+    LLM Internals
+  </a>
+  
+    <nav class="md-nav" aria-label="LLM Internals">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#personal-notes" class="md-nav__link">
+    Personal notes:
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#llm-nella-vostra-vita-professionale-e-personale" class="md-nav__link">
+    LLM nella vostra vita professionale e personale
+  </a>
+  
+    <nav class="md-nav" aria-label="LLM nella vostra vita professionale e personale">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#economic-impact" class="md-nav__link">
+    Economic impact
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#invention-vs-innovation" class="md-nav__link">
+    Invention vs Innovation
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#hallucinations" class="md-nav__link">
+    Hallucinations
+  </a>
+  
+    <nav class="md-nav" aria-label="Hallucinations">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#a-personal-experience" class="md-nav__link">
+    A personal experience
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#summarization-and-research" class="md-nav__link">
+    Summarization and Research
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#accuracy" class="md-nav__link">
+    Accuracy
+  </a>
+  
+    <nav class="md-nav" aria-label="Accuracy">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#a-personal-experience_1" class="md-nav__link">
+    A personal experience:
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#reliability" class="md-nav__link">
+    Reliability
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#advanced-topics" class="md-nav__link">
+    Advanced Topics
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#multimodal-audio-and-video" class="md-nav__link">
+    Multimodal (Audio and Video)
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+<h1 id="parte-2-llm">Parte 2 - LLM</h1>
+<h2 id="llm-internals">LLM Internals</h2>
+<ul>
+<li>LLM explained briefly (<a href="https://www.3blue1brown.com/?topic=neural-networks">3Blue1Brown</a> video lectures)  </li>
+<li><a href="https://poloclub.github.io/transformer-explainer/">Transformer Explainer: LLM Visually Explained</a>  </li>
+<li><a href="https://ngrok.com/blog/prompt-caching">Prompt caching: 10x cheaper LLM tokens, but how?</a> By the end of this post you will...understand, at a deeper level, how LLMs work; have built some new intuition for why LLMs work the way they do.  </li>
+<li><a href="https://machinelearningmastery.com/how-llms-choose-their-words-a-practical-walk-through-of-logits-softmax-and-sampling/">How LLMs Choose Their Words: A Practical Walk-Through of Logits, Softmax and Sampling</a> Large Language Models (LLMs) can produce varied, creative, and sometimes surprising outputs even when given the same prompt. This randomness is not a bug but a core feature of how the model samples its next token from a probability distribution. In this article, we break down the key sampling strategies.  </li>
+<li><a href="https://sebastianraschka.com/llm-architecture-gallery/">Gallery of LLM architectures</a> A curated reference for modern language-model architectures. Compare architecture diagrams, implementation links, release dates, attention mechanisms, decoder types, and compact fact sheets without digging through individual posts.  </li>
+<li><a href="https://intheweights.com/p/bartoli-alberto">Check the knowledge embedded in LLM weights</a> What LLMs know about you?  </li>
+<li><a href="https://garymarcus.substack.com/p/open-source-is-not-the-same-as-open">Open-source is NOT the same as open-weight</a> Too many people —this morning it was editors and writers at The New York Times among others—are failing to distinguish the two.</li>
+</ul>
+<h3 id="personal-notes">Personal notes:</h3>
+<ul>
+<li><a href="https://docs.google.com/document/d/1PdiNj7_gFI0SDlJu4WF74JEewtui9AFryPrPr4Xc_So/edit?tab=t.0#heading=h.q3q1klw7gl3d">LLM Internals: FFN (feedforward network)</a>  </li>
+<li><a href="https://docs.google.com/document/d/1PdiNj7_gFI0SDlJu4WF74JEewtui9AFryPrPr4Xc_So/edit?tab=t.0#heading=h.bcwfzo8iv9pv">LLM Internals: Attention</a>  </li>
+<li><a href="https://docs.google.com/document/d/1PdiNj7_gFI0SDlJu4WF74JEewtui9AFryPrPr4Xc_So/edit?usp=sharing">LLM in more depth</a> - Training, Agents and so on.</li>
+</ul>
+<h2 id="llm-nella-vostra-vita-professionale-e-personale">LLM nella vostra vita professionale e personale</h2>
+<ul>
+<li><a href="https://fs.blog/writing-to-think/">Writing to think</a> The reason they teach writing to kids in school is not to generate endless essays on history or books but to create a space to practice reasoning. By delegating writing to AI, my son might be reducing his time spent doing homework. But he’s missing the chance to think more clearly about the topic at hand. Writing forces you to slow down, focus your attention, and think deeply. …Writing is the process by which you realize that you do not understand what you are talking about. <strong>(If you want to read only one thing from this collection, then read this one).</strong>  </li>
+<li><a href="https://www.schneier.com/blog/archives/2026/07/should-you-use-ai-for-a-task-heres-a-simple-way-to-decide.html">Should You Use AI for a Task? Here’s a Simple Way to Decide</a> The writing assignments I give my students are gym tasks, not work tasks. I ask them to write policy memos not because the world needs more policy memos. I assign them because the very act of writing, which includes thinking and outlining and drafting and editing, making and criticizing and revising arguments, will help develop the critical thinking skills they will need in their future careers. And without this constant mental exercise, those skills will atrophy (July 2026).</li>
+</ul>
+<h3 id="economic-impact">Economic impact</h3>
+<ul>
+<li><a href="https://www.independent.co.uk/tech/ford-ai-automation-humans-hiring-artificial-intelligence-b3004733.html">Ford hired AI and sacked humans. It backfired badly</a> Ford has admitted to rehiring hundreds of human workers after its aggressive AI adoption strategy backfired. The US automaker hired over 350 veteran engineers, referred to internally as “gray beards”, over the past three years in order to address mistakes made by automated systems. The staff will lead quality reviews after the automation issues cost the company billions of dollars, Bloomberg reported, while some workers will also help improve and train the AI systems (June 2026).  </li>
+<li><a href="https://www.reuters.com/business/starbucks-scraps-ai-inventory-tool-across-north-america-2026-05-21/#:~:text=Starbucks%20">Starbucks scraps AI inventory tool across North America</a> Starbucks terminated an AI program workers used for automating certain inventory counts this week, nine months after deploying it across its North American ‌stores (May 2026).  </li>
+<li>
+<p><a href="https://timesofindia.indiatimes.com/technology/tech-news/after-laying-off-4000-employees-and-automating-with-ai-agents-salesforce-executives-admit-we-were-more-confident-about-/articleshow/126121875.cms">After redeploying 4000 employees and automating their work with AI agents, Salesforce executives admit: we were more confident about LLM capabilities</a> Salesforce, one of the world's most valuable enterprise software companies, is pulling back from its heavy reliance of LLM after encountering reliability issues that have shaken executive confidence.</p>
+</li>
+<li>
+<p><a href="https://mlq.ai/media/quarterly_decks/v0.1_State_of_AI_in_Business_2025_Report.pdf">The GenAI Divide  STATE OF AI IN  BUSINESS 2025 - MIT</a> Despite $30–40 billion in enterprise investment into GenAI, this report uncovers a surprising result in that 95% of organizations are getting zero return (July 2025).  </p>
+</li>
+<li><a href="https://isaiprofitable.com">Is AI Profitable?</a> This site tracks cumulative spend versus revenue across most major AI companies in one place, allowing you to see approximately how much money is flowing into the industry and how far it is from breaking even (January 2026).  </li>
+<li><a href="https://hermit-tech.com/blog/ai-mania-is-eviscerating-global-decisionmaking">AI Mania Is Eviscerating Global Decision-Making</a> All of the AI projects we have observed as a team are failing. Every single one – we have seen 0% success in a year and a half, not only amongst projects we have been asked to participate in, but even within projects that we have observed in passing while doing totally unrelated work. Even if you grant that AI tooling accelerates specific workloads, the method and scale of the current investments is senseless (July 2026). </li>
+</ul>
+<h3 id="invention-vs-innovation">Invention vs Innovation</h3>
+<ul>
+<li><a href="https://www.normaltech.ai/p/ai-as-normal-technology">AI as Normal Technology</a> We explain why we think that transformative economic and societal impacts will be slow (on the timescale of decades), making a critical distinction between AI methods, AI applications, and AI adoption, arguing that the three happen at different timescales (April 2025).</li>
+</ul>
+<h2 id="hallucinations">Hallucinations</h2>
+<ul>
+<li><a href="https://www.damiencharlotin.com/hallucinations/">AI Hallucination Cases</a> This database tracks legal decisions in cases where generative AI produced hallucinated content – typically fake citations, but also other types of AI-generated arguments.  </li>
+<li>(Tribunale di Milano, 5/6/2026): Questa limitazione è giustificata dalla presenza nella comparsa di costituzione di tre massime giurisprudenziali apparentemente estrapolate da pronunce della Corte di Cassazione (cfr. pag. 13: Cass. 21432/2021, Cass. 7024/2017, Cass. 24058/2004), che però, ad una più attenta lettura, risultano inesistenti: o meglio, le sentenze citate esistono, ma non hanno nulla a che vedere con le citazioni riportate dalla parte convenuta. Ciò denota verosimilmente l’utilizzo di sistemi di intelligenza artificiale nella redazione degli scritti difensivi, senza controllo da parte del difensore sui noti rischi di “allucinazione”.  </li>
+<li><a href="https://gptzero.me/news/investigations-kpmg/">Chasing the Hallucinations: KPMG's AI-Powered Attempt at "Redefining Excellence"</a> This investigation analyzes a KPMG report from October 2025 on customer experience and agentic AI. The report, titled <a href="https://smallpdf.com/file#s=a35e268b-87cf-4380-b3f2-77b78c9e2274&amp;r=read">Total Experience: Redefining Excellence in the Age of Agentic AI</a>, summarizes the results of an annual study on consumer experience around the world. Of the 45 citations in the report, only five accurately point to real sources. Another 28 citations provide paraphrased titles The final 12 are too vague or flawed to accurately determine if a source exists. Additionally, around half of the claims evidenced by the 45 citations appear to be fake or misattributed (June 2026).  </li>
+<li><a href="https://www.nature.com/articles/s42256-025-01113-8">Language models cannot reliably distinguish belief from knowledge and fact and/or fake components for a real source</a>We evaluate 24 cutting-edge LMs using a new benchmark of 13,000 questions across 13 epistemic tasks. Our findings reveal crucial limitations. In particular, all models tested systematically fail to acknowledge first-person false beliefs, with GPT-4o dropping from 98.2% to 64.4% accuracy and DeepSeek R1 plummeting from over 90% to 14.4%  (Nature Machine Intelligence, 2025).  </li>
+<li><a href="https://www.computerworld.com/article/4059383/openai-admits-ai-hallucinations-are-mathematically-inevitable-not-just-engineering-flaws.html?ref=wheresyoured.at">OpenAI admits AI hallucinations are mathematically inevitable, not just engineering flaws</a> In a landmark study, OpenAI researchers reveal that large language models will always produce plausible but false outputs, even with perfect data, due to fundamental statistical and computational limits (September 2025).  </li>
+<li><a href="https://www.theregister.com/software/2025/10/06/deloitte-refunds-australian-government-over-ai-in-report/722000">Deloitte refunds Aussie gov after AI fabrications slip into $440K welfare report</a> Deloitte has agreed to refund part of an Australian government contract after admitting it used generative AI to produce a report riddled with fake citations, phantom footnotes, and even a made-up quote from a Federal Court judgment (October 2025).</li>
+</ul>
+<h3 id="a-personal-experience">A personal experience</h3>
+<ul>
+<li><a href="https://bartoli-alberto.blogspot.com/2026/08/unallucinazione-ai-molto-istruttiva-per.html">Un'allucinazione AI molto istruttiva (per me un pò triste)</a> (Agosto 2026)</li>
+</ul>
+<h2 id="summarization-and-research">Summarization and Research</h2>
+<ul>
+<li><a href="https://futurism.com/artificial-intelligence/google-ai-overviews-misinformation">Analysis Finds That Google’s AI Overviews Are Providing Misinformation at a Scale Possibly Unprecedented in the History of Human Civilization</a> AI-generated summaries, which appear above Google search results, are accurate around 91 percent of the time. In a sense, that may sound like an impressive figure. But here’s an even more impressive one….tens of millions of wrong answers that the AI Overviews are providing every hour (April 2026) .  </li>
+<li><a href="https://www.cjr.org/analysis/i-tested-how-well-ai-tools-work-for-journalism.php">I Tested How Well AI Tools Work for Journalism</a> Some tools were sufficient for summarizing meetings. For research, the results were a disaster (August 2025).  </li>
+<li><a href="https://www.bbc.com/news/articles/c0m17d8827ko">AI chatbots unable to accurately summarise news, BBC finds</a> 51% of all AI answers to questions about the news were judged to have significant issues of some form. Additionally, 19% of AI answers which cited BBC content introduced factual errors, such as incorrect factual statements, numbers and dates (February 2025).  </li>
+<li><a href="https://www.bbc.co.uk/mediacentre/2025/new-ebu-research-ai-assistants-news-content">Largest study of its kind shows AI assistants misrepresent news content 45% of the time – regardless of language or territory</a> 45% of all AI answers had at least one significant issue. 31% of responses showed serious sourcing problems – missing, misleading, or incorrect attributions. 20% contained major accuracy issues, including hallucinated details and outdated information (October 2025).</li>
+</ul>
+<h2 id="accuracy">Accuracy</h2>
+<ul>
+<li><a href="https://arxiv.org/pdf/2412.14161">TheAgentCompany: Benchmarking LLM Agents on Consequential Real World Tasks</a> We introduce TheAgentCompany, an extensible benchmark for evaluating AI agents that interact with the world in similar ways to those of a digital worker: by browsing the Web, writing code, running programs, and communicating with other coworkers. … We find that the most competitive agent can complete 30% of tasks autonomously  (September 2025, Carnegie-Mellon, Duke). <a href="https://the-agent-company.com/#/leaderboard">Leaderboard</a>.  </li>
+<li><a href="https://arxiv.org/pdf/2505.18878">CRMArena-Pro: Holistic Assessment of LLM Agents Across Diverse Business Scenarios and Interactions</a> We introduce CRMArena-Pro, a novel benchmark for holistic and realistic assessment of LLM agents in diverse professional settings. Experiments show leading LLM agents achieve approximately solely 58% single-turn success rate on CRMArena-Pro, with significant performance drops in multi-turn settings to 35% (May 2025, Salesforce).  </li>
+<li>
+<p><a href="https://spreadsheetbench.github.io">SpreadsheetBench</a> evaluates large language model agents' capabilities in manipulating complex real-world spreadsheets and business spreadsheet workflows. Leaderboard March 2026: 35%.</p>
+</li>
+<li>
+<p><a href="https://www.abc.net.au/news/2026-08-14/ai-medical-scribe-error-leaves-patient-devastated/107031672">Error by AI scribe during medical appointment leaves patient devastated</a> When Rebecca Green arrived for her first appointment with a urologist, she was asked whether she consented to having the appointment transcribed by artificial intelligence (AI). She said yes without hesitation….But that decision would cause her a lot of stress, with the AI scribe making up the serious but false claim that Ms Green was taking illegal drugs (August 2026).  </p>
+</li>
+<li><a href="https://www.tomshardware.com/tech-industry/artificial-intelligence/chinese-farmer-kills-25-acres-of-crops-after-following-ai-generated-weed-and-pest-control-advice-farmer-trusted-pesticide-recipe-after-months-of-successful-advice">Chinese farmer kills 25 acres of crops after following AI-generated weed and pest control advice</a> Wu asked the AI for advice on weed and pest control, after which it … recommended that they use “high-efficiency flupyrimethalin” and “flusulfasulfaether” to kill weeds and mixed it with “thiamethoxazine” and “methyl salt.” The farmer followed the AI’s advice to the letter without confirming the information via agricultural technicians (or even just counter-checking its answers online). The result of the AI’s mistake was quickly apparent, as, just the following day, the weeds and the sesame seedlings died en masse (August 2026).</li>
+</ul>
+<h3 id="a-personal-experience_1">A personal experience:</h3>
+<ul>
+<li><a href="https://bartoli-alberto.blogspot.com/2026/04/a-subtle-hallucination-by-ai.html">A subtle hallucination by the “AI”</a> I am playing with Gemini for extracting MITRE ATT\&amp;CK techniques from cybersecurity incident reports automatically (MITRE ATT\&amp;CK is a powerful framework for reasoning about attacks and I use this framework intensively in my Cybersecurity course): you give Gemini the URL of a report and will immediately obtain the attack techniques used in that attack campaign….This usage of "the AI" is potentially very useful for grasping the essentials of an attack campaign quickly and providing students with concrete examples. It is also an usage that fits an essential but often overlooked requirements of AI applications: the cost of a mistake must be small…</li>
+</ul>
+<h2 id="reliability">Reliability</h2>
+<ul>
+<li><a href="https://www.normaltech.ai/p/new-paper-towards-a-science-of-ai?hl=it-IT">Towards a science of AI agent reliability</a> AI agents are evaluated based on a single number, the average success rate at the task. That number has been going up quickly on many tasks over the last two years, which is why there’s so much excitement about deploying agents… When we consider a coworker to be reliable, we don’t just mean that they get things right most of the time. We mean something richer:  </li>
+<li>They get it right consistently, not right today and wrong tomorrow on the same thing (Consistency);  </li>
+<li>They don’t fall apart when conditions aren’t perfect (Robustness);  </li>
+<li>They tell you when they’re unsure rather than confidently guessing (Calibration);  </li>
+<li>When they do mess up, their mistakes are more likely to be fixable than catastrophic (Safety)</li>
+</ul>
+<p>We found that reliability has improved only modestly over 18 months, while accuracy improved substantially. All three major providers cluster together, so this appears to be an industry-wide limitation (February 2026, Princeton). <a href="https://hal.cs.princeton.edu/reliability/">Reliability Dashboard</a>.</p>
+<ul>
+<li><a href="https://arxiv.org/html/2604.15597v1">LLMs Corrupt Your Documents When You Delegate</a> Our large-scale experiment with 19 LLMs reveals that current models degrade documents during delegation: even frontier models (Gemini 3.1 Pro, Claude 4.6 Opus, GPT 5.4) corrupt an average of 25% of document content by the end of long workflows, with other models failing more severely. Additional experiments reveal that…degradation severity is exacerbated by document size, length of interaction, or presence of distractor files. Our analysis shows that current LLMs are unreliable delegates: they introduce sparse but severe errors that silently corrupt documents, compounding over long interaction (April 2026).  </li>
+<li><a href="https://futurism.com/artificial-intelligence/meta-ai-safety-mistake-alarm">Meta's Head of AI Safety Just Made a Mistake That May Cause You a Certain Amount of Alarm</a> Yue admitted that she screwed up by letting OpenClaw take control of her computer, after which it proceeded to unintentionally hold her “important” emails hostage (February 2026).   </li>
+<li><a href="https://arxiv.org/pdf/2602.20021">Agents of Chaos</a> We report an exploratory red-teaming study of autonomous LLM–powered agents deployed in a live laboratory environment with persistent memory, email accounts, Discord access, file systems, and shell execution. Over a two-week period, twenty AI researchers interacted with the agents under benign and adversarial conditions. Observed behaviors include unauthorized compliance with non-owners, disclosure of sensitive information, execution of destructive system-level actions, denial-of-service conditions, uncontrolled resource consumption, identity spoofing vulnerabilities, cross-agent propagation of unsafe practices, and partial system takeover  (February 2026, Stanford, MIT, Carnegie-Mellon and others). </li>
+</ul>
+<h2 id="advanced-topics">Advanced Topics</h2>
+<ul>
+<li>Foundations of LLM - Xiao, Zhu - <a href="https://arxiv.org/abs/2501.09223">https://arxiv.org/abs/2501.09223</a>  </li>
+<li>Introduction to LLM - Jurafsky - Stanford <a href="https://web.stanford.edu/~jurafsky/slp3/slides/LLM24aug.pdf">https://web.stanford.edu/\~jurafsky/slp3/slides/LLM24aug.pdf</a>  </li>
+<li>LLM: the basics - Duh - Johns Hopkins <a href="https://www.cs.jhu.edu/~kevinduh/a/llm-tutorial/2406-JSALT-LLM.pdf">https://www.cs.jhu.edu/\~kevinduh/a/llm-tutorial/2406-JSALT-LLM.pdf</a>   </li>
+<li>Transformers and LLMs - Amidi and Amidi - Stanford Course  </li>
+<li>Syllabus (videos, slides) <a href="https://cme295.stanford.edu/syllabus/">https://cme295.stanford.edu/syllabus/</a>   </li>
+<li>Slides <a href="https://github.com/sinchro1/cme295-stanford-slides">https://github.com/sinchro1/cme295-stanford-slides</a> </li>
+</ul>
+<h2 id="multimodal-audio-and-video">Multimodal (Audio and Video)</h2>
+<ul>
+<li><a href="https://blog.bytebytego.com/p/multimodal-llms-basics-how-llms-process">Multimodal LLMs Basics: How LLMs Process Text, Images, Audio &amp; Videos</a>  </li>
+<li><a href="https://www.3blue1brown.com/?topic=guest-videos&amp;lesson=diffusion-models">But how do AI images and videos actually work?</a> </li>
+</ul>
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    <script id="__config" type="application/json">{"base": "../..", "features": [], "search": "../../assets/javascripts/workers/search.208ed371.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.407015b8.min.js"></script>
+      
+    
+  </body>
+</html>
