@@ -8,20 +8,20 @@
       
       
       
-        <link rel="canonical" href="https://bartolialberto.github.io/WorkingNotes/Cybersecurity/Personal%20Notes%20-%20Cybersec%20%284%29/">
+        <link rel="canonical" href="https://bartolialberto.github.io/WorkingNotes/TLS/AitM%20-%20HTTPS/">
       
       
-        <link rel="prev" href="../Personal%20Notes%20-%20Cybersec%20%283%29/">
+        <link rel="prev" href="../../LLM/Vulnerability/">
       
       
-        <link rel="next" href="../Personal%20Notes%20-%20Cybersec%20%285%29/">
+        <link rel="next" href="../Understanding_MITM_proxies_with_HTTPS/">
       
       <link rel="icon" href="../../assets/images/favicon.png">
       <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.1.5">
     
     
       
-        <title>Phishing - Working Notes</title>
+        <title>TLS - Working Notes</title>
       
     
     
@@ -83,7 +83,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#a-closer-look-at-modern-evasive-phishing-emails" class="md-skip">
+        <a href="#tls-internals" class="md-skip">
           Skip to content
         </a>
       
@@ -117,7 +117,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Phishing
+              TLS
             
           </span>
         </div>
@@ -278,16 +278,14 @@
 
   
   
-    
-  
   
     
-    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--nested">
       
       
       
       
-      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" checked>
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
       
       
       
@@ -296,7 +294,7 @@
           <span class="md-nav__icon md-icon"></span>
         </label>
       
-      <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="true">
+      <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
         <label class="md-nav__title" for="__nav_3">
           <span class="md-nav__icon md-icon"></span>
           Cybersecurity
@@ -309,7 +307,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../AI%20in%20cybersec/" class="md-nav__link">
+      <a href="../../Cybersecurity/AI%20in%20cybersec/" class="md-nav__link">
         AI in Cybersec
       </a>
     </li>
@@ -323,7 +321,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../Personal%20Notes%20-%20Cybersec%20%281%29/" class="md-nav__link">
+      <a href="../../Cybersecurity/Personal%20Notes%20-%20Cybersec%20%281%29/" class="md-nav__link">
         Driver abuse
       </a>
     </li>
@@ -337,7 +335,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../Personal%20Notes%20-%20Cybersec%20%282%29/" class="md-nav__link">
+      <a href="../../Cybersecurity/Personal%20Notes%20-%20Cybersec%20%282%29/" class="md-nav__link">
         IoC
       </a>
     </li>
@@ -351,7 +349,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../Personal%20Notes%20-%20Cybersec%20%283%29/" class="md-nav__link">
+      <a href="../../Cybersecurity/Personal%20Notes%20-%20Cybersec%20%283%29/" class="md-nav__link">
         Attack Economics
       </a>
     </li>
@@ -363,75 +361,11 @@
               
   
   
-    
   
-  
-    <li class="md-nav__item md-nav__item--active">
-      
-      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
-      
-      
-      
-        <label class="md-nav__link md-nav__link--active" for="__toc">
-          Phishing
-          <span class="md-nav__icon md-icon"></span>
-        </label>
-      
-      <a href="./" class="md-nav__link md-nav__link--active">
+    <li class="md-nav__item">
+      <a href="../../Cybersecurity/Personal%20Notes%20-%20Cybersec%20%284%29/" class="md-nav__link">
         Phishing
       </a>
-      
-        
-
-<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
-  
-  
-  
-  
-    <label class="md-nav__title" for="__toc">
-      <span class="md-nav__icon md-icon"></span>
-      Table of contents
-    </label>
-    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#a-closer-look-at-modern-evasive-phishing-emails" class="md-nav__link">
-    A Closer Look At Modern Evasive Phishing Emails
-  </a>
-  
-    <nav class="md-nav" aria-label="A Closer Look At Modern Evasive Phishing Emails">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#evasion" class="md-nav__link">
-    Evasion
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#email-volume" class="md-nav__link">
-    Email volume
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#login-pages" class="md-nav__link">
-    Login pages
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-    </ul>
-  
-</nav>
-      
     </li>
   
 
@@ -443,7 +377,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../Personal%20Notes%20-%20Cybersec%20%285%29/" class="md-nav__link">
+      <a href="../../Cybersecurity/Personal%20Notes%20-%20Cybersec%20%285%29/" class="md-nav__link">
         Secure Software Development
       </a>
     </li>
@@ -457,7 +391,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../Personal%20Notes%20-%20Cybersec%20%286%29/" class="md-nav__link">
+      <a href="../../Cybersecurity/Personal%20Notes%20-%20Cybersec%20%286%29/" class="md-nav__link">
         Technical quirks
       </a>
     </li>
@@ -471,7 +405,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../Personal%20Notes%20-%20Cybersec%20%287%29/" class="md-nav__link">
+      <a href="../../Cybersecurity/Personal%20Notes%20-%20Cybersec%20%287%29/" class="md-nav__link">
         Crime
       </a>
     </li>
@@ -485,7 +419,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../Personal%20Notes%20-%20Cybersec/" class="md-nav__link">
+      <a href="../../Cybersecurity/Personal%20Notes%20-%20Cybersec/" class="md-nav__link">
         Persistence in Windows
       </a>
     </li>
@@ -624,14 +558,16 @@
 
   
   
+    
+  
   
     
-    <li class="md-nav__item md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
       
       
       
       
-      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" >
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" checked>
       
       
       
@@ -640,7 +576,7 @@
           <span class="md-nav__icon md-icon"></span>
         </label>
       
-      <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+      <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="true">
         <label class="md-nav__title" for="__nav_5">
           <span class="md-nav__icon md-icon"></span>
           TLS
@@ -651,11 +587,96 @@
               
   
   
+    
   
-    <li class="md-nav__item">
-      <a href="../../TLS/AitM%20-%20HTTPS/" class="md-nav__link">
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          TLS
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
         TLS
       </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#tls-internals" class="md-nav__link">
+    TLS internals
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#certification-authorities-trust-and-revocation" class="md-nav__link">
+    Certification authorities: trust and revocation
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#certificate-transparency" class="md-nav__link">
+    Certificate Transparency
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#certificate-pinning" class="md-nav__link">
+    Certificate pinning
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#proxy-tls-interception" class="md-nav__link">
+    Proxy TLS interception
+  </a>
+  
+    <nav class="md-nav" aria-label="Proxy TLS interception">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#software-tools" class="md-nav__link">
+    Software tools
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#evilginx" class="md-nav__link">
+    Evilginx
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
     </li>
   
 
@@ -667,7 +688,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../TLS/Understanding_MITM_proxies_with_HTTPS/" class="md-nav__link">
+      <a href="../Understanding_MITM_proxies_with_HTTPS/" class="md-nav__link">
         Understanding MITM proxies with HTTPS
       </a>
     </li>
@@ -755,30 +776,51 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#a-closer-look-at-modern-evasive-phishing-emails" class="md-nav__link">
-    A Closer Look At Modern Evasive Phishing Emails
+  <a href="#tls-internals" class="md-nav__link">
+    TLS internals
   </a>
   
-    <nav class="md-nav" aria-label="A Closer Look At Modern Evasive Phishing Emails">
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#certification-authorities-trust-and-revocation" class="md-nav__link">
+    Certification authorities: trust and revocation
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#certificate-transparency" class="md-nav__link">
+    Certificate Transparency
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#certificate-pinning" class="md-nav__link">
+    Certificate pinning
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#proxy-tls-interception" class="md-nav__link">
+    Proxy TLS interception
+  </a>
+  
+    <nav class="md-nav" aria-label="Proxy TLS interception">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#evasion" class="md-nav__link">
-    Evasion
+  <a href="#software-tools" class="md-nav__link">
+    Software tools
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#email-volume" class="md-nav__link">
-    Email volume
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#login-pages" class="md-nav__link">
-    Login pages
+  <a href="#evilginx" class="md-nav__link">
+    Evilginx
   </a>
   
 </li>
@@ -803,105 +845,60 @@
                   
 
 
-<h1 id="phishing">Phishing</h1>
-<h2 id="a-closer-look-at-modern-evasive-phishing-emails">A Closer Look At Modern Evasive Phishing Emails</h2>
-<p>E. Boulila, M. Dacier, S. P. V. Peroumal, N. Veys and S. Aonzo<br />
-55th Annual IEEE/IFIP International Conference on Dependable Systems and Networks (DSN 2025)<br />
-<a href="https://www.eurecom.fr/publication/8200/download/sec-publi-8200.pdf">https://www.eurecom.fr/publication/8200/download/sec-publi-8200.pdf</a> </p>
+<h1 id="tls">TLS</h1>
 <ul>
-<li>Exhaustive analysis of user-reported phishing messages pertaining to five companies over a ten-month period. These messages are of particular interest as they evaded all state of the art security layers in place and were identified by the recipients themselves.  </li>
-<li>
-<p>We gathered 1,551 user-reported messages that were confirmed to be malicious, with a particular focus on those targeting the harvesting of corporate credentials.</p>
-</li>
-<li>
-<p>Our findings indicate that:  </p>
-</li>
-<li>The majority of observed phishing attacks are <strong>low-volume</strong> but <strong>meticulously planned</strong>, exhibiting a high degree of premeditation and strategic preparation. Infrequent campaigns against which automated systems have received limited data, thereby impeding their ability to detect them on a large scale.  </li>
-<li>A substantial number of sites were registered and had obtained TLS certificates <strong>several weeks before the attacks</strong> in order to avoid being flagged based on their young age, a common practice used by products to defeat phishing websites.  </li>
-<li>Phishing pages are now safeguarded by <strong>advanced evasion mechanisms</strong>, such as bot detection services and open-source fingerprinting libraries.  </li>
-<li>
-<p><strong>QR codes</strong> are increasingly used to embed phishing content. Access to the website will not be done from the corporate machine protected by the corporate defenses but from the smartphone that flashes the QR code. As of now, most personal smartphones are typically less monitored and protected than machines in the corporate network.</p>
-</li>
-<li>
-<p>To <strong>send the message</strong>, attackers may use:  </p>
-</li>
-<li>compromised email servers  </li>
-<li>compromised email accounts  </li>
-<li>third-party services  </li>
-<li>malicious sender accounts.  </li>
-<li>They may also employ domain spoofing or email header manipulation to disguise the true origin of the message.  </li>
-<li><strong>All the reported messages pass the three email authentication methods</strong>: SPF, DKIM, and DMARC.  </li>
-<li>This means that they are either sent from legitimate, well established email addresses or from compromised or malicious accounts.</li>
+<li><a href="https://www.feistyduck.com/ssl-tls-and-pki-history/">SSL/TLS and PKI History</a>
+A comprehensive history of the most important events that shaped the SSL/TLS and PKI ecosystem (i.e., certificates and certification authorities). Describes the major vulnerabilities discovered in this area. </li>
+<li><a href="https://www.ssllabs.com/ssltest/index.html">SSL Server Test</a> Free online service performs a deep analysis of the configuration of any TLS SSL web server on the public Internet (is the TLS configuration ofn esse3.units.it ok?)</li>
+<li><a href="https://securityheaders.com/">Security Headers</a> A similar service that focusses instead on the security-relevant HTTPS headers.</li>
 </ul>
-<h3 id="evasion">Evasion</h3>
+<h2 id="tls-internals">TLS internals</h2>
 <ul>
-<li>The <strong>evasion techniques</strong> employed to bypass the email security parsers and scanners can be categorized into two distinct classes.  </li>
-<li><strong>Message-level</strong> evasion: it refers to techniques used to <strong>hide an embedded URL in a message</strong>, such that it is not successfully retrieved by email security parsers. It can be based for instance on obfuscation, character substitution, and character encoding (where parts of the message are encoded in Base64 for example). Attackers might also embed malicious text in images to evade text-based filters.  </li>
-<li>
-<p><strong>Cloaking</strong>: it refers to techniques used when a client visits a phishing website. The goal is to <strong>conceal the phishing page from web crawlers and security bots</strong>, while keeping it visible to human victims. If the visitor is identified as a bot, a benign content is displayed.  </p>
-</li>
-<li>
-<p><strong>Client-side cloaking</strong> involves techniques executed within the user’s browser or system. Some checks are run on the client to collect information about the environment or the user’s behavior. Depending on the result, a different content is displayed to the visitor (benign or malicious).  </p>
-</li>
-<li><strong>User interaction</strong>: the phishing content remains hidden until a button in a pop-up window is clicked or if a mouse activity is detected. In other cases, user interaction such as scrolling or filling out form fields are needed to show the malicious content.  </li>
-<li><strong>Fingerprinting</strong>: if the cookies are disabled or if the browser cache is enabled, the client is detected as an automated environment and the phishing page is not displayed.  <ul>
-<li>This detection can also be made based on the origin of the traffic (by checking the Referrer field), or on the user agent string, accessed via the navigator.userAgent property. Some additional checks can be made based on attributes like the screen resolution for instance.  </li>
+<li><a href="https://textbook.cs161.org/network/tls.html">31 TLS</a> from Computer Security at Berkeley (CS161). Everything in this book is more than ok. </li>
+<li><a href="https://tls12.xargs.org/">The Illustrated TLS 1.2 Connection</a>
+Every byte explained and reproduced (TLS 1.2, TLS 1.3, QUIC)</li>
+<li><a href="https://tlseminar.github.io/first-few-milliseconds/">The First Few Milliseconds of an TLS 1.2 Connection</a> </li>
+<li><a href="https://www.cloudflare.com/learning/ssl/why-use-tls-1.3/">Why use TLS 1.3?</a> by Cloudflare, clear and concise.</li>
 </ul>
-</li>
-<li>
-<p><strong>Bot behavior</strong>: the phishing content is randomly displayed or is delayed by a few seconds. While scanning a URL, some security crawlers do not wait enough time before the page is reloaded with malicious content. This leads to a false negative verdict. Additionally, Google reCaptcha was seen in previous phishing campaigns since at least 202]. It presents the user with the ”I’m not a robot” checkbox, prompting them to solve image-based puzzles.</p>
-</li>
-<li>
-<p><strong>Server-side cloaking</strong> is executed on the phishing server itself. In this case, the server decides what content to serve based on attributes of the incoming request, such as IP address or User-Agent. The phishing content is only displayed to targeted users.  </p>
-</li>
-<li><strong>Delaying the activation of a phishing URL</strong>: before its activation, all visitors are redirected to a benign page. This technique can be used to prevent email security filters from reaching the malicious page while scanning the URL extracted from an incoming message.  <ul>
-<li>For example, attackers might choose to send a phish message when the victim is supposed to be unavailable (in the middle of the night for instance). At delivery time, the URL does not display any malicious content. A few hours later, the URL is activated.  </li>
-</ul>
-</li>
-<li><strong>User Agent filtering</strong>: the phishing content is only accessible for specific clients, for example the ones associated with a mobile browser (such as Safari on iOS). This technique might be part of the attacker’s strategy, for instance, when the phishing URL is embedded in a QR code, which should normally be decoded by a mobile phone, not a desktop o a laptop.  </li>
-<li><strong>IP blacklists</strong>: used to block access to clients whose IPs are associated to known security scanners.  </li>
-<li><strong>Displaying the phishing site only if the GET request is made to a valid tokenized URL</strong>: The attacker generates URLs containing unique tokens. For example, a URL might look like the following: https://evil-site.com/dhfYWfH, where the token is ”dhfYWfH”. Any request lacking a valid token is redirected to a benign webpage. Additionally, attackers can disable individual tokens, preventing even those URLs from displaying the phishing content.</li>
-</ul>
-<h3 id="email-volume">Email volume</h3>
+<h2 id="certification-authorities-trust-and-revocation">Certification authorities: trust and revocation</h2>
 <ul>
-<li>In total, these companies handle over <strong>60 million</strong> inbound emails monthly.  </li>
-<li>The companies maintain a robust awareness policy, actively encouraging their staff and consultants to report any suspicious emails they receive and frequently engaging them in phishing simulation campaigns.  </li>
-<li>These email messages are initially intercepted and analyzed by state of the art security products.  </li>
-<li>At this stage, <strong>17%</strong> of all messages are filtered out because they were detected as malicious or spam.  </li>
-<li>Among the remaining 83%, about <strong>14,000</strong> are monthly reported as suspicious by end-users (corresponding to <strong>0.03%</strong> of the total delivered messages).  </li>
-<li>Among the reported emails, about <strong>3.7% are found to be malicious</strong>  </li>
-<li>The rest are flagged as either legitimate (35.0%) or spam (61.3%).  </li>
-<li>
-<p>In absolute numbers, <strong>500 are reported and confirmed as malicious every month</strong>, i.e., <strong>25 per working day on average</strong>.</p>
-</li>
-<li>
-<p><strong>29.9%</strong> correspond to <strong>active phishing</strong>; namely, such emails redirect to a web page with a fake login form.  </p>
-</li>
-<li>49.6% of the messages do not contain any embedded web resources (such as URLs); these are generally associated with fraud when attackers try to establish <strong>first contact</strong> with the recipient.  </li>
-<li>15.9% lead to error pages (NXDomain error, page unreachable, etc.), despite our efforts to analyze them in real time. These instances might correspond to phishing websites that had been deactivated or server-side cloaking that we could not circumvent.  </li>
-<li>4.5% lead to pages requiring specific user interaction (e.g., a Dropbox document, a Google Drive page, or a website requiring solving a traditional CAPTCHA system involving image-based puzzles).  </li>
-<li>Only five (0.1%) messages resulted in the download of external files, specifically ZIP archives. Each archive contains an HTA (HTML Application) file that retrieves a JavaScript file from a domain identified as malicious by VirusTotal.</li>
+<li><a href="https://textbook.cs161.org/crypto/certificates.html">13. Certificates</a> from Computer Security at Berkeley (CS161). Everything in this book is more than ok. </li>
+<li><a href="https://blog.apnic.net/2022/03/22/whats-going-on-with-certificate-revocation/">What’s going on with certificate revocation?</a> A <em>fantastic</em> description of why certificate revocation is so hard. Complex because the topic is complex.</li>
+<li><a href="https://pluralistic.net/2022/11/09/infosec-blackpill/">Delegating trust is really, really, really hard (infosec edition)</a> A <em>fantastic</em> description of why defining and managing trust in certification authorities is so hard. Complex because the topic is complex.</li>
+<li><a href="https://koen.engineer/russias-certificate-authority-for-sanctioned-organizations-645d61af8ac6">Russia’s certificate authority for sanctioned organizations</a></li>
+<li><a href="https://www.agwa.name/blog/post/roots_intermediates_and_resellers">The Difference Between Root Certificate Authorities, Intermediates, and Resellers</a></li>
+<li><a href="https://www.agwa.name/blog/post/checking_if_a_certificate_is_revoked_how_hard_can_it_be">Checking if a Certificate is Revoked: How Hard Can It Be?</a> Another discussion of why certificate revocation is hard. </li>
 </ul>
-<h3 id="login-pages">Login pages</h3>
+<h2 id="certificate-transparency">Certificate Transparency</h2>
 <ul>
-<li>After identifying the phishing URLs leading to fake lookalike login pages, we inspect the requests made by our automated browser while visiting these pages.  </li>
-<li>In 339/1,137 cases (29.8%), the client downloads in real-time embedded resources, including the logo and the background image from the third-party domains belonging to the organization being impersonated.  </li>
-<li>
-<p>This is a crucial observation because by <strong>identifying referrals</strong> in requests made for the aforementioned web resources within their own systems, organizations can track, at early stages, pages impersonating their login sites.</p>
+<li><a href="https://medium.com/cloud-security/certificate-transparency-logs-what-you-need-to-know-c7d20738eaa9#id_token=eyJhbGciOiJSUzI1NiIsImtpZCI6IjY3NmRhOWQzMTJjMzlhNDI5OTMyZjU0M2U2YzFiNmU2NTEyZTQ5ODMiLCJ0eXAiOiJKV1QifQ.eyJpc3MiOiJodHRwczovL2FjY291bnRzLmdvb2dsZS5jb20iLCJuYmYiOjE2ODkyNDE1MDMsImF1ZCI6IjIxNjI5NjAzNTgzNC1rMWs2cWUwNjBzMnRwMmEyamFtNGxqZGNtczAwc3R0Zy5hcHBzLmdvb2dsZXVzZXJjb250ZW50LmNvbSIsInN1YiI6IjEwODUxNDk3MzE5Nzc1ODMxMTMyMiIsImVtYWlsIjoiYmFydG9saS5hbGJlcnRvQGdtYWlsLmNvbSIsImVtYWlsX3ZlcmlmaWVkIjp0cnVlLCJhenAiOiIyMTYyOTYwMzU4MzQtazFrNnFlMDYwczJ0cDJhMmphbTRsamRjbXMwMHN0dGcuYXBwcy5nb29nbGV1c2VyY29udGVudC5jb20iLCJuYW1lIjoiQWxiZXJ0byBCYXJ0b2xpIiwicGljdHVyZSI6Imh0dHBzOi8vbGgzLmdvb2dsZXVzZXJjb250ZW50LmNvbS9hL0FBY0hUdGVnUzdLU2h0UTRHcVpETmg3bDk5NngtQnVSUTJvNTNxckI3Vjl1TWtSM0RoYz1zOTYtYyIsImdpdmVuX25hbWUiOiJBbGJlcnRvIiwiZmFtaWx5X25hbWUiOiJCYXJ0b2xpIiwiaWF0IjoxNjg5MjQxODAzLCJleHAiOjE2ODkyNDU0MDMsImp0aSI6IjM2NDk4Y2I0MThkNTI3OGI4NjU4Njk4NTk1YjQ5MTFlNmFlOTdmYWYifQ.OJSvpq_4YeJAyH5Eh9W4zW4e1jA2Jy8eMCWEO5n09zK3nDGQfc4b5E6ccWkxsClQVimZg-Yn8y2lg_i82X5JBsrQSGnWlePDDptQDhUClP9o59aJOOUwQ1wl3SMrHBWTYhTcQ0_YKGdL9CNg9ekRv0GN5I0nDvwaHa-3P8-QN2KzURlPOK32R_w2Q-ASVaWvp3rzLjbvd1Sh2d6xe7xRB34TQtlFrbS1lOjMD9RQG9aOGg5zJRr-qyLO1S3TnXExykFdPxoH-wGmpqcyathexI9t1MB-7wUn1rjQcPx_GRF8u1B6ePTQIS5_FWPZ466q5868XHTvqHodHbCMJufxDA">Certificate Transparency Logs —What you need to know</a></li>
+</ul>
+<h2 id="certificate-pinning">Certificate pinning</h2>
+<ul>
+<li><a href="https://littlemaninmyhead.wordpress.com/2020/06/08/understanding-certificate-pinning/">Understanding certificate pinning</a></li>
+<li><a href="https://repositum.tuwien.at/bitstream/20.500.12708/150264/1/Pradeep-2022-A%20Comparative%20Analysis%20of%20Certificate%20Pinning%20in%20Android%20%20iOS-ao.pdf">Certificate pinning: A Comparative Analysis of Certificate Pinning in Android &amp; iOS</a>. A scientific paper with a large scale analysis. Interesting for understanding how to determine whether a smartphone app indeed implements Certificate pinning. <em>"We find that 0.9% to 8% of Android apps and 2.5% to 11% of iOS apps use certificate pinning"</em>.</li>
+<li><a href="https://www.youtube.com/watch?v=xp8ufidc514">Intercepting Android App Traffic with BurpSuite</a> Video on setting up an Android VM, Installing the Burp Certificate in the System Store, and proxying application traffic through BurpSuite. It also go over using Frida to defeat certificate pinning.</li>
+<li><a href="https://petruknisme.medium.com/easy-way-to-bypass-ssl-pinning-with-objection-frida-beginner-friendly-58118be4094">Easy Way to Bypass SSL Pinning with Objection &amp; Frida (Beginner Friendly)</a></li>
+</ul>
+<h2 id="proxy-tls-interception">Proxy TLS interception</h2>
+<ul>
+<li><a href="https://www.enisa.europa.eu/publications/encrypted-traffic-analysis">Encrypted Traffic Analysis (ENISA)</a> Key use cases: application identification, network analytics, user information identification, detection of encrypted malware, file/device/website/location fingerprinting and DNS tunnelling detection.</li>
+</ul>
+<h3 id="software-tools">Software tools</h3>
+<ul>
+<li><a href="https://mitmproxy.org/">mitmproxy</a> is your swiss-army knife for debugging, testing, privacy measurements, and penetration testing. It can be used to intercept, inspect, modify and replay web traffic such as HTTP/1, HTTP/2, WebSockets, or any other SSL/TLS-protected protocols</li>
+<li><a href="https://portswigger.net/burp/communitydownload">Burp Suite Community Edition</a> Start your web security testing journey for free.</li>
+<li><a href="https://www.telerik.com/fiddler">Fiddler</a> Web debugging proxy for MacOS, Windows, and Linux</li>
+</ul>
+<h3 id="evilginx">Evilginx</h3>
+<ul>
+<li><a href="https://github.com/kgretzky/evilginx2">Evilginx 3.0</a> Man-in-the-middle attack framework used for phishing login credentials along with session cookies, which in turn allows to bypass 2-factor authentication protection.<ul>
+<li>This tool is a successor to Evilginx, released in 2017, which used a custom version of nginx HTTP server to provide man-in-the-middle functionality to act as a proxy between a browser and phished website.</li>
+<li>Most existing tutorials are for version 2. Version 3 phishlets (i.e., YAML configuration files for targeting a specific site) are not fully compatible with version 2, hence some tutorial might not work with the new version.</li>
+</ul>
 </li>
-<li>
-<p>The <strong>median time for delivering a phishing message</strong> is approximately:  </p>
-</li>
-<li>24 days after creating the landing domain  </li>
-<li>
-<p>8 days after issuing the associated TLS certificate.</p>
-</li>
-<li>
-<p>The <strong>number of reported messages linked to the identified landing domains</strong> is:  </p>
-</li>
-<li>Average 2.62.  </li>
-<li>Median number is only 1.0.  </li>
-<li>This suggests that many of these phishing attempts may be part of more targeted attacks rather than large-scale phishing campaigns. This could indicate that a significant portion of the associated landing domains could be designed for specific, low-volume operations, making them harder to detect in targeted scenarios.</li>
+<li><a href="https://www.trustwave.com/en-us/resources/blogs/spiderlabs-blog/bypassing-2fa-authentication-with-evilginx2/">Bypassing 2FA Authentication with Evilginx2</a></li>
+<li><a href="https://janbakker.tech/how-to-set-up-evilginx-to-phish-office-365-credentials/">How to set up Evilginx to phish Office 365 credentials</a></li>
 </ul>
 
 
