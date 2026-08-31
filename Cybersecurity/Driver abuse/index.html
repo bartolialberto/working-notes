@@ -8,20 +8,20 @@
       
       
       
-        <link rel="canonical" href="https://bartolialberto.github.io/WorkingNotes/Cybersecurity/Personal%20Notes%20-%20Cybersec/">
+        <link rel="canonical" href="https://bartolialberto.github.io/WorkingNotes/Cybersecurity/Driver%20abuse/">
       
       
-        <link rel="prev" href="../Personal%20Notes%20-%20Cybersec%20%287%29/">
+        <link rel="prev" href="../AI%20in%20cybersec/">
       
       
-        <link rel="next" href="../../LLM/Coding/">
+        <link rel="next" href="../Economics/">
       
       <link rel="icon" href="../../assets/images/favicon.png">
       <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.1.5">
     
     
       
-        <title>Persistence in Windows - Working Notes</title>
+        <title>Driver abuse - Working Notes</title>
       
     
     
@@ -83,7 +83,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#sok-systematization-detection-and-hunting-of-windows-malware-persistence-techniques" class="md-skip">
+        <a href="#unveiling-byovd-threats-malwares-use-and-abuse-of-kernel-drivers" class="md-skip">
           Skip to content
         </a>
       
@@ -117,7 +117,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Persistence in Windows
+              Driver abuse
             
           </span>
         </div>
@@ -321,10 +321,74 @@
               
   
   
+    
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          Driver abuse
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        Driver abuse
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#unveiling-byovd-threats-malwares-use-and-abuse-of-kernel-drivers" class="md-nav__link">
+    Unveiling BYOVD Threats: Malware’s Use and Abuse of Kernel Drivers
+  </a>
+  
+    <nav class="md-nav" aria-label="Unveiling BYOVD Threats: Malware’s Use and Abuse of Kernel Drivers">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#background" class="md-nav__link">
+    Background
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
   
     <li class="md-nav__item">
-      <a href="../Personal%20Notes%20-%20Cybersec%20%281%29/" class="md-nav__link">
-        Driver abuse
+      <a href="../Economics/" class="md-nav__link">
+        Attack Economics
       </a>
     </li>
   
@@ -337,7 +401,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../Personal%20Notes%20-%20Cybersec%20%282%29/" class="md-nav__link">
+      <a href="../IoC/" class="md-nav__link">
         IoC
       </a>
     </li>
@@ -351,8 +415,8 @@
   
   
     <li class="md-nav__item">
-      <a href="../Personal%20Notes%20-%20Cybersec%20%283%29/" class="md-nav__link">
-        Attack Economics
+      <a href="../Persistence/" class="md-nav__link">
+        Persistence in Windows
       </a>
     </li>
   
@@ -410,91 +474,6 @@
       <a href="../Personal%20Notes%20-%20Cybersec%20%287%29/" class="md-nav__link">
         Crime
       </a>
-    </li>
-  
-
-            
-          
-            
-              
-  
-  
-    
-  
-  
-    <li class="md-nav__item md-nav__item--active">
-      
-      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
-      
-      
-      
-        <label class="md-nav__link md-nav__link--active" for="__toc">
-          Persistence in Windows
-          <span class="md-nav__icon md-icon"></span>
-        </label>
-      
-      <a href="./" class="md-nav__link md-nav__link--active">
-        Persistence in Windows
-      </a>
-      
-        
-
-<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
-  
-  
-  
-  
-    <label class="md-nav__title" for="__toc">
-      <span class="md-nav__icon md-icon"></span>
-      Table of contents
-    </label>
-    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#sok-systematization-detection-and-hunting-of-windows-malware-persistence-techniques" class="md-nav__link">
-    SoK: Systematization, Detection, and Hunting of Windows Malware Persistence Techniques
-  </a>
-  
-    <nav class="md-nav" aria-label="SoK: Systematization, Detection, and Hunting of Windows Malware Persistence Techniques">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#prevalence" class="md-nav__link">
-    Prevalence
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#how" class="md-nav__link">
-    How
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#evasion" class="md-nav__link">
-    Evasion
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#detection" class="md-nav__link">
-    Detection
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-    </ul>
-  
-</nav>
-      
     </li>
   
 
@@ -762,37 +741,16 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#sok-systematization-detection-and-hunting-of-windows-malware-persistence-techniques" class="md-nav__link">
-    SoK: Systematization, Detection, and Hunting of Windows Malware Persistence Techniques
+  <a href="#unveiling-byovd-threats-malwares-use-and-abuse-of-kernel-drivers" class="md-nav__link">
+    Unveiling BYOVD Threats: Malware’s Use and Abuse of Kernel Drivers
   </a>
   
-    <nav class="md-nav" aria-label="SoK: Systematization, Detection, and Hunting of Windows Malware Persistence Techniques">
+    <nav class="md-nav" aria-label="Unveiling BYOVD Threats: Malware’s Use and Abuse of Kernel Drivers">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#prevalence" class="md-nav__link">
-    Prevalence
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#how" class="md-nav__link">
-    How
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#evasion" class="md-nav__link">
-    Evasion
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#detection" class="md-nav__link">
-    Detection
+  <a href="#background" class="md-nav__link">
+    Background
   </a>
   
 </li>
@@ -817,48 +775,39 @@
                   
 
 
-<h1 id="persistence-in-windows">Persistence in Windows</h1>
-<h2 id="sok-systematization-detection-and-hunting-of-windows-malware-persistence-techniques">SoK: Systematization, Detection, and Hunting of Windows Malware Persistence Techniques</h2>
-<p><a href="https://dl.acm.org/doi/proceedings/10.1145/3779208">ASIA CCS '26: Proceedings of the ACM Asia Conference on Computer and Communications Security</a> June 2026</p>
+<h1 id="driver-abuse">Driver abuse</h1>
+<h2 id="unveiling-byovd-threats-malwares-use-and-abuse-of-kernel-drivers">Unveiling BYOVD Threats: Malware’s Use and Abuse of Kernel Drivers</h2>
+<p><a href="https://www.ndss-symposium.org/wp-content/uploads/2026-s1491-paper.pdf">https://www.ndss-symposium.org/wp-content/uploads/2026-s1491-paper.pdf</a> NDSS 2026</p>
 <ul>
-<li>The AV-TEST Institute records over 250K new malware samples every day.  </li>
-<li><a href="https://www.av-test.org/en/statistics/malware/">https://www.av-test.org/en/statistics/malware/</a>  </li>
+<li>Some drivers exist solely to implement system level features or to expose privileged operations to user-mode applications.  </li>
+<li>If these drivers contain vulnerabilities, malicious actors can exploit them to bypass security mechanisms, gain elevated privileges, and execute undetected malicious code in the OS kernel. Vulnerable drivers are routinely patched and replaced with new, more secure versions.   </li>
+<li>Bring Your Own Vulnerable Driver (BYOVD) is a sophisticated malware attack technique that leverages legitimate but vulnerable kernel drivers to compromise computer systems. In these attacks, malicious software brings along its own copy of a vulnerable third-party driver and loads it into the operating system – effectively reintroducing into the system an old vulnerability it already knows how to exploit   </li>
+<li>While BYOVD is becoming increasingly popular among malware authors, defense techniques are lagging behind. Modern EDR systems, although effective at monitoring user-mode activity, are often blind to actions that take place in the kernel.  </li>
+<li>For instance, when a malware sample loads and abuses the Zemana anti-malware driver to terminate Windows Defender, public sandboxes on VirusTotal detect only the driver load event, but fail to capture how it is used once loaded into the system. This limitation stems from a fundamental lack of visibility into internal kernel-level communications.</li>
+</ul>
+<h3 id="background">Background</h3>
+<ul>
+<li>Driver Signature Enforcement (DSE) ensures that each kernel driver loaded in the system is signed. To sign a driver, developers submit the binary to Microsoft’s Windows Hardware Dev Center, where it undergoes a suite of security and compatibility checks before Microsoft applies its digital signature  </li>
+<li>While there have been cases of malicious drivers signed by Microsoft [16], this is a risky approach for malware developers. Instead, attackers often exploit legitimate signed drivers with vulnerabilities that expose kernel functions to user-mode programs.  </li>
+<li>Malware authors target drivers that allow arbitrary memory access or dangerous actions like process termination, kernel memory mapping, privileged file access, and I/O monitoring, executing user-specified code at the kernel level.   </li>
 <li>
-<p><a href="https://portal.av-atlas.org">https://portal.av-atlas.org</a> </p>
+<p>A common way to trigger a vulnerability in a driver is to send a properly crafted request. Windows supports two different types of communications with kernel drivers: Minifilter APIs and I/O Request Packet (IRP). </p>
 </li>
 <li>
-<p>We present the largest documented set of persistence techniques (72 in total)   </p>
+<p>Once a driver with the desired characteristics is identified, the malware must drop it on disk and then load it after successfully infecting the system. This procedure is due to the fact that typical methods used to load drivers (e.g., sc.exe, NtLoadDriver, or CreateService) require a file path pointing to a location on disk and cannot be performed from memory.</p>
 </li>
-<li>48,873 detonated Windows malware samples.</li>
-</ul>
-<h3 id="prevalence">Prevalence</h3>
-<ul>
-<li>Only 55.2% of samples are persistent.  </li>
-<li>Contrary to the general expectation that the vast majority of active malware requires persistence.  </li>
-<li>Absence of running malware does not prove that no execution occurred—malware may exfiltrate data and delete itself without being resident </li>
-</ul>
-<h3 id="how">How</h3>
-<ul>
-<li>Over 30% employ two or more persistence techniques  </li>
-<li>Removing a single vector may not fully eradicate the malware.  </li>
-<li>We identified 42 distinct methods out of 72 documented, highlighting a long-tail distribution. The top 10 techniques cover many families, but full detection requires attention to rarer methods.  </li>
-<li>Malware families often switch persistence techniques over time.  </li>
-<li>Knowing the family and its typical behavior doesn’t guarantee knowledge of the specific technique used.   </li>
-<li>Only 43.2% aim for execution at boot.  </li>
-<li>Although persistence is often equated with boot-time execution, many samples prefer to trigger on system events, schedules, or user actions. </li>
-</ul>
-<h3 id="evasion">Evasion</h3>
-<ul>
-<li>Although monitoring Windows API calls is effective for most techniques we documented, attackers can exploit less commonly monitored Windows subsystems to achieve the same effect more stealthily.   </li>
-<li>Another common evasion strategy is the obfuscation of Registry and file system paths.</li>
-</ul>
-<h3 id="detection">Detection</h3>
-<ul>
-<li>While persistence detection is generally considered a solved problem, we reveal that industry-standard persistence detection tools produce a significant number of false positives and false negatives.   </li>
-<li>Our analysis of state-of-the-art tools reveals that:  </li>
-<li><a href="https://mandiant.github.io/capa/#examples">Capa</a> 72.5% false positives, 42.1% false negative rate (FNR). Triage unknown files, guide reverse engineering, and hunt across a corpus for novel malware. In contrast to YARA, which primarily searches for sequences of bytes, capa rules describe features at the code-level.   </li>
-<li><a href="https://learn.microsoft.com/en-us/sysinternals/downloads/autoruns">Autoruns</a> 24.9% FNR. This utility, which has the most comprehensive knowledge of auto-starting locations of any startup monitor, shows you what programs are configured to run during system bootup or login…Autoruns reports Explorer shell extensions, toolbars, browser helper objects, Winlogon notifications, auto-start services, and much more.   </li>
-<li><a href="https://github.com/last-byte/PersistenceSniper">Persistence Sniper</a> a 34.9% FNR. Powershell module that can be used by Blue Teams, Incident Responders and System Administrators to hunt persistences implanted in Windows machines.  </li>
+<li>
+<p>However, loading a driver in Windows requires the process to already run with administrative privileges. This raises a crucial question: why would malware bother loading a driver if it already has administrative privileges?  </p>
+</li>
+<li>
+<p>The answer lies in the design of modern Windows operating systems. Some processes and system components are so essential to maintaining the security and integrity of the system that even administrators are prohibited from modifying them. Only the kernel has the necessary privileges to modify these highly protected system parts. </p>
+</li>
+<li>
+<p>Protected Processes Termination (PPL) provides a flexible protection model designed to isolate processes. They are extensively used to isolate different operating system components, such as process management, the LSASS, Microsoft Defender.  </p>
+</li>
+<li>Modern EDRs are implemented by using a combination of user-mode PPL processes (that contain the detection logic), and kernel-mode drivers (that provide access to privileged resources).   </li>
+<li>Malware can no longer terminate user-space EDR components (even when running with administrative privileges), thanks to their protection under the PPL mechanism.  </li>
+<li>An attacker could find a way to limit the EDR functionalities through other kinds of vulnerabilities, exploit flaws in the PPL implementation, or perform a BYOVD attack to abuse an existing driver that allows a user-mode process to kill even PPL processes. </li>
 </ul>
 
 
