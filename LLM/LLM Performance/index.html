@@ -8,20 +8,20 @@
       
       
       
-        <link rel="canonical" href="https://bartolialberto.github.io/working-notes/LLM/Training/">
+        <link rel="canonical" href="https://bartolialberto.github.io/working-notes/LLM/LLM%20Performance/">
       
       
-        <link rel="prev" href="../LLM%20vs%20AI%20Agents/">
+        <link rel="prev" href="../LLM%20Internals/">
       
       
-        <link rel="next" href="../Vulnerability/">
+        <link rel="next" href="../LLM%20vs%20AI%20Agents/">
       
       <link rel="icon" href="../../assets/images/favicon.png">
       <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.1.5">
     
     
       
-        <title>Training an LLM - Working Notes</title>
+        <title>LLM Performance - Working Notes</title>
       
     
     
@@ -71,7 +71,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#capabilities-developed-with-fine-tuning" class="md-skip">
+        <a href="#hallucinations" class="md-skip">
           Skip to content
         </a>
       
@@ -105,7 +105,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Training an LLM
+              LLM Performance
             
           </span>
         </div>
@@ -484,11 +484,95 @@
               
   
   
+    
   
-    <li class="md-nav__item">
-      <a href="../LLM%20Performance/" class="md-nav__link">
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          LLM Performance
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
         LLM Performance
       </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#hallucinations" class="md-nav__link">
+    Hallucinations
+  </a>
+  
+    <nav class="md-nav" aria-label="Hallucinations">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#a-personal-experience" class="md-nav__link">
+    A personal experience
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#summarization-and-research" class="md-nav__link">
+    Summarization and Research
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#accuracy" class="md-nav__link">
+    Accuracy
+  </a>
+  
+    <nav class="md-nav" aria-label="Accuracy">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#a-personal-experience_1" class="md-nav__link">
+    A personal experience
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#reliability" class="md-nav__link">
+    Reliability
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
     </li>
   
 
@@ -512,62 +596,11 @@
               
   
   
-    
   
-  
-    <li class="md-nav__item md-nav__item--active">
-      
-      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
-      
-      
-      
-        <label class="md-nav__link md-nav__link--active" for="__toc">
-          Training an LLM
-          <span class="md-nav__icon md-icon"></span>
-        </label>
-      
-      <a href="./" class="md-nav__link md-nav__link--active">
+    <li class="md-nav__item">
+      <a href="../Training/" class="md-nav__link">
         Training an LLM
       </a>
-      
-        
-
-<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
-  
-  
-  
-  
-    <label class="md-nav__title" for="__toc">
-      <span class="md-nav__icon md-icon"></span>
-      Table of contents
-    </label>
-    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#capabilities-developed-with-fine-tuning" class="md-nav__link">
-    Capabilities developed with fine tuning
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#rl-training-steps-in-a-nutshell" class="md-nav__link">
-    RL training steps (in a nutshell)
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#reasoning-self-refinement-and-reflection" class="md-nav__link">
-    Reasoning (Self-Refinement and Reflection)
-  </a>
-  
-</li>
-      
-    </ul>
-  
-</nav>
-      
     </li>
   
 
@@ -618,22 +651,55 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#capabilities-developed-with-fine-tuning" class="md-nav__link">
-    Capabilities developed with fine tuning
+  <a href="#hallucinations" class="md-nav__link">
+    Hallucinations
+  </a>
+  
+    <nav class="md-nav" aria-label="Hallucinations">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#a-personal-experience" class="md-nav__link">
+    A personal experience
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#summarization-and-research" class="md-nav__link">
+    Summarization and Research
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#rl-training-steps-in-a-nutshell" class="md-nav__link">
-    RL training steps (in a nutshell)
+  <a href="#accuracy" class="md-nav__link">
+    Accuracy
   </a>
+  
+    <nav class="md-nav" aria-label="Accuracy">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#a-personal-experience_1" class="md-nav__link">
+    A personal experience
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#reasoning-self-refinement-and-reflection" class="md-nav__link">
-    Reasoning (Self-Refinement and Reflection)
+  <a href="#reliability" class="md-nav__link">
+    Reliability
   </a>
   
 </li>
@@ -653,194 +719,69 @@
                   
 
 
-<h1 id="training-an-llm">Training an LLM</h1>
-<p>Training of a LLM involves several phases:</p>
-<ol>
-<li>
-<p><strong>Pre-training</strong>: The objective is to create a "foundation model" by training a Transformer on <strong>enormous amounts of unlabeled text</strong> (trillions of tokens) using self-supervised learning, specifically <strong>next-token prediction</strong>. The aim is to build broad world knowledge, language competence, and general reasoning ability. The output is a "base model" that can complete text plausibly but isn't yet reliable at following instructions or producing relevant answers.</p>
-</li>
-<li>
-<p><strong>Supervised Fine-tuning (SFT)</strong>: Continue training on a <strong>smaller, curated dataset</strong> of (instruction, ideal response) pairs, typically written or vetted by humans. The aim is to teach the model to <strong>follow user instructions</strong> and <strong>perform specific tasks</strong> (such as translation or summarization). This involves training the pre-trained model on a much smaller, high-quality dataset of <strong>labeled instruction-response pairs</strong>. This is the first point where the model starts behaving like a chatbot rather than a text-completion engine. </p>
-</li>
-<li>
-<p><strong>Reinforcement Learning from Human Feedback (RLHF)</strong>: Often referred to as <strong>preference tuning</strong>,or <strong>alignment</strong>, this phase aims to further refine the model's behavior to match complex human values and preferences. The aim is to make outputs more helpful, harmless, and honest according to human judgment — optimizing for qualities (tone, tact, calibration, refusal behavior) that are <strong>hard to specify as a single "correct" target label</strong> the way SFT requires.</p>
-</li>
-</ol>
-<p>Newer <strong>"reasoning models"</strong> have an additional distinct phase: </p>
-<ol>
-<li><strong>Reasoning-focused RL</strong> RL against <strong>verifiable and objective correctness signals</strong> (does the math answer match ground truth? does the code pass tests?) rather than subjective human preference. The aim is to improve the model's ability to reason step-by-step, solve harder multi-step problems and <strong>self-correct</strong> (see Self-Reflection below). </li>
-</ol>
-<p>Weights are always updated with backpropagation.</p>
-<p>The definition of the loss function in the RL steps is not based on the difference between observed output and expected output, as in pre-training and in SFT. It is instead based on a synthetically generated numerical reward given to each observed output in a way that approximates human preferences (RLHF) or a correctness signal (Reasoning-focused RL).</p>
-<h2 id="capabilities-developed-with-fine-tuning">Capabilities developed with fine tuning</h2>
-<p>The training phases that follow pre-training are collectively denoted as fine-tuning. The capabilities developed with fine tuning can be summarized as follows</p>
-<table>
-<thead>
-<tr>
-<th>Capability</th>
-<th>Definition</th>
-<th>SFT</th>
-<th>RLHF</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><strong>Instruction-following</strong></td>
-<td>Responding helpfully and accurately to a wide range of user instructions, rather than just completing text in a generic way (the core shift from a raw pretrained "base model" to an assistant-like model)</td>
-<td>✅ primary</td>
-<td>–</td>
-</tr>
-<tr>
-<td><strong>Conversational coherence</strong></td>
-<td>Maintaining context, tone, and consistency across multi-turn dialogue rather than treating each turn in isolation</td>
-<td>✅ primary</td>
-<td>✅ secondary</td>
-</tr>
-<tr>
-<td><strong>Task-specific expertise</strong></td>
-<td>Specializing the model for a narrow domain (e.g., legal document analysis, medical Q\&amp;A, code generation) using domain-specific data</td>
-<td>✅ primary</td>
-<td>–</td>
-</tr>
-<tr>
-<td><strong>Tool/function-calling</strong></td>
-<td>Learning to correctly decide when to invoke external tools, format tool calls per a schema, and integrate tool results into a coherent response</td>
-<td>✅ primary</td>
-<td>✅ secondary</td>
-</tr>
-<tr>
-<td><strong>Safety and harm avoidance</strong></td>
-<td>Refusing or appropriately handling requests involving harmful, illegal, or dangerous content</td>
-<td>✅ secondary</td>
-<td>✅ primary</td>
-</tr>
-<tr>
-<td><strong>Honesty and calibration</strong></td>
-<td>Expressing appropriate uncertainty, avoiding confident-sounding fabrications (hallucinations), and acknowledging the limits of its knowledge</td>
-<td>–</td>
-<td>✅ primary</td>
-</tr>
-<tr>
-<td><strong>Alignment with human preferences</strong></td>
-<td>Producing outputs that humans (or AI raters, as a proxy) actually judge as helpful, relevant, and well-formatted, not just technically correct</td>
-<td>–</td>
-<td>✅ (by definition)</td>
-</tr>
-<tr>
-<td><strong>Style/format adherence</strong></td>
-<td>Following formatting conventions (Markdown, code blocks, specific output structures like JSON) reliably and consistently</td>
-<td>✅ primary</td>
-<td>–</td>
-</tr>
-<tr>
-<td><strong>Persona/brand consistency</strong></td>
-<td>Adopting a specific tone, personality, or identity consistent with a product's intended voice</td>
-<td>✅ primary</td>
-<td>✅ secondary</td>
-</tr>
-<tr>
-<td><strong>Multilingual/cross-lingual competence</strong></td>
-<td>Improving performance in specific languages or on translation tasks, especially lower-resource languages underrepresented in pretraining data</td>
-<td>✅ primary</td>
-<td>✅ secondary</td>
-</tr>
-<tr>
-<td><strong>Reduced toxicity/bias</strong></td>
-<td>Decreasing the likelihood of outputs that are offensive, discriminatory, or reflect harmful stereotypes present in web-scale pretraining data</td>
-<td>✅ secondary</td>
-<td>✅ primary</td>
-</tr>
-<tr>
-<td><strong>Reasoning (Self-Refinement and Reflection)</strong></td>
-<td>Ability to identify errors in its own initial outputs and refine them based on internal logic or specific feedback.</td>
-<td></td>
-<td>RL* (not RLHF)</td>
-</tr>
-</tbody>
-</table>
-<h2 id="rl-training-steps-in-a-nutshell">RL training steps (in a nutshell)</h2>
-<p>RLHF is used for aligning the model with preferences that are hard to express as a single "correct" target output (e.g., "<em>which of these two responses is more helpful/harmless?</em>" doesn't have one ground-truth answer the way "<em>translate this sentence</em>" does).</p>
-<p><strong>Step A — Train a reward model.</strong> Humans are shown pairs of model outputs for the same prompt and asked which is better. This preference data trains a separate <strong>reward model</strong>: a neural network that takes a (prompt, response) pair and outputs a scalar score estimating "<em>how good is this response.</em>" This reward model is itself trained via ordinary backpropagation, with a loss that pushes it to score the preferred response higher than the rejected one. The resulting reward model will be used at the next step to imitate human preferences at scale.</p>
-<p><strong>Step B — Use the reward model to update the LLM.</strong> This is the actual Reinforcement Learning (RL) step:</p>
+<h1 id="llm-performance">LLM Performance</h1>
+<h2 id="hallucinations">Hallucinations</h2>
 <ul>
-<li>The LLM generates a response to a prompt.  </li>
-<li>The reward model scores that response.  </li>
-<li>The score is used as a <strong>reward signal</strong> in a policy-gradient RL update: weights are adjusted to make outputs that scored highly <em>more probable</em> in the future, and low-scoring outputs <em>less probable</em>. Specifically, the score multiplies the probability of the generated tokens and that product is used for backpropagation.</li>
-</ul>
-<p>The specific RL algorithm used for computing the loss and thus updating the weights with backpropagation is called <strong>PPO (Proximal Policy Optimization)</strong>. In a nutshell, this RL algorithm makes sure that weights are modified only a small step at a time, and never too far from how the original model behaved. The exploration ability of RL is a consequence of a sampling from the probability distribution of the predicted words.</p>
-<p>Increasingly common as a replacement for PPO, DPO (Direct Preference Optimization) reformulates the same preference data (A is better than B) into a loss function that can be optimized <strong>directly via standard backpropagation</strong>, <strong>without needing a separate reward model</strong> or <strong>the RL sampling loop</strong> at all. It's mathematically derived to have the same optimal solution as RLHF, but is simpler and more stable to train. So in practice, some "RL-based" alignment today is actually done without explicit RL machinery, just backpropagation on a cleverly designed loss.</p>
-<table>
-<thead>
-<tr>
-<th>Method</th>
-<th>Data type</th>
-<th>Loss/reward source</th>
-<th>Update mechanism</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>Pretraining</td>
-<td>Raw text</td>
-<td>Next-token prediction accuracy</td>
-<td>Backprop</td>
-</tr>
-<tr>
-<td>SFT</td>
-<td>(instruction, ideal response) pairs</td>
-<td>Cross-entropy vs. target</td>
-<td>Backprop</td>
-</tr>
-<tr>
-<td>RLHF (PPO)</td>
-<td>(prompt, response, reward score)</td>
-<td>Reward model's scalar score</td>
-<td>Backprop, but gradient comes from an RL objective (policy gradient), not a fixed target</td>
-</tr>
-<tr>
-<td>DPO</td>
-<td>(prompt, preferred response, rejected response)</td>
-<td>Preference comparison, reformulated as a direct loss</td>
-<td>Backprop, no separate RL loop</td>
-</tr>
-</tbody>
-</table>
-<h2 id="reasoning-self-refinement-and-reflection">Reasoning (Self-Refinement and Reflection)</h2>
-<p>This is the ability to identify errors in its own initial outputs and refine them based on internal logic or specific feedback.</p>
-<p>Even a model with no special reflection training can be prompted to critique and revise its own output — e.g., "<code>Here's your answer. Now critique it for errors, then produce an improved version.</code>" This works to some degree purely from the base model's/SFT model's general competence, exploiting the same capability that lets it evaluate <em>other</em> text for errors. </p>
-<p>If you fine-tune on examples that are written to <em>look like</em> reflection (e.g., "<code>Draft: ... Critique: ... Revised: ...</code>"), SFT will teach the model to produce that structure. But this is largely <strong>imitating the surface pattern of self-correction</strong>, not necessarily instilling a robust ability to actually detect its own errors in novel cases. It works reasonably well within the distribution of the training examples but <strong>tends to generalize poorly</strong> — the model learns "<em>reflection-shaped text follows this answer</em>" not "<em>genuinely re-examine whether this answer is right</em>."</p>
-<p><strong>Self-refinement is most robustly instilled through RL against verifiable correctness signals.</strong> SFT can scaffold the <strong>format</strong>, but the actual <strong>skill of catching and correcting</strong> its own errors is something RL training incentivizes far more directly, precisely because RL rewards the outcome (being right) rather than the resemblance to a human-written example.</p>
+<li><a href="https://www.nature.com/articles/s42256-025-01113-8">Language models cannot reliably distinguish belief from knowledge and fact and/or fake components for a real source</a>We evaluate 24 cutting-edge LMs using a new benchmark of 13,000 questions across 13 epistemic tasks. Our findings reveal crucial limitations. In particular, all models tested systematically fail to acknowledge first-person false beliefs, with GPT-4o dropping from 98.2% to 64.4% accuracy and DeepSeek R1 plummeting from over 90% to 14.4%  (Nature Machine Intelligence, 2025).  </li>
+<li><a href="https://www.computerworld.com/article/4059383/openai-admits-ai-hallucinations-are-mathematically-inevitable-not-just-engineering-flaws.html?ref=wheresyoured.at">OpenAI admits AI hallucinations are mathematically inevitable, not just engineering flaws</a> In a landmark study, OpenAI researchers reveal that large language models will always produce plausible but false outputs, even with perfect data, due to fundamental statistical and computational limits (September 2025).</li>
+<li>
+<p><a href="https://www.damiencharlotin.com/hallucinations/">AI Hallucination Cases</a> This database tracks legal decisions in cases where generative AI produced hallucinated content – typically fake citations, but also other types of AI-generated arguments.</p>
 <ul>
-<li>When training uses <strong>outcome-based RL</strong> (reward \= did the final answer match ground truth, e.g., correct math answer or passing test suite), the model isn't told <em>how</em> to reason — it's only rewarded for <em>arriving at the correct answer</em>.  </li>
-<li>Through many rounds of trial and error, the model discovers that certain reasoning behaviors — checking its own intermediate steps, noticing an inconsistency, backtracking and trying a different approach — <strong>causally increase the reward</strong>, because they lead to more correct final answers.  </li>
-<li>Crucially, this is <strong>learned as a strategy that pays off</strong>, not imitated from human-written examples of what reflection "should look like." This is why models trained this way (e.g., OpenAI's o1/o3, DeepSeek-R1) exhibit long, sometimes messy-looking reasoning traces with genuine self-correction ("<code>wait, that's not right, let me reconsider...</code>") — behavior that emerged from the RL objective rather than being explicitly written into training examples by a human.</li>
+<li><em>(Tribunale di Milano, 5/6/2026): Questa limitazione è giustificata dalla presenza nella comparsa di costituzione di tre massime giurisprudenziali apparentemente estrapolate da pronunce della Corte di Cassazione (cfr. pag. 13: Cass. 21432/2021, Cass. 7024/2017, Cass. 24058/2004), che però, ad una più attenta lettura, risultano inesistenti: o meglio, <strong>le sentenze citate esistono, ma non hanno nulla a che vedere con le citazioni riportate dalla parte convenuta</strong>. Ciò denota verosimilmente l’utilizzo di sistemi di intelligenza artificiale nella redazione degli scritti difensivi, senza controllo da parte del difensore sui noti rischi di “allucinazione”.</em></li>
 </ul>
-<table>
-<thead>
-<tr>
-<th>Mechanism</th>
-<th>What it produces</th>
-<th>Genuine or imitative?</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>Prompting alone</td>
-<td>Surface-level self-critique, quality bounded by base capability</td>
-<td>Neither trained — relies on existing competence</td>
-</tr>
-<tr>
-<td>SFT on reflection-formatted examples</td>
-<td>Model learns to <em>produce reflection-shaped output</em></td>
-<td>Largely imitative — mimics the pattern</td>
-</tr>
-<tr>
-<td>RL with outcome-based reward</td>
-<td>Model learns self-correction <em>because it improves accuracy</em></td>
-<td>Genuine — reflection emerges as an instrumentally useful strategy</td>
-</tr>
-</tbody>
-</table>
+</li>
+<li>
+<p><a href="https://gptzero.me/news/investigations-kpmg/">Chasing the Hallucinations: KPMG's AI-Powered Attempt at "Redefining Excellence"</a> This investigation analyzes a KPMG report from October 2025 on customer experience and agentic AI. The report, titled <a href="https://smallpdf.com/file#s=a35e268b-87cf-4380-b3f2-77b78c9e2274&amp;r=read">Total Experience: Redefining Excellence in the Age of Agentic AI</a>, summarizes the results of an annual study on consumer experience around the world. Of the 45 citations in the report, only five accurately point to real sources. Another 28 citations provide paraphrased titles The final 12 are too vague or flawed to accurately determine if a source exists. Additionally, around half of the claims evidenced by the 45 citations appear to be fake or misattributed (June 2026).</p>
+</li>
+<li>
+<p><a href="https://www.theregister.com/software/2025/10/06/deloitte-refunds-australian-government-over-ai-in-report/722000">Deloitte refunds Aussie gov after AI fabrications slip into $440K welfare report</a> Deloitte has agreed to refund part of an Australian government contract after admitting it used generative AI to produce a report riddled with fake citations, phantom footnotes, and even a made-up quote from a Federal Court judgment (October 2025).</p>
+</li>
+</ul>
+<h3 id="a-personal-experience">A personal experience</h3>
+<ul>
+<li><a href="https://bartoli-alberto.blogspot.com/2026/08/unallucinazione-ai-molto-istruttiva-per.html">Un'allucinazione AI molto istruttiva (per me un pò triste)</a> (Agosto 2026)</li>
+</ul>
+<h2 id="summarization-and-research">Summarization and Research</h2>
+<ul>
+<li><a href="https://futurism.com/artificial-intelligence/google-ai-overviews-misinformation">Analysis Finds That Google’s AI Overviews Are Providing Misinformation at a Scale Possibly Unprecedented in the History of Human Civilization</a> AI-generated summaries, which appear above Google search results, are accurate around 91 percent of the time. In a sense, that may sound like an impressive figure. But here’s an even more impressive one….tens of millions of wrong answers that the AI Overviews are providing every hour (April 2026) .  </li>
+<li><a href="https://www.cjr.org/analysis/i-tested-how-well-ai-tools-work-for-journalism.php">I Tested How Well AI Tools Work for Journalism</a> Some tools were sufficient for summarizing meetings. For research, the results were a disaster (August 2025).  </li>
+<li><a href="https://www.bbc.com/news/articles/c0m17d8827ko">AI chatbots unable to accurately summarise news, BBC finds</a> 51% of all AI answers to questions about the news were judged to have significant issues of some form. Additionally, 19% of AI answers which cited BBC content introduced factual errors, such as incorrect factual statements, numbers and dates (February 2025).  </li>
+<li><a href="https://www.bbc.co.uk/mediacentre/2025/new-ebu-research-ai-assistants-news-content">Largest study of its kind shows AI assistants misrepresent news content 45% of the time – regardless of language or territory</a> 45% of all AI answers had at least one significant issue. 31% of responses showed serious sourcing problems – missing, misleading, or incorrect attributions. 20% contained major accuracy issues, including hallucinated details and outdated information (October 2025).</li>
+</ul>
+<h2 id="accuracy">Accuracy</h2>
+<ul>
+<li><a href="https://arxiv.org/pdf/2412.14161">TheAgentCompany: Benchmarking LLM Agents on Consequential Real World Tasks</a> We introduce TheAgentCompany, an extensible benchmark for evaluating AI agents that interact with the world in similar ways to those of a digital worker: by browsing the Web, writing code, running programs, and communicating with other coworkers. … We find that the most competitive agent can complete 30% of tasks autonomously  (September 2025, Carnegie-Mellon, Duke). <a href="https://the-agent-company.com/#/leaderboard">Leaderboard</a>.  </li>
+<li><a href="https://arxiv.org/pdf/2505.18878">CRMArena-Pro: Holistic Assessment of LLM Agents Across Diverse Business Scenarios and Interactions</a> We introduce CRMArena-Pro, a novel benchmark for holistic and realistic assessment of LLM agents in diverse professional settings. Experiments show leading LLM agents achieve approximately solely 58% single-turn success rate on CRMArena-Pro, with significant performance drops in multi-turn settings to 35% (May 2025, Salesforce).  </li>
+<li>
+<p><a href="https://spreadsheetbench.github.io">SpreadsheetBench</a> evaluates large language model agents' capabilities in manipulating complex real-world spreadsheets and business spreadsheet workflows. Leaderboard March 2026: 35%.</p>
+</li>
+<li>
+<p><a href="https://www.abc.net.au/news/2026-08-14/ai-medical-scribe-error-leaves-patient-devastated/107031672">Error by AI scribe during medical appointment leaves patient devastated</a> When Rebecca Green arrived for her first appointment with a urologist, she was asked whether she consented to having the appointment transcribed by artificial intelligence (AI). She said yes without hesitation….But that decision would cause her a lot of stress, with the AI scribe making up the serious but false claim that Ms Green was taking illegal drugs (August 2026).  </p>
+</li>
+<li><a href="https://www.tomshardware.com/tech-industry/artificial-intelligence/chinese-farmer-kills-25-acres-of-crops-after-following-ai-generated-weed-and-pest-control-advice-farmer-trusted-pesticide-recipe-after-months-of-successful-advice">Chinese farmer kills 25 acres of crops after following AI-generated weed and pest control advice</a> Wu asked the AI for advice on weed and pest control, after which it … recommended that they use “high-efficiency flupyrimethalin” and “flusulfasulfaether” to kill weeds and mixed it with “thiamethoxazine” and “methyl salt.” The farmer followed the AI’s advice to the letter without confirming the information via agricultural technicians (or even just counter-checking its answers online). The result of the AI’s mistake was quickly apparent, as, just the following day, the weeds and the sesame seedlings died en masse (August 2026).</li>
+</ul>
+<h3 id="a-personal-experience_1">A personal experience</h3>
+<ul>
+<li><a href="https://bartoli-alberto.blogspot.com/2026/04/a-subtle-hallucination-by-ai.html">A subtle hallucination by the “AI”</a> I am playing with Gemini for extracting MITRE ATT\&amp;CK techniques from cybersecurity incident reports automatically (MITRE ATT\&amp;CK is a powerful framework for reasoning about attacks and I use this framework intensively in my Cybersecurity course): you give Gemini the URL of a report and will immediately obtain the attack techniques used in that attack campaign….This usage of "the AI" is potentially very useful for grasping the essentials of an attack campaign quickly and providing students with concrete examples. It is also an usage that fits an essential but often overlooked requirements of AI applications: the cost of a mistake must be small…</li>
+</ul>
+<h2 id="reliability">Reliability</h2>
+<ul>
+<li>
+<p><a href="https://www.normaltech.ai/p/new-paper-towards-a-science-of-ai?hl=it-IT">Towards a science of AI agent reliability</a> AI agents are evaluated based on a single number, the average success rate at the task. That number has been going up quickly on many tasks over the last two years, which is why there’s so much excitement about deploying agents… When we consider a coworker to be reliable, we don’t just mean that they get things right most of the time. We mean something richer: </p>
+<ul>
+<li>They get it right consistently, not right today and wrong tomorrow on the same thing (Consistency);  </li>
+<li>They don’t fall apart when conditions aren’t perfect (Robustness);  </li>
+<li>They tell you when they’re unsure rather than confidently guessing (Calibration);  </li>
+<li>When they do mess up, their mistakes are more likely to be fixable than catastrophic (Safety)</li>
+</ul>
+</li>
+</ul>
+<p>We found that reliability has improved only modestly over 18 months, while accuracy improved substantially. All three major providers cluster together, so this appears to be an industry-wide limitation (February 2026, Princeton). <a href="https://hal.cs.princeton.edu/reliability/">Reliability Dashboard</a>.</p>
+<ul>
+<li><a href="https://arxiv.org/html/2604.15597v1">LLMs Corrupt Your Documents When You Delegate</a> Our large-scale experiment with 19 LLMs reveals that current models degrade documents during delegation: even frontier models (Gemini 3.1 Pro, Claude 4.6 Opus, GPT 5.4) corrupt an average of 25% of document content by the end of long workflows, with other models failing more severely. Additional experiments reveal that…degradation severity is exacerbated by document size, length of interaction, or presence of distractor files. Our analysis shows that current LLMs are unreliable delegates: they introduce sparse but severe errors that silently corrupt documents, compounding over long interaction (April 2026).  </li>
+<li><a href="https://futurism.com/artificial-intelligence/meta-ai-safety-mistake-alarm">Meta's Head of AI Safety Just Made a Mistake That May Cause You a Certain Amount of Alarm</a> Yue admitted that she screwed up by letting OpenClaw take control of her computer, after which it proceeded to unintentionally hold her “important” emails hostage (February 2026).   </li>
+<li><a href="https://arxiv.org/pdf/2602.20021">Agents of Chaos</a> We report an exploratory red-teaming study of autonomous LLM–powered agents deployed in a live laboratory environment with persistent memory, email accounts, Discord access, file systems, and shell execution. Over a two-week period, twenty AI researchers interacted with the agents under benign and adversarial conditions. Observed behaviors include unauthorized compliance with non-owners, disclosure of sensitive information, execution of destructive system-level actions, denial-of-service conditions, uncontrolled resource consumption, identity spoofing vulnerabilities, cross-agent propagation of unsafe practices, and partial system takeover  (February 2026, Stanford, MIT, Carnegie-Mellon and others). </li>
+</ul>
 
 
 

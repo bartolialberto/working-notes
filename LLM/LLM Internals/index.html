@@ -14,7 +14,7 @@
         <link rel="prev" href="../Coding/">
       
       
-        <link rel="next" href="../LLM%20vs%20AI%20Agents/">
+        <link rel="next" href="../LLM%20Performance/">
       
       <link rel="icon" href="../../assets/images/favicon.png">
       <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.1.5">
@@ -43,6 +43,8 @@
         <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
       
     
+    
+      <link rel="stylesheet" href="../../css/custom.css">
     
     <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
@@ -87,8 +89,7 @@
   <nav class="md-header__inner md-grid" aria-label="Header">
     <a href="../.." title="Working Notes" class="md-header__button md-logo" aria-label="Working Notes" data-md-component="logo">
       
-  
-  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
+  <img src="../../bernabeusmall.png" alt="logo">
 
     </a>
     <label class="md-header__button md-icon" for="__drawer">
@@ -173,8 +174,7 @@
   <label class="md-nav__title" for="__drawer">
     <a href="../.." title="Working Notes" class="md-nav__button md-logo" aria-label="Working Notes" data-md-component="logo">
       
-  
-  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
+  <img src="../../bernabeusmall.png" alt="logo">
 
     </a>
     Working Notes
@@ -248,20 +248,6 @@
     <li class="md-nav__item">
       <a href="../../Corso%20Principi%20IA%20per%20Ingegneria/AI%20Intro%20-%20Parte%202/" class="md-nav__link">
         Parte 2 - LLM
-      </a>
-    </li>
-  
-
-            
-          
-            
-              
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../Corso%20Principi%20IA%20per%20Ingegneria/AI%20Intro%20-%20Allucinazione/" class="md-nav__link">
-        Hallucination - Personal experience
       </a>
     </li>
   
@@ -612,6 +598,20 @@
   
   
     <li class="md-nav__item">
+      <a href="../LLM%20Performance/" class="md-nav__link">
+        LLM Performance
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../LLM%20vs%20AI%20Agents/" class="md-nav__link">
         LLM vs AI Agents
       </a>
@@ -853,48 +853,45 @@
 <p>Un esempio concreto per rendere l'idea: una chiave potrebbe attivarsi fortemente quando riconosce "<em>negazione seguita da un verbo al participio passato</em>" (es. "<em>non è stato fatto</em>") — questa è la direzione D1 che il prodotto scalare rileva. Il valore associato a quella chiave, però, potrebbe spingere il punto verso una direzione dello spazio che codifica "<em>questo è probabilmente il soggetto di una forma passiva</em>" — un concetto grammaticale completamente diverso da D1, utile per i layer successivi del Transformer. La chiave fa da "sensore", il valore fa da "azione conseguente" — e il modello, durante il training, è libero di imparare qualsiasi coppia sensore→azione risulti utile per ridurre la loss finale, per quanto le due possano sembrare scorrelate a un osservatore umano.</p>
 <p>E’ precisamente questo disaccoppiamento chiave/valore che permette a un singolo layer FFN di implementare <strong>migliaia di regole "se X allora Y" indipendenti in parallelo</strong> — non un semplice filtro che amplifica ciò che è già presente, ma una vera e propria lookup table appresa durante il training: condizione → conseguenza.</p>
 <h3 id="attention">Attention</h3>
-<p>X input matrix: ogni riga è un token nello spazio degli embedding.</p>
+<p><code>X</code> input matrix: ogni riga è un token nello spazio degli embedding.</p>
 <ul>
-<li>Numero di righe \= seq_len (lunghezza richiesta analizzata: inferiore alla lunghezza massima del contesto).  </li>
-<li>Numero colonne \= d_model (dimensione degli embedding).</li>
+<li>Numero di righe = <code>seq_len</code> (lunghezza richiesta analizzata: inferiore alla lunghezza massima del contesto).  </li>
+<li>Numero colonne = <code>d_model</code> (dimensione degli embedding).</li>
 </ul>
 <p>WQ, WK, WV: matrici di pesi, della stessa dimensione.</p>
 <ul>
-<li>Numero di righe \= d_model (dimensione degli embedding).  </li>
-<li>Numero di colonne \= d_head (d_model diviso per il numero di attention heads).</li>
+<li>Numero di righe = <code>d_model</code> (dimensione degli embedding).  </li>
+<li>Numero di colonne = <code>d_head</code> (<code>d_model</code> diviso per il numero di attention heads).</li>
 </ul>
-<p>Q \= X x WQ, K \= X * WK , V \= X * WV</p>
+<p><code>Q = X x WQ, K = X * WK , V = X * WV</code></p>
 <ul>
-<li>Numero di righe \= seq_len  </li>
-<li>Numero colonne \= d_head  </li>
-<li>Ogni riga è un token nello spazio degli “embedding compressi” alla dimensione d_head.</li>
+<li>Numero di righe = <code>seq_len</code>  </li>
+<li>Numero colonne = <code>d_head</code>  </li>
+<li>Ogni riga è un token nello spazio degli “embedding compressi” alla dimensione <code>d_head</code>.</li>
 </ul>
-<p>Ogni riga di Q e di K è associata ad un token di ingresso; definisce una direzione nello spazio compresso degli embedding (query) ed il corrispondente contributo del token in quella direzione (key). Direzione e contributo non sono fissati dal solo token ma dal token nella frase, in quanto si ottengono a partire da X. </p>
-<p>Ogni riga di V è associata ad un token di ingresso; ne rappresenta il contenuto informativo da trasportare in output ed è calcolato in parallelo a Q e K, in modo indipendente da essi.  Anche questo valore informativo dipende dall’intera frase, in quanto è calcolato a partire da X.</p>
-<p>Lo “score” di ogni token di ingresso si calcola come Scores \= Softmax(Q * KT/ sqrt(d_head)). Alla matrice Q * KT si applica una maschera triangolare inferiore prima del calcolo di Softmax. In altre parole, un token di ingresso produce una query nello spazio degli embedding compressi; ogni token della sequenza (incluso se stesso) produce una key nello stesso spazio; la riga di Q·Kᵀ che corrisponde al token di ingresso quantifica quanto sono allineate con la sua query le key di tutti i token ammessi dalla maschera (se stesso e i token precedenti).  </p>
-<p>Il valore di attention per ogni token è ottenuto come Scores * V. Ogni riga corrisponde ad un token ed il numero di colonne è d_head (embedding compressi).</p>
-<p>Ogni attention head produce una matrice Scores * V, usando una terna di matrici WQ, WK, WV diversa da quella di ogni altra head. Queste matrici sono affiancate per colonne, ottenendo una matrice intermedia con seq_len e d_model colonne. Le righe di questa matrice hanno dimensione d_model ma non sono embedding, in quanto sono state costruite concatenando degli embedding compressi. </p>
-<p>La matrice intermedia è quindi moltiplicata per una matrice di pesi WO appresa in training, di dimensione seq_len x d_model. La matrice risultante ha ancora dimensione seq_len x d_model e viene sommata alla matrice di ingresso X.</p>
-<p>L’effetto è che ad ogni riga di X viene sommato un “piccolo spostamento riga”, che rappresenta il valore di attention dei token diversi da quello della riga.</p>
+<p>Ogni riga di <code>Q</code> e di <code>K</code> è associata ad un token di ingresso; definisce una direzione nello spazio compresso degli embedding (query) ed il corrispondente contributo del token in quella direzione (key). Direzione e contributo non sono fissati dal solo token ma dal token nella frase, in quanto si ottengono a partire da <code>X</code>. </p>
+<p>Ogni riga di <code>V</code> è associata ad un token di ingresso; ne rappresenta il contenuto informativo da trasportare in output ed è calcolato in parallelo a <code>Q</code> e <code>K</code>, in modo indipendente da essi.  Anche questo valore informativo dipende dall’intera frase, in quanto è calcolato a partire da <code>X</code>.</p>
+<p>Lo “score” di ogni token di ingresso si calcola come <code>Scores = Softmax(Q * KT/ sqrt(d_head))</code>. Alla matrice <code>Q * KT</code> si applica una maschera triangolare inferiore prima del calcolo di <code>Softmax</code>. In altre parole, un token di ingresso produce una query nello spazio degli embedding compressi; ogni token della sequenza (incluso se stesso) produce una key nello stesso spazio; la riga di <code>Q·Kᵀ</code> che corrisponde al token di ingresso quantifica quanto sono allineate con la sua query le key di tutti i token ammessi dalla maschera (se stesso e i token precedenti).  </p>
+<p>Il valore di attention per ogni token è ottenuto come <code>Scores * V</code>. Ogni riga corrisponde ad un token ed il numero di colonne è <code>d_head</code> (embedding compressi).</p>
+<p>Ogni attention head produce una matrice S<code>cores * V</code>, usando una terna di matrici <code>WQ, WK, WV</code> diversa da quella di ogni altra head. Queste matrici sono affiancate per colonne, ottenendo una matrice intermedia con <code>seq_len</code> e <code>d_model</code> colonne. Le righe di questa matrice hanno dimensione <code>d_model</code> ma non sono embedding, in quanto sono state costruite concatenando degli embedding compressi. </p>
+<p>La matrice intermedia è quindi moltiplicata per una matrice di pesi <code>WO</code> appresa in training, di dimensione <code>seq_len x d_model</code>. La matrice risultante ha ancora dimensione <code>seq_len x d_model</code> e viene sommata alla matrice di ingresso <code>X</code>.</p>
+<p>L’effetto è che ad ogni riga di <code>X</code> viene sommato un “piccolo spostamento riga”, che rappresenta il valore di attention dei token diversi da quello della riga.</p>
 <h3 id="number-of-parameters">Number of parameters</h3>
 <p>Usiamo Llama 3.1 8B.</p>
 <ul>
-<li>d_model \= 4096  </li>
+<li><code>d_model</code> = 4096  </li>
 <li>32 attention head  </li>
-<li>quindi d_head \= 4096 / 32 \= 128.</li>
+<li>quindi <code>d_head</code> = 4096 / 32 = 128.</li>
 </ul>
 <p><strong>Attention layer</strong></p>
-<p><strong>Wq, Wk, Wv</strong> — ciascuna di dimensione (d_model × d_head) \= (4096 × 128):</p>
-<p>4096 × 128 \= 524.288 parametri per matrice</p>
-<p>Per una testa: 524.288 × 3 \= 1.572.864 parametri</p>
-<p>Per 32 teste: 1.572.864 × 32 \= <strong>50.331.648 parametri</strong> (≈ 50,3M)</p>
-<p><strong>Wo</strong> — l'unica matrice condivisa, dimensione (d_model × d_model) \= (4096 × 4096):</p>
-<p>4096 × 4096 \= <strong>16.777.216 parametri</strong> (≈ 16,8M)</p>
-<p><strong>Totale:</strong> 50.331.648 + 16.777.216 \= <strong>67.108.864 parametri</strong> (≈ 67,1M per layer)</p>
+<p><code>Wq, Wk, Wv</code> — ciascuna di dimensione <code>d_model × d_head</code> = 4096 × 128= 524.288 parametri per matrice.
+* Per una testa: 524.288 × 3 = 1.572.864 parametri.
+* Per 32 teste: 1.572.864 × 32 = <strong>50.331.648 parametri</strong> (≈ 50,3M)</p>
+<p><code>Wo</code> — l'unica matrice condivisa, dimensione <code>d_model × d_model</code> = 4096 × 4096= <strong>16.777.216 parametri</strong> (≈ 16,8M).</p>
+<p><strong>Totale:</strong> 50.331.648 + 16.777.216 = <strong>67.108.864 parametri</strong> (≈ 67,1M per layer)</p>
 <p><strong>FFN</strong></p>
-<p>Llama 3.1 usa una variante gated (SwiGLU) con 3 matrici invece di 2, e una dimensione intermedia reale di <strong>14.336</strong> (non un semplice ×4 di 4096):</p>
-<p>4096 × 14.336 \= <strong>58.720.256 parametri</strong> per matrice</p>
-<p>Con 3 matrici (gate, up, down): 58.720.256 × 3 \= <strong>176.160.768 parametri</strong> (≈ 176,2M per layer)</p>
+<p>Llama 3.1 usa una variante gated (SwiGLU) con 3 matrici invece di 2, e una dimensione intermedia reale di <strong>14.336</strong> (non un semplice ×4 di 4096): 4096 × 14.336 = <strong>58.720.256 parametri</strong> per matrice.</p>
+<p>Con 3 matrici (gate, up, down): 58.720.256 × 3 = <strong>176.160.768 parametri</strong> (≈ 176,2M per layer).</p>
 <p><strong>Confronto</strong></p>
 <table>
 <thead>
@@ -906,19 +903,19 @@
 </thead>
 <tbody>
 <tr>
-<td>Attention (Wq+Wk+Wv×32 teste + Wo)</td>
+<td>Attention (<code>Wq+Wk+Wv</code>×32 teste + <code>Wo</code>)</td>
 <td>≈ 67,1M</td>
-<td>\~28%</td>
+<td>~28%</td>
 </tr>
 <tr>
 <td>FFN</td>
 <td>≈ 176,2M</td>
-<td>\~72%</td>
+<td>~72%</td>
 </tr>
 </tbody>
 </table>
 <p><strong>FFN ha circa 2,6 volte i parametri dell'attention.</strong></p>
-<p><strong>M</strong>oltiplicando (67,1M + 176,2M) ≈ 243,3M per i <strong>32 layer</strong> di Llama 3.1 8B si ottiene ≈ 7,8 miliardi di parametri — molto vicino agli 8B dichiarati nel nome del modello (la differenza residua è dovuta agli embedding di ingresso/uscita e alle normalizzazioni, non conteggiati qui).</p>
+<p>Moltiplicando (67,1M + 176,2M) ≈ 243,3M per i <strong>32 layer</strong> di Llama 3.1 8B si ottiene ≈ 7,8 miliardi di parametri — molto vicino agli 8B dichiarati nel nome del modello (la differenza residua è dovuta agli embedding di ingresso/uscita e alle normalizzazioni, non conteggiati qui).</p>
 
 
 
