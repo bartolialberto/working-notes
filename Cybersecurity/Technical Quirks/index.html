@@ -8,10 +8,10 @@
       
       
       
-        <link rel="canonical" href="https://bartolialberto.github.io/WorkingNotes/Cybersecurity/Personal%20Notes%20-%20Cybersec%20%287%29/">
+        <link rel="canonical" href="https://bartolialberto.github.io/WorkingNotes/Cybersecurity/Technical%20Quirks/">
       
       
-        <link rel="prev" href="../Personal%20Notes%20-%20Cybersec%20%286%29/">
+        <link rel="prev" href="../Secure%20Development/">
       
       
         <link rel="next" href="../../LLM/Coding/">
@@ -21,7 +21,7 @@
     
     
       
-        <title>Crime - Working Notes</title>
+        <title>Technical quirks - Working Notes</title>
       
     
     
@@ -83,7 +83,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#all-your-database-are-belong-to-us-characterizing-database-ransomware-attacks" class="md-skip">
+        <a href="#i-have-obtained-a-remote-shell-on-a-linux-target-i-do-not-see-any-prompt-why" class="md-skip">
           Skip to content
         </a>
       
@@ -117,7 +117,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Crime
+              Technical quirks
             
           </span>
         </div>
@@ -323,6 +323,20 @@
   
   
     <li class="md-nav__item">
+      <a href="../Crime/" class="md-nav__link">
+        Crime
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../Driver%20abuse/" class="md-nav__link">
         Driver abuse
       </a>
@@ -379,7 +393,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../Personal%20Notes%20-%20Cybersec%20%284%29/" class="md-nav__link">
+      <a href="../Phishing/" class="md-nav__link">
         Phishing
       </a>
     </li>
@@ -393,22 +407,8 @@
   
   
     <li class="md-nav__item">
-      <a href="../Personal%20Notes%20-%20Cybersec%20%285%29/" class="md-nav__link">
+      <a href="../Secure%20Development/" class="md-nav__link">
         Secure Software Development
-      </a>
-    </li>
-  
-
-            
-          
-            
-              
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../Personal%20Notes%20-%20Cybersec%20%286%29/" class="md-nav__link">
-        Technical quirks
       </a>
     </li>
   
@@ -429,12 +429,12 @@
       
       
         <label class="md-nav__link md-nav__link--active" for="__toc">
-          Crime
+          Technical quirks
           <span class="md-nav__icon md-icon"></span>
         </label>
       
       <a href="./" class="md-nav__link md-nav__link--active">
-        Crime
+        Technical quirks
       </a>
       
         
@@ -451,8 +451,8 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#all-your-database-are-belong-to-us-characterizing-database-ransomware-attacks" class="md-nav__link">
-    All Your (Data)base Are Belong to Us: Characterizing Database Ransom(ware) Attacks,
+  <a href="#i-have-obtained-a-remote-shell-on-a-linux-target-i-do-not-see-any-prompt-why" class="md-nav__link">
+    I have obtained a remote shell on a Linux target. I do not see any prompt. Why?
   </a>
   
 </li>
@@ -728,8 +728,8 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#all-your-database-are-belong-to-us-characterizing-database-ransomware-attacks" class="md-nav__link">
-    All Your (Data)base Are Belong to Us: Characterizing Database Ransom(ware) Attacks,
+  <a href="#i-have-obtained-a-remote-shell-on-a-linux-target-i-do-not-see-any-prompt-why" class="md-nav__link">
+    I have obtained a remote shell on a Linux target. I do not see any prompt. Why?
   </a>
   
 </li>
@@ -749,39 +749,25 @@
                   
 
 
-<h1 id="crime">Crime</h1>
-<h2 id="all-your-database-are-belong-to-us-characterizing-database-ransomware-attacks">All Your (Data)base Are Belong to Us: Characterizing Database Ransom(ware) Attacks,</h2>
-<p><em>Kevin van Liebergen, Gibran Gomez, Srdjan Matic, e Juan Caballero</em><br />
-<em>Proceedings of the Network and Distributed Systems Security Symposium (NDSS 2025)</em><br />
-<a href="https://www.google.com/search?q=https://doi.org/10.14722/ndss.2025.241887">https://doi.org/10.14722/ndss.2025.241887</a>. </p>
+<h1 id="technical-quirks">Technical quirks</h1>
+<h2 id="i-have-obtained-a-remote-shell-on-a-linux-target-i-do-not-see-any-prompt-why">I have obtained a remote shell on a Linux target. I do not see any prompt. Why?</h2>
+<p>The reason you don't see a prompt is that you are connected to a <strong>non-interactive shell</strong> (often called a "blind" or "dumb" shell).</p>
+<p>This happens when you have injected an exploit that:</p>
+<ol>
+<li>spawns a system shell (like /bin/sh or /bin/bash) (i.e., as a child process)  </li>
+<li>redirects the standard input, output, and error (stdin, stdout, stderr) of that process over a raw network socket connection to your listener.</li>
+</ol>
+<p>Because of this raw redirection:</p>
 <ul>
-<li>We perform the first systematic study of database ransom(ware) attacks. In this class of attacks, the attackers identify target database servers by scanning the IPv4 address space or by using Internet scanning engines.  </li>
-<li>They can scan for target servers on default database ports (e.g., 3306/TCP for MySQL, 9200/TCP for Elasticsearch).  </li>
-<li>Once a target is located, the attackers connect to the database server and try to login by leveraging the lack of authentication, using default credentials, or guessing weak credentials.  </li>
-<li>
-<p>If they manage to log in, they examine the databases the compromised account has access to, optionally exfiltrate the database contents, drop the content of those databases, and leave a ransom note (e.g., by creating a new database table with a catchy name) with instructions on how to get the data back. The note provides ransom payment details.</p>
-</li>
-<li>
-<p>We obtain data about 60,427 compromised Elasticsearch, MySQL, and MariaDB servers (identified by their IP address) collected by the LeakIX Internet scanning engine over 3 years from May 2021<br />
-  until April 2024.  </p>
-</li>
-<li>
-<p>We group the infections into 91 campaigns run by 32 groups. It reveals a dominant group that is responsible for 35 campaigns and 76% of the server infections </p>
-</li>
-<li>
-<p>In total, database ransom attacks have received $498K.  </p>
-</li>
-<li>The dominant group has generated 90% of all measured revenue.  </li>
-<li>The requested ransom amounts are small with 94.4% of all deposits being at most $1,000. Small ransom amounts are likely used to incentivize payments in case the victim has doubts about the data being returned.  </li>
-<li>
-<p>As recently demonstrated, revenue estimates are affected by limited coverage from the Internet scanning engines and can be up to 39 times higher in reality.</p>
-</li>
-<li>
-<p>Newly infected servers keep appearing with over 6K infected IPs in March 2024, a 60% increase over one year earlier.   </p>
-</li>
-<li>Our honeypots get infected by database ransom attacks in 14 hours since connected to the Internet.  </li>
-<li>Weak authentication is two orders of magnitude higher in Elasticsearch servers compared to MySQL servers.  </li>
-<li>Elasticsearch only introduced strong default credentials in version 8.0, released in February 2022. After 2.5 years, scanning data shows that only 7.6% Elasticsearch servers run 8.x versions, compared to 92.4% running older versions. Thus, adoption of up-to-date Elasticsearch software with secure default installation is slow, likely leading to servers with weak authentication and vulnerable to database ransom attacks.</li>
+<li><strong>No TTY (Teletypewriter):</strong> The target system does not associate your network connection with a terminal device. Without a TTY, the shell runs in non-interactive mode.  </li>
+<li><strong>No Prompt Generation:</strong> In Linux, standard shell prompts (the PS1 environment variable) are only rendered when the shell detects it is running in an interactive terminal.  </li>
+<li><strong>No Job Control:</strong> If you run a command like top or try to use nano, it will fail or break the connection because there is no terminal to handle the interface.</li>
+</ul>
+<p>The shell changes its behavior based on the type of connection as follows.</p>
+<p>The shell reads from File Descriptor <code>0</code> (<code>stdin</code>) and writes to <code>1</code> (<code>stdout</code>) and <code>2</code> (<code>stderr</code>), as any other process. The shell is programmed so that when it starts up, one of the very first things it does is query the OS to see what <em>kind</em> of files those descriptors point to . It does this using certain standard C library system calls.</p>
+<ul>
+<li><strong>If <code>fd 0</code> is a TTY/PTY (like ssh or local terminal):</strong> The shell knows it is interactive. It prints the prompt.  </li>
+<li><strong>If <code>fd 0</code> is a network socket:</strong> <code>tcgetattr</code> fails with the error <code>ENOTTY</code> ("Not a typewriter"). The shell immediately realizes, <em>"Ah, I am being piped data or fed commands from a non-terminal source."</em> It disables the prompt and interactive features to avoid cluttering the output stream with terminal escape codes.</li>
 </ul>
 
 
