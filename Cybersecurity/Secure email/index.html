@@ -8,25 +8,27 @@
       
       
       
-        <link rel="canonical" href="https://bartolialberto.github.io/WorkingNotes/">
+        <link rel="canonical" href="https://bartolialberto.github.io/WorkingNotes/Cybersecurity/Secure%20email/">
       
       
+        <link rel="prev" href="../Secure%20Development/">
       
-        <link rel="next" href="Corso%20Principi%20IA%20per%20Ingegneria/AI%20Intro%20-%20Parte%201/">
       
-      <link rel="icon" href="assets/images/favicon.png">
+        <link rel="next" href="../Technical%20Quirks/">
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
       <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.1.5">
     
     
       
-        <title>Working Notes</title>
+        <title>Secure Email - Working Notes</title>
       
     
     
-      <link rel="stylesheet" href="assets/stylesheets/main.7a7fce14.min.css">
+      <link rel="stylesheet" href="../../assets/stylesheets/main.7a7fce14.min.css">
       
         
-        <link rel="stylesheet" href="assets/stylesheets/palette.a0c5b2b5.min.css">
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.a0c5b2b5.min.css">
       
       
 
@@ -42,9 +44,9 @@
       
     
     
-      <link rel="stylesheet" href="css/custom.css">
+      <link rel="stylesheet" href="../../css/custom.css">
     
-    <script>__md_scope=new URL(".",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
   
@@ -80,6 +82,11 @@
     <label class="md-overlay" for="__drawer"></label>
     <div data-md-component="skip">
       
+        
+        <a href="#spf-sender-policy-framework" class="md-skip">
+          Skip to content
+        </a>
+      
     </div>
     <div data-md-component="announce">
       
@@ -94,7 +101,7 @@
   <nav class="md-header__inner md-grid" aria-label="Header">
     <a href="https://bartoli.inginf.units.it" title="Working Notes" class="md-header__button md-logo" aria-label="Working Notes" data-md-component="logo">
       
-  <img src="bernabeusmall.png" alt="logo">
+  <img src="../../bernabeusmall.png" alt="logo">
 
     </a>
     <label class="md-header__button md-icon" for="__drawer">
@@ -110,7 +117,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Working Notes
+              Secure Email
             
           </span>
         </div>
@@ -179,7 +186,7 @@
   <label class="md-nav__title" for="__drawer">
     <a href="https://bartoli.inginf.units.it" title="Working Notes" class="md-nav__button md-logo" aria-label="Working Notes" data-md-component="logo">
       
-  <img src="bernabeusmall.png" alt="logo">
+  <img src="../../bernabeusmall.png" alt="logo">
 
     </a>
     Working Notes
@@ -193,19 +200,11 @@
 
   
   
-    
   
-  
-    <li class="md-nav__item md-nav__item--active">
-      
-      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
-      
-      
-      
-      <a href="." class="md-nav__link md-nav__link--active">
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
         Working Notes
       </a>
-      
     </li>
   
 
@@ -245,7 +244,7 @@
   
   
     <li class="md-nav__item">
-      <a href="Corso%20Principi%20IA%20per%20Ingegneria/AI%20Intro%20-%20Parte%201/" class="md-nav__link">
+      <a href="../../Corso%20Principi%20IA%20per%20Ingegneria/AI%20Intro%20-%20Parte%201/" class="md-nav__link">
         Parte 1 - Machine Learning
       </a>
     </li>
@@ -259,7 +258,7 @@
   
   
     <li class="md-nav__item">
-      <a href="Corso%20Principi%20IA%20per%20Ingegneria/AI%20Intro%20-%20Parte%202/" class="md-nav__link">
+      <a href="../../Corso%20Principi%20IA%20per%20Ingegneria/AI%20Intro%20-%20Parte%202/" class="md-nav__link">
         Parte 2 - LLM
       </a>
     </li>
@@ -279,14 +278,16 @@
 
   
   
+    
+  
   
     
-    <li class="md-nav__item md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
       
       
       
       
-      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" checked>
       
       
       
@@ -295,7 +296,7 @@
           <span class="md-nav__icon md-icon"></span>
         </label>
       
-      <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+      <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="true">
         <label class="md-nav__title" for="__nav_3">
           <span class="md-nav__icon md-icon"></span>
           Cybersecurity
@@ -308,7 +309,7 @@
   
   
     <li class="md-nav__item">
-      <a href="Cybersecurity/AI%20in%20cybersec/" class="md-nav__link">
+      <a href="../AI%20in%20cybersec/" class="md-nav__link">
         AI in Cybersec
       </a>
     </li>
@@ -322,7 +323,7 @@
   
   
     <li class="md-nav__item">
-      <a href="Cybersecurity/Crime/" class="md-nav__link">
+      <a href="../Crime/" class="md-nav__link">
         Crime
       </a>
     </li>
@@ -336,7 +337,7 @@
   
   
     <li class="md-nav__item">
-      <a href="Cybersecurity/Driver%20abuse/" class="md-nav__link">
+      <a href="../Driver%20abuse/" class="md-nav__link">
         Driver abuse
       </a>
     </li>
@@ -350,7 +351,7 @@
   
   
     <li class="md-nav__item">
-      <a href="Cybersecurity/Economics/" class="md-nav__link">
+      <a href="../Economics/" class="md-nav__link">
         Attack Economics
       </a>
     </li>
@@ -364,7 +365,7 @@
   
   
     <li class="md-nav__item">
-      <a href="Cybersecurity/IoC/" class="md-nav__link">
+      <a href="../IoC/" class="md-nav__link">
         IoC
       </a>
     </li>
@@ -378,7 +379,7 @@
   
   
     <li class="md-nav__item">
-      <a href="Cybersecurity/Persistence/" class="md-nav__link">
+      <a href="../Persistence/" class="md-nav__link">
         Persistence in Windows
       </a>
     </li>
@@ -392,7 +393,7 @@
   
   
     <li class="md-nav__item">
-      <a href="Cybersecurity/Phishing/" class="md-nav__link">
+      <a href="../Phishing/" class="md-nav__link">
         Phishing
       </a>
     </li>
@@ -406,7 +407,7 @@
   
   
     <li class="md-nav__item">
-      <a href="Cybersecurity/Secure%20Development/" class="md-nav__link">
+      <a href="../Secure%20Development/" class="md-nav__link">
         Secure Software Development
       </a>
     </li>
@@ -418,11 +419,76 @@
               
   
   
+    
   
-    <li class="md-nav__item">
-      <a href="Cybersecurity/Secure%20email/" class="md-nav__link">
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          Secure Email
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
         Secure Email
       </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#spf-sender-policy-framework" class="md-nav__link">
+    SPF - Sender Policy Framework
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#dkim-domainkeys-identified-mail" class="md-nav__link">
+    DKIM - DomainKeys Identified Mail
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#dmarc-domain-based-message-authentication-reporting-and-conformance" class="md-nav__link">
+    DMARC - Domain-based Message Authentication, Reporting and Conformance
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#pec" class="md-nav__link">
+    PEC
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#mta-sts" class="md-nav__link">
+    MTA-STS
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
     </li>
   
 
@@ -434,7 +500,7 @@
   
   
     <li class="md-nav__item">
-      <a href="Cybersecurity/Technical%20Quirks/" class="md-nav__link">
+      <a href="../Technical%20Quirks/" class="md-nav__link">
         Technical quirks
       </a>
     </li>
@@ -483,7 +549,7 @@
   
   
     <li class="md-nav__item">
-      <a href="LLM/Coding/" class="md-nav__link">
+      <a href="../../LLM/Coding/" class="md-nav__link">
         LLM and Coding
       </a>
     </li>
@@ -497,7 +563,7 @@
   
   
     <li class="md-nav__item">
-      <a href="LLM/LLM%20Internals/" class="md-nav__link">
+      <a href="../../LLM/LLM%20Internals/" class="md-nav__link">
         LLM Internals
       </a>
     </li>
@@ -511,7 +577,7 @@
   
   
     <li class="md-nav__item">
-      <a href="LLM/LLM%20Performance/" class="md-nav__link">
+      <a href="../../LLM/LLM%20Performance/" class="md-nav__link">
         LLM Performance
       </a>
     </li>
@@ -525,7 +591,7 @@
   
   
     <li class="md-nav__item">
-      <a href="LLM/LLM%20vs%20AI%20Agents/" class="md-nav__link">
+      <a href="../../LLM/LLM%20vs%20AI%20Agents/" class="md-nav__link">
         LLM vs AI Agents
       </a>
     </li>
@@ -539,7 +605,7 @@
   
   
     <li class="md-nav__item">
-      <a href="LLM/Training/" class="md-nav__link">
+      <a href="../../LLM/Training/" class="md-nav__link">
         Training an LLM
       </a>
     </li>
@@ -553,7 +619,7 @@
   
   
     <li class="md-nav__item">
-      <a href="LLM/Vulnerability/" class="md-nav__link">
+      <a href="../../LLM/Vulnerability/" class="md-nav__link">
         Vulnerability search
       </a>
     </li>
@@ -602,7 +668,7 @@
   
   
     <li class="md-nav__item">
-      <a href="TLS/AitM%20-%20HTTPS/" class="md-nav__link">
+      <a href="../../TLS/AitM%20-%20HTTPS/" class="md-nav__link">
         TLS
       </a>
     </li>
@@ -616,7 +682,7 @@
   
   
     <li class="md-nav__item">
-      <a href="TLS/Understanding_MITM_proxies_with_HTTPS/" class="md-nav__link">
+      <a href="../../TLS/Understanding_MITM_proxies_with_HTTPS/" class="md-nav__link">
         Understanding MITM proxies with HTTPS
       </a>
     </li>
@@ -665,7 +731,7 @@
   
   
     <li class="md-nav__item">
-      <a href="Windows/Integrity%201/" class="md-nav__link">
+      <a href="../../Windows/Integrity%201/" class="md-nav__link">
         Windows Integrity Architecture
       </a>
     </li>
@@ -697,6 +763,49 @@
   
   
   
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#spf-sender-policy-framework" class="md-nav__link">
+    SPF - Sender Policy Framework
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#dkim-domainkeys-identified-mail" class="md-nav__link">
+    DKIM - DomainKeys Identified Mail
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#dmarc-domain-based-message-authentication-reporting-and-conformance" class="md-nav__link">
+    DMARC - Domain-based Message Authentication, Reporting and Conformance
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#pec" class="md-nav__link">
+    PEC
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#mta-sts" class="md-nav__link">
+    MTA-STS
+  </a>
+  
+</li>
+      
+    </ul>
+  
 </nav>
                   </div>
                 </div>
@@ -710,10 +819,45 @@
                   
 
 
-<h1 id="working-notes-alberto-bartoli">Working Notes - Alberto Bartoli</h1>
-<p>Notes taken from scientific papers, chats with Claude/Gemini, chats with NotebookLM.</p>
-<p>All chats with the so-called AI carefully controlled and reworked.</p>
-<p><em><a href="https://bartoli.inginf.units.it/home">Alberto Bartoli</a></em></p>
+<h1 id="secure-email">Secure Email</h1>
+<h2 id="spf-sender-policy-framework">SPF - Sender Policy Framework</h2>
+<p>It allows the domain of the <code>envelope-From:</code>  address (the sending domain) to identify and assert the authorized mail senders.</p>
+<p>The sending domain does this by placing a specially formatted <code>TXT RR</code> in the DNS database for the domain. The RR is composed of a space-separated sequence of name=value pairs, including the <code>v=spf1</code> pair. For instance:   </p>
+<p><code>example.com IN TXT   "v=spf1 ip4:192.0.0.1  include:third-example.net -all"</code> </p>
+<p>The set of allowed pairs along with their meaning is specified in the standard.</p>
+<p>SPF and DKIM both have the problem of “<strong>identifier alignment</strong>”. It means that the sender email address that user sees can be different from the address that is actually used to  perform authentication.  </p>
+<p>An attacker can set the “<code>Return-Path</code>” domain to her own domain and set her SPF record to pass the authentication. However, what the receiving user sees on the email interface is set by the “<code>From</code>” field. Since SPF does not require the two domains to be the same, then the spoofing email can pass the SPF check while displaying the impersonated address to users*</p>
+<h2 id="dkim-domainkeys-identified-mail">DKIM - DomainKeys Identified Mail</h2>
+<p>It allows the sending domain to claim some responsibility for a message by means of a signature inserted in the message headers.</p>
+<p>A DKIM signature is generated using the message body and headers and included in a new DKIM-Signature header inserted in the message headers. To validate the signature, the public key is retrieved from a specially formatted TXT RR placed in the DNS by the sending domain.</p>
+<p>In detail, the value of the <code>DKIM-Signature</code> header is composed of a set of name=value pairs. The set of allowed pairs along with their meaning is specified in the standard. Name <code>bh</code> identifies signature; name <code>d</code> identifies the sending domain while name <code>s</code> identifies the TXT RR in the sending domain (the standard specifies how to link the <code>From:</code> address to the d name of DKIM). For instance:  </p>
+<p><code>DKIM-Signature: ... d=example.gov; s=adkimkey; bh=base64 string; ...</code></p>
+<p>The corresponding RR would be:</p>
+<p><code>adkimkey._domainkey.example.gov. IN TXT  "v=DKIM1; k=rsa; p=&lt;base64 string public key&gt;"</code> </p>
+<p>Note that there is no way to detect if DKIM is implemented by the sender without getting a mail from the sender, extracting the selector from the <code>DKIM-Signature</code> header and getting the DKIM policy from DNS based on this selector.</p>
+<p>One can check if some commonly used selectors can be found in DNS. But a successful check does not mean that any of these selector actually gets used for signing nor does it mean that the messages gets signed at all. And, no typical selector found does not mean that DKIM is not implemented.</p>
+<ul>
+<li>Unlike SPF, DKIM requires specialized functionality on the sender agent to generate the signatures.   </li>
+<li>Since DKIM requires the use cryptographic keys, enterprises must have a key management plan in place to generate, store and retire key pairs.  </li>
+<li>Administrative boundaries complicate this plan if one organization sends mail on another organization's behalf.  </li>
+<li>Softwares for managing mailing lists often alter a message body thereby invalidating any signature computed before.</li>
+</ul>
+<h2 id="dmarc-domain-based-message-authentication-reporting-and-conformance">DMARC - Domain-based Message Authentication, Reporting and Conformance</h2>
+<p>It allows the sending domain to specify whether SPF and DKIM checks should be performed (and possibly how to inform the sending domains of failed checks: this is important for figuring out whether the domain is being targeted, how and toward whom).</p>
+<p>Without DMARC, an attacker stripping <code>DKIM-Signature</code> information and altering email content would be undetected because the receiver would not know whether the sending domain indeed uses DKIM.</p>
+<p>A sending domain asserts its usage of DMARC with a TXT RR named <code>_dmarc</code>. The specific DMARC policy used is specified by means of a set of name=value pairs; the set of allowed pairs along with their meaning is specified in the standard. For instance:  </p>
+<p><code>_dmarc.example.gov  3600 IN TXT  “v=DMARC1; p=reject; rua=reports@example.gov;“</code> </p>
+<p>This policy advises receivers to discard messages that failed SPF or DKIM checks and to inform the sending domain at <a href="mailto:reports@example.gov">reports@example.gov</a>.</p>
+<h2 id="pec">PEC</h2>
+<p>Il messaggio originale è inserito come allegato in una busta di trasporto. La busta di trasporto è firmata dal gestore mittente (integrità, autenticità).</p>
+<p>Il <strong>colloquio tra i gestori</strong> deve avvenire con SMTP su TLS, come descritto nella RFC 3207. Il punto di ricezione deve prevedere ed annunciare <code>STARTTLS</code> ed accettare anche connessioni in chiaro (per la posta ordinaria).</p>
+<h2 id="mta-sts">MTA-STS</h2>
+<p>MTA-STS is an inbound mail protocol designed to add a layer of encryption/security between sending and receiving mail servers. It was designed to patch an existing hole in the <code>STARTTLS</code> protocol that allowed for communication to be unencrypted via an attacker who could remove parts of the SMTP session (such as the “<code>250 STARTTLS</code>” response). This is accomplished by bringing DNS as a third party to verify connections.</p>
+<p>The MTA-STS protocol works by having a DNS record that tells mail servers to fetch a policy file via HTTPS  from a defined subdomain. This file contains a list of the receiver’s mail servers which are authenticated and approved to receive the messages and also what policy to apply to inbound messages. The policy file for example.org is placed at:</p>
+<p><code>https://mta-sts.example.org/.well-known/mta-sts.txt</code></p>
+<p>A DNS TXT resource record is needed in order to enable MTA-STS on your domain. This record exists at a unique subdomain <code>_mta-sts</code>. For the <code>example.org</code> domain, it would be <code>_mta-sts.example.org</code>.</p>
+<p>An example of such record is as below:</p>
+<p><code>_mta-sts.example.org.  IN TXT “v=STSv1; id=202104012135;”</code></p>
 
 
   
@@ -753,10 +897,10 @@
       <div class="md-dialog__inner md-typeset"></div>
     </div>
     
-    <script id="__config" type="application/json">{"base": ".", "features": [], "search": "assets/javascripts/workers/search.208ed371.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
+    <script id="__config" type="application/json">{"base": "../..", "features": [], "search": "../../assets/javascripts/workers/search.208ed371.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
     
     
-      <script src="assets/javascripts/bundle.407015b8.min.js"></script>
+      <script src="../../assets/javascripts/bundle.407015b8.min.js"></script>
       
     
   </body>
