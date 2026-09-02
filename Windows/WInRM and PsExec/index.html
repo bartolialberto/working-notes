@@ -8,20 +8,18 @@
       
       
       
-        <link rel="canonical" href="https://bartolialberto.github.io/WorkingNotes/Cybersecurity/Driver%20abuse/">
+        <link rel="canonical" href="https://bartolialberto.github.io/WorkingNotes/Windows/WInRM%20and%20PsExec/">
       
       
-        <link rel="prev" href="../Crime/">
+        <link rel="prev" href="../Integrity%201/">
       
-      
-        <link rel="next" href="../Economics/">
       
       <link rel="icon" href="../../assets/images/favicon.png">
       <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.1.5">
     
     
       
-        <title>Driver abuse - Working Notes</title>
+        <title>WinRM and PsExec - Working Notes</title>
       
     
     
@@ -81,7 +79,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#unveiling-byovd-threats-malwares-use-and-abuse-of-kernel-drivers" class="md-skip">
+        <a href="#winrm" class="md-skip">
           Skip to content
         </a>
       
@@ -115,7 +113,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Driver abuse
+              WinRM and PsExec
             
           </span>
         </div>
@@ -276,16 +274,14 @@
 
   
   
-    
-  
   
     
-    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--nested">
       
       
       
       
-      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" checked>
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
       
       
       
@@ -294,7 +290,7 @@
           <span class="md-nav__icon md-icon"></span>
         </label>
       
-      <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="true">
+      <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
         <label class="md-nav__title" for="__nav_3">
           <span class="md-nav__icon md-icon"></span>
           Cybersecurity
@@ -307,7 +303,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../AI%20in%20cybersec/" class="md-nav__link">
+      <a href="../../Cybersecurity/AI%20in%20cybersec/" class="md-nav__link">
         AI in Cybersec
       </a>
     </li>
@@ -321,7 +317,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../Crime/" class="md-nav__link">
+      <a href="../../Cybersecurity/Crime/" class="md-nav__link">
         Crime
       </a>
     </li>
@@ -333,61 +329,11 @@
               
   
   
-    
   
-  
-    <li class="md-nav__item md-nav__item--active">
-      
-      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
-      
-      
-      
-        <label class="md-nav__link md-nav__link--active" for="__toc">
-          Driver abuse
-          <span class="md-nav__icon md-icon"></span>
-        </label>
-      
-      <a href="./" class="md-nav__link md-nav__link--active">
+    <li class="md-nav__item">
+      <a href="../../Cybersecurity/Driver%20abuse/" class="md-nav__link">
         Driver abuse
       </a>
-      
-        
-
-<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
-  
-  
-  
-  
-    <label class="md-nav__title" for="__toc">
-      <span class="md-nav__icon md-icon"></span>
-      Table of contents
-    </label>
-    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#unveiling-byovd-threats-malwares-use-and-abuse-of-kernel-drivers" class="md-nav__link">
-    Unveiling BYOVD Threats: Malware’s Use and Abuse of Kernel Drivers
-  </a>
-  
-    <nav class="md-nav" aria-label="Unveiling BYOVD Threats: Malware’s Use and Abuse of Kernel Drivers">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#background" class="md-nav__link">
-    Background
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-    </ul>
-  
-</nav>
-      
     </li>
   
 
@@ -399,7 +345,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../Economics/" class="md-nav__link">
+      <a href="../../Cybersecurity/Economics/" class="md-nav__link">
         Attack Economics
       </a>
     </li>
@@ -413,7 +359,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../IoC/" class="md-nav__link">
+      <a href="../../Cybersecurity/IoC/" class="md-nav__link">
         IoC
       </a>
     </li>
@@ -427,7 +373,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../Persistence/" class="md-nav__link">
+      <a href="../../Cybersecurity/Persistence/" class="md-nav__link">
         Persistence in Windows
       </a>
     </li>
@@ -441,7 +387,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../Phishing/" class="md-nav__link">
+      <a href="../../Cybersecurity/Phishing/" class="md-nav__link">
         Phishing
       </a>
     </li>
@@ -455,7 +401,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../Secure%20Development/" class="md-nav__link">
+      <a href="../../Cybersecurity/Secure%20Development/" class="md-nav__link">
         Secure Software Development
       </a>
     </li>
@@ -469,7 +415,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../Secure%20email/" class="md-nav__link">
+      <a href="../../Cybersecurity/Secure%20email/" class="md-nav__link">
         Secure Email
       </a>
     </li>
@@ -483,7 +429,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../Technical%20Quirks/" class="md-nav__link">
+      <a href="../../Cybersecurity/Technical%20Quirks/" class="md-nav__link">
         Technical quirks
       </a>
     </li>
@@ -685,14 +631,16 @@
 
   
   
+    
+  
   
     
-    <li class="md-nav__item md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
       
       
       
       
-      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6" >
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6" checked>
       
       
       
@@ -701,7 +649,7 @@
           <span class="md-nav__icon md-icon"></span>
         </label>
       
-      <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="false">
+      <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="true">
         <label class="md-nav__title" for="__nav_6">
           <span class="md-nav__icon md-icon"></span>
           Windows
@@ -714,7 +662,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../Windows/Integrity%201/" class="md-nav__link">
+      <a href="../Integrity%201/" class="md-nav__link">
         Windows Integrity Architecture
       </a>
     </li>
@@ -726,11 +674,55 @@
               
   
   
+    
   
-    <li class="md-nav__item">
-      <a href="../../Windows/WInRM%20and%20PsExec/" class="md-nav__link">
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          WinRM and PsExec
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
         WinRM and PsExec
       </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#winrm" class="md-nav__link">
+    WinRM
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#psexec" class="md-nav__link">
+    PsExec
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
     </li>
   
 
@@ -767,22 +759,16 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#unveiling-byovd-threats-malwares-use-and-abuse-of-kernel-drivers" class="md-nav__link">
-    Unveiling BYOVD Threats: Malware’s Use and Abuse of Kernel Drivers
-  </a>
-  
-    <nav class="md-nav" aria-label="Unveiling BYOVD Threats: Malware’s Use and Abuse of Kernel Drivers">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#background" class="md-nav__link">
-    Background
+  <a href="#winrm" class="md-nav__link">
+    WinRM
   </a>
   
 </li>
-        
-      </ul>
-    </nav>
+      
+        <li class="md-nav__item">
+  <a href="#psexec" class="md-nav__link">
+    PsExec
+  </a>
   
 </li>
       
@@ -801,39 +787,32 @@
                   
 
 
-<h1 id="driver-abuse">Driver abuse</h1>
-<h2 id="unveiling-byovd-threats-malwares-use-and-abuse-of-kernel-drivers">Unveiling BYOVD Threats: Malware’s Use and Abuse of Kernel Drivers</h2>
-<p><a href="https://www.ndss-symposium.org/wp-content/uploads/2026-s1491-paper.pdf">https://www.ndss-symposium.org/wp-content/uploads/2026-s1491-paper.pdf</a> NDSS 2026</p>
+<h1 id="winrm-and-psexec">WinRM and PsExec</h1>
+<p>They both allow executing commands on a remote machine with a command-line interface. They can both execute one single command or launch an interactive command prompt (cmd.exe for PsExec, a PowerShell session for WinRM). </p>
+<p>The account on the remote machine can be a domain account (Domain\User), a local account (of the remote machine), or can be omitted.</p>
 <ul>
-<li>Some drivers exist solely to implement system level features or to expose privileged operations to user-mode applications.  </li>
-<li>If these drivers contain vulnerabilities, malicious actors can exploit them to bypass security mechanisms, gain elevated privileges, and execute undetected malicious code in the OS kernel. Vulnerable drivers are routinely patched and replaced with new, more secure versions.   </li>
-<li>Bring Your Own Vulnerable Driver (BYOVD) is a sophisticated malware attack technique that leverages legitimate but vulnerable kernel drivers to compromise computer systems. In these attacks, malicious software brings along its own copy of a vulnerable third-party driver and loads it into the operating system – effectively reintroducing into the system an old vulnerability it already knows how to exploit   </li>
-<li>While BYOVD is becoming increasingly popular among malware authors, defense techniques are lagging behind. Modern EDR systems, although effective at monitoring user-mode activity, are often blind to actions that take place in the kernel.  </li>
-<li>For instance, when a malware sample loads and abuses the Zemana anti-malware driver to terminate Windows Defender, public sandboxes on VirusTotal detect only the driver load event, but fail to capture how it is used once loaded into the system. This limitation stems from a fundamental lack of visibility into internal kernel-level communications.</li>
+<li>If a domain account is used, commands can be executed only if the <strong>account is an administrator of the remote machine</strong> (a member of the local Administrators group).</li>
+<li>If a local account is used, commands can be executed only if the <strong>account is the built-in Administrator account</strong> (or if LocalAccountTokenFilterPolicy has been set to 1 on the remote machine, in which case any local administrator account works). </li>
+<li>If omitted, PsExec passes through the credentials of the currently logged-on session with the same rules as above. If the session is a local logon, the Administrator password on the local machine must be identical to the one on the other machine for NTLM authentication to succeed.</li>
 </ul>
-<h3 id="background">Background</h3>
+<p>In the case of WinRM, domain or local accounts that are member of the Remote Management Users group are also allowed to execute commands, without requiring administrator rights.</p>
+<h2 id="winrm">WinRM</h2>
+<p>WinRM (Windows Remote Management) is the Microsoft implementation of the WS-Management protocol:</p>
 <ul>
-<li>Driver Signature Enforcement (DSE) ensures that each kernel driver loaded in the system is signed. To sign a driver, developers submit the binary to Microsoft’s Windows Hardware Dev Center, where it undergoes a suite of security and compatibility checks before Microsoft applies its digital signature  </li>
-<li>While there have been cases of malicious drivers signed by Microsoft [16], this is a risky approach for malware developers. Instead, attackers often exploit legitimate signed drivers with vulnerabilities that expose kernel functions to user-mode programs.  </li>
-<li>Malware authors target drivers that allow arbitrary memory access or dangerous actions like process termination, kernel memory mapping, privileged file access, and I/O monitoring, executing user-specified code at the kernel level.   </li>
-<li>
-<p>A common way to trigger a vulnerability in a driver is to send a properly crafted request. Windows supports two different types of communications with kernel drivers: Minifilter APIs and I/O Request Packet (IRP). </p>
-</li>
-<li>
-<p>Once a driver with the desired characteristics is identified, the malware must drop it on disk and then load it after successfully infecting the system. This procedure is due to the fact that typical methods used to load drivers (e.g., sc.exe, NtLoadDriver, or CreateService) require a file path pointing to a location on disk and cannot be performed from memory.</p>
-</li>
-<li>
-<p>However, loading a driver in Windows requires the process to already run with administrative privileges. This raises a crucial question: why would malware bother loading a driver if it already has administrative privileges?  </p>
-</li>
-<li>
-<p>The answer lies in the design of modern Windows operating systems. Some processes and system components are so essential to maintaining the security and integrity of the system that even administrators are prohibited from modifying them. Only the kernel has the necessary privileges to modify these highly protected system parts. </p>
-</li>
-<li>
-<p>Protected Processes Termination (PPL) provides a flexible protection model designed to isolate processes. They are extensively used to isolate different operating system components, such as process management, the LSASS, Microsoft Defender.  </p>
-</li>
-<li>Modern EDRs are implemented by using a combination of user-mode PPL processes (that contain the detection logic), and kernel-mode drivers (that provide access to privileged resources).   </li>
-<li>Malware can no longer terminate user-space EDR components (even when running with administrative privileges), thanks to their protection under the PPL mechanism.  </li>
-<li>An attacker could find a way to limit the EDR functionalities through other kinds of vulnerabilities, exploit flaws in the PPL implementation, or perform a BYOVD attack to abuse an existing driver that allows a user-mode process to kill even PPL processes. </li>
+<li>It runs as a <strong>service</strong> that listens on HTTP/HTTPS (5985/5986) and handles authentication,encryption, and routing of WS-Man SOAP messages.</li>
+<li>It is a generic remote-management transport that can host different "plugins", PowerShell being one of those.</li>
+</ul>
+<p>When you run the PowerShell <code>Enter-PSSession</code> or <code>Invoke-Command</code> cmdlets on the local machine, PowerShell will connect to the specified, remote WinRM service; this service will spawn a child process to run a PowerShell instance.</p>
+<p>Some PowerShell cmdlets have a ComputerName parameter that can be used to run commands on a remote computer. Depending on the specific cmdlet, this may or may not use WinRM. Many legacy cmdlets (e.g., <code>Get-WmiObject</code>, <code>Get-Service</code>, <code>Restart-Computer</code>) use RPC/DCOM instead. Newer cmdlets (e.g., <code>Get-CimInstance</code>) use WinRM/WSMan.</p>
+<h2 id="psexec">PsExec</h2>
+<p>PsExec drops and runs an arbitrary binary as a service. It interacts with the network as follows:</p>
+<ul>
+<li>It establishes an SMB session with the remote machine and authenticates (TCP port 445 or legacy TCP port 139).</li>
+<li>It connects to the <code>ADMIN$</code> share and to the <code>IPC$</code> share. The former is for uploading files, the latter is for interacting with the Service Control Manager on the remote machine through Named Pipes (Microsoft Remote Procedure Call - RPC).</li>
+<li>It uploads the service executable <code>PSEXESVC.exe</code>.</li>
+<li>It creates a service pointing at the uploaded executable and starts the service.</li>
+<li>The service has its stdin, stdout, stderr redirected back to PsExec with the dynamically created Named Pipes over the SMB connection.</li>
+<li>The service will spawn the requested command (including a shell) as a child process; stdin, stdout, stderr of that process are redirected to the service (and then back to PsExec) with Named Pipes.</li>
 </ul>
 
 
