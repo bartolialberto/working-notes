@@ -2,102 +2,106 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
     <url>
          <loc>https://bartolialberto.github.io/WorkingNotes/</loc>
-         <lastmod>2026-09-04</lastmod>
+         <lastmod>2026-09-05</lastmod>
     </url>
     <url>
          <loc>https://bartolialberto.github.io/WorkingNotes/Corso%20Principi%20IA%20per%20Ingegneria/AI%20Intro%20-%20Parte%201/</loc>
-         <lastmod>2026-09-04</lastmod>
+         <lastmod>2026-09-05</lastmod>
     </url>
     <url>
          <loc>https://bartolialberto.github.io/WorkingNotes/Corso%20Principi%20IA%20per%20Ingegneria/AI%20Intro%20-%20Parte%202/</loc>
-         <lastmod>2026-09-04</lastmod>
+         <lastmod>2026-09-05</lastmod>
     </url>
     <url>
          <loc>https://bartolialberto.github.io/WorkingNotes/Corso%20Principi%20IA%20per%20Ingegneria/Not%20LIsted/AI%20Intro%20-%20Allucinazione/</loc>
-         <lastmod>2026-09-04</lastmod>
+         <lastmod>2026-09-05</lastmod>
     </url>
     <url>
          <loc>https://bartolialberto.github.io/WorkingNotes/Cybersecurity/AI%20in%20cybersec/</loc>
-         <lastmod>2026-09-04</lastmod>
+         <lastmod>2026-09-05</lastmod>
     </url>
     <url>
          <loc>https://bartolialberto.github.io/WorkingNotes/Cybersecurity/Crime/</loc>
-         <lastmod>2026-09-04</lastmod>
+         <lastmod>2026-09-05</lastmod>
     </url>
     <url>
          <loc>https://bartolialberto.github.io/WorkingNotes/Cybersecurity/Driver%20abuse/</loc>
-         <lastmod>2026-09-04</lastmod>
+         <lastmod>2026-09-05</lastmod>
     </url>
     <url>
          <loc>https://bartolialberto.github.io/WorkingNotes/Cybersecurity/Economics/</loc>
-         <lastmod>2026-09-04</lastmod>
+         <lastmod>2026-09-05</lastmod>
     </url>
     <url>
          <loc>https://bartolialberto.github.io/WorkingNotes/Cybersecurity/IoC/</loc>
-         <lastmod>2026-09-04</lastmod>
+         <lastmod>2026-09-05</lastmod>
     </url>
     <url>
          <loc>https://bartolialberto.github.io/WorkingNotes/Cybersecurity/Persistence/</loc>
-         <lastmod>2026-09-04</lastmod>
+         <lastmod>2026-09-05</lastmod>
     </url>
     <url>
          <loc>https://bartolialberto.github.io/WorkingNotes/Cybersecurity/Phishing/</loc>
-         <lastmod>2026-09-04</lastmod>
+         <lastmod>2026-09-05</lastmod>
     </url>
     <url>
          <loc>https://bartolialberto.github.io/WorkingNotes/Cybersecurity/Secure%20Development/</loc>
-         <lastmod>2026-09-04</lastmod>
+         <lastmod>2026-09-05</lastmod>
     </url>
     <url>
          <loc>https://bartolialberto.github.io/WorkingNotes/Cybersecurity/Secure%20email/</loc>
-         <lastmod>2026-09-04</lastmod>
+         <lastmod>2026-09-05</lastmod>
     </url>
     <url>
          <loc>https://bartolialberto.github.io/WorkingNotes/Cybersecurity/Technical%20Quirks/</loc>
-         <lastmod>2026-09-04</lastmod>
+         <lastmod>2026-09-05</lastmod>
     </url>
     <url>
          <loc>https://bartolialberto.github.io/WorkingNotes/LLM/Coding/</loc>
-         <lastmod>2026-09-04</lastmod>
+         <lastmod>2026-09-05</lastmod>
     </url>
     <url>
          <loc>https://bartolialberto.github.io/WorkingNotes/LLM/LLM%20Internals/</loc>
-         <lastmod>2026-09-04</lastmod>
+         <lastmod>2026-09-05</lastmod>
     </url>
     <url>
          <loc>https://bartolialberto.github.io/WorkingNotes/LLM/LLM%20Performance/</loc>
-         <lastmod>2026-09-04</lastmod>
+         <lastmod>2026-09-05</lastmod>
     </url>
     <url>
          <loc>https://bartolialberto.github.io/WorkingNotes/LLM/LLM%20vs%20AI%20Agents/</loc>
-         <lastmod>2026-09-04</lastmod>
+         <lastmod>2026-09-05</lastmod>
     </url>
     <url>
          <loc>https://bartolialberto.github.io/WorkingNotes/LLM/Training/</loc>
-         <lastmod>2026-09-04</lastmod>
+         <lastmod>2026-09-05</lastmod>
     </url>
     <url>
          <loc>https://bartolialberto.github.io/WorkingNotes/LLM/Vulnerability/</loc>
-         <lastmod>2026-09-04</lastmod>
+         <lastmod>2026-09-05</lastmod>
     </url>
     <url>
          <loc>https://bartolialberto.github.io/WorkingNotes/TLS/AitM%20-%20HTTPS/</loc>
-         <lastmod>2026-09-04</lastmod>
+         <lastmod>2026-09-05</lastmod>
+    </url>
+    <url>
+         <loc>https://bartolialberto.github.io/WorkingNotes/TLS/QUIC/</loc>
+         <lastmod>2026-09-05</lastmod>
     </url>
     <url>
          <loc>https://bartolialberto.github.io/WorkingNotes/TLS/Understanding_MITM_proxies_with_HTTPS/</loc>
-         <lastmod>2026-09-04</lastmod>
+         <lastmod>2026-09-05</lastmod>
     </url>
     <url>
          <loc>https://bartolialberto.github.io/WorkingNotes/Windows/Application%20Control/</loc>
-         <lastmod>2026-09-04</lastmod>
+         <lastmod>2026-09-05</lastmod>
     </url>
     <url>
          <loc>https://bartolialberto.github.io/WorkingNotes/Windows/Integrity%201/</loc>
-         <lastmod>2026-09-04</lastmod>
+         <lastmod>2026-09-05</lastmod>
     </url>
     <url>
          <loc>https://bartolialberto.github.io/WorkingNotes/Windows/WInRM%20and%20PsExec/</loc>
-         <lastmod>2026-09-04</lastmod>
+         <lastmod>2026-09-05</lastmod>
     </url>
 </urlset>

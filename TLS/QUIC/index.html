@@ -8,20 +8,20 @@
       
       
       
-        <link rel="canonical" href="https://bartolialberto.github.io/WorkingNotes/Windows/Application%20Control/">
+        <link rel="canonical" href="https://bartolialberto.github.io/WorkingNotes/TLS/QUIC/">
       
       
-        <link rel="prev" href="../../TLS/Understanding_MITM_proxies_with_HTTPS/">
+        <link rel="prev" href="../AitM%20-%20HTTPS/">
       
       
-        <link rel="next" href="../Integrity%201/">
+        <link rel="next" href="../Understanding_MITM_proxies_with_HTTPS/">
       
       <link rel="icon" href="../../assets/images/favicon.png">
       <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.1.5">
     
     
       
-        <title>Application and Behavior Control - Working Notes</title>
+        <title>QUIC and HTTP/3 - Working Notes</title>
       
     
     
@@ -81,7 +81,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#authenticode-code-signing" class="md-skip">
+        <a href="#http2-vs-http11" class="md-skip">
           Skip to content
         </a>
       
@@ -115,7 +115,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Application and Behavior Control
+              QUIC and HTTP/3
             
           </span>
         </div>
@@ -570,14 +570,16 @@
 
   
   
+    
+  
   
     
-    <li class="md-nav__item md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
       
       
       
       
-      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" >
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" checked>
       
       
       
@@ -586,7 +588,7 @@
           <span class="md-nav__icon md-icon"></span>
         </label>
       
-      <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+      <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="true">
         <label class="md-nav__title" for="__nav_5">
           <span class="md-nav__icon md-icon"></span>
           TLS
@@ -599,7 +601,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../TLS/AitM%20-%20HTTPS/" class="md-nav__link">
+      <a href="../AitM%20-%20HTTPS/" class="md-nav__link">
         TLS and HTTPS
       </a>
     </li>
@@ -611,11 +613,68 @@
               
   
   
+    
   
-    <li class="md-nav__item">
-      <a href="../../TLS/QUIC/" class="md-nav__link">
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          QUIC and HTTP/3
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
         QUIC and HTTP/3
       </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#http2-vs-http11" class="md-nav__link">
+    HTTP/2 vs HTTP/1.1
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#http3-quic-vs-http2" class="md-nav__link">
+    HTTP/3 (QUIC) vs HTTP/2
+  </a>
+  
+    <nav class="md-nav" aria-label="HTTP/3 (QUIC) vs HTTP/2">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#connection-establishment" class="md-nav__link">
+    Connection establishment
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
     </li>
   
 
@@ -627,7 +686,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../TLS/Understanding_MITM_proxies_with_HTTPS/" class="md-nav__link">
+      <a href="../Understanding_MITM_proxies_with_HTTPS/" class="md-nav__link">
         Understanding MITM proxies with HTTPS
       </a>
     </li>
@@ -647,16 +706,14 @@
 
   
   
-    
-  
   
     
-    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--nested">
       
       
       
       
-      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6" checked>
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6" >
       
       
       
@@ -665,7 +722,7 @@
           <span class="md-nav__icon md-icon"></span>
         </label>
       
-      <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="true">
+      <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="false">
         <label class="md-nav__title" for="__nav_6">
           <span class="md-nav__icon md-icon"></span>
           Windows
@@ -676,82 +733,11 @@
               
   
   
-    
   
-  
-    <li class="md-nav__item md-nav__item--active">
-      
-      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
-      
-      
-      
-        <label class="md-nav__link md-nav__link--active" for="__toc">
-          Application and Behavior Control
-          <span class="md-nav__icon md-icon"></span>
-        </label>
-      
-      <a href="./" class="md-nav__link md-nav__link--active">
+    <li class="md-nav__item">
+      <a href="../../Windows/Application%20Control/" class="md-nav__link">
         Application and Behavior Control
       </a>
-      
-        
-
-<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
-  
-  
-  
-  
-    <label class="md-nav__title" for="__toc">
-      <span class="md-nav__icon md-icon"></span>
-      Table of contents
-    </label>
-    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#authenticode-code-signing" class="md-nav__link">
-    Authenticode (code signing)
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#attack-surface-reduction-asr" class="md-nav__link">
-    Attack Surface Reduction (ASR)
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#wdac-windows-defender-application-control" class="md-nav__link">
-    WDAC  (Windows Defender Application Control)
-  </a>
-  
-    <nav class="md-nav" aria-label="WDAC  (Windows Defender Application Control)">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#reputation" class="md-nav__link">
-    Reputation
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#applocker" class="md-nav__link">
-    AppLocker
-  </a>
-  
-</li>
-      
-    </ul>
-  
-</nav>
-      
     </li>
   
 
@@ -763,7 +749,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../Integrity%201/" class="md-nav__link">
+      <a href="../../Windows/Integrity%201/" class="md-nav__link">
         Windows Integrity Architecture
       </a>
     </li>
@@ -777,7 +763,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../WInRM%20and%20PsExec/" class="md-nav__link">
+      <a href="../../Windows/WInRM%20and%20PsExec/" class="md-nav__link">
         WinRM and PsExec
       </a>
     </li>
@@ -816,43 +802,29 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#authenticode-code-signing" class="md-nav__link">
-    Authenticode (code signing)
+  <a href="#http2-vs-http11" class="md-nav__link">
+    HTTP/2 vs HTTP/1.1
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#attack-surface-reduction-asr" class="md-nav__link">
-    Attack Surface Reduction (ASR)
+  <a href="#http3-quic-vs-http2" class="md-nav__link">
+    HTTP/3 (QUIC) vs HTTP/2
   </a>
   
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#wdac-windows-defender-application-control" class="md-nav__link">
-    WDAC  (Windows Defender Application Control)
-  </a>
-  
-    <nav class="md-nav" aria-label="WDAC  (Windows Defender Application Control)">
+    <nav class="md-nav" aria-label="HTTP/3 (QUIC) vs HTTP/2">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#reputation" class="md-nav__link">
-    Reputation
+  <a href="#connection-establishment" class="md-nav__link">
+    Connection establishment
   </a>
   
 </li>
         
       </ul>
     </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#applocker" class="md-nav__link">
-    AppLocker
-  </a>
   
 </li>
       
@@ -871,63 +843,40 @@
                   
 
 
-<h1 id="application-and-behavior-control">Application and Behavior Control</h1>
-<h2 id="authenticode-code-signing">Authenticode (code signing)</h2>
-<p>On a stock, non-domain, unmanaged Windows 11 machine, Authenticode signature validity is essentially advisory for user-mode code (EXE/DLL).</p>
-<p>Neither the Windows loader (CreateProcess) nor the DLL loader (LoadLibrary) performs any Authenticode signature validation. A piece of code that is either <strong>not signed or with an invalid signature is executed anyway</strong>.</p>
-<p>The main exception is when an executable carries the Mark of the Web (MOTW) — i.e., it was <strong>downloaded from the Internet</strong>. In that case, Microsoft Defender SmartScreen evaluates the file's reputation by querying a cloud service (the same as the one queried by WDAC below). Reputation depends on many signals: signature validity, publisher trust, download prevalence, URL/domain reputation, and cloud telemetry. If reputation is insufficient a warning dialog is shown (not a hard block); the user can dismiss it and run the file anyway. This evaluation persists on each launch until sufficient reputation accumulates or the user manually unblocks the file.</p>
-<p>Kernel-mode drivers must instead have a valid Authenticode signature, checked at load time (i.e., every time).</p>
-<h2 id="attack-surface-reduction-asr">Attack Surface Reduction (ASR)</h2>
-<p>It is a form of <strong>policy-based behavioral detection</strong> that block <strong>specific techniques</strong> known to be used by malware and adversaries.</p>
-<p>It consists of a set of approximately 20 rules enforced by Windows Defender. In non-domain joined machines all the ASR rules are disabled by default. They can be managed with PowerShell.</p>
-<p>A subset of the available rules:</p>
+<h1 id="quic-and-http3">QUIC and HTTP/3</h1>
+<h2 id="http2-vs-http11">HTTP/2 vs HTTP/1.1</h2>
+<p>In HTTP/2, each HTTP request/response exchange is associated with its own <strong>stream</strong>. Multiple streams can be multiplexed on the same TCP connection. Streams are largely independent of each other, so a blocked or stalled request or response does not prevent progress on other streams within the same connection. This contrasts with HTTP/1.1 where a blocked connection can stall all ongoing transactions (head of line blocking).</p>
+<p>HTTP/2 is a <strong>binary</strong> protocol. Streams are represented in a binary form, which allowsmore efficient and less error-prone parsing of messages compared to HTTP/1.1's whitespace-delimited text fields.</p>
 <ul>
-<li>Block credential stealing from LSASS.</li>
-<li>Block Adobe Reader from creating child processes.</li>
-<li>Block all Office applications from creating child processes.</li>
-<li>Block executable content from email client and webmail.   </li>
-<li>Block executable files from running unless they meet a prevalence, age, or trusted list criterion.</li>
-<li>Block execution of potentially obfuscated scripts.</li>
-<li>Block JavaScript or VBScript from launching downloaded executable content.</li>
-<li>Block Office applications from creating executable content.</li>
-<li>Block Office applications from injecting code into other processes.</li>
-<li>Block untrusted and unsigned processes that run from USB.</li>
-<li>Block process creations originating from PSExec and WMI commands.</li>
-<li>Block Win32 API calls from Office macros.</li>
-</ul>
-<p>According to Microsoft, some rules can be activated without any prior testing whereas most rules require testing (Audit mode) to make sure they do not block legitimate applications.</p>
-<h2 id="wdac-windows-defender-application-control">WDAC  (Windows Defender Application Control)</h2>
-<p>It allows defining policies for determining whether <strong>a piece of code</strong> (executable, DLL, driver, script) is allowed to <strong>run</strong> at all, <strong>independent of runtime behavior</strong>.</p>
-<p>It is enforced at the kernel level.</p>
-<p>Policies can allow/deny based on publisher certificate, file hash, file path, Package Family Name, or other attributes. They can also be based on a <strong>reputation</strong> level determined dynamically and obtained from a cloud service (see next section).</p>
-<p>One may define policies that lock down a system to only run known, signed, trusted software — common in kiosk machines, regulated/high-security environments. Or, policies that prevent execution of fileless/living-off-the-land attacks that ASR rules don't specifically name.</p>
-<p>Deploying "strict policies" on common environments is hard: they can block many legitimate pieces of code; error messages can be misleading (attributing the observed failure to the real reason is hard). See <a href="https://tharros.com/locking-down-windows-part-2-appcontrol-manager/">Locking down Windows Part 2: AppControl Manager</a> (AppControl Manager is an application with a GUI for managing WDAC).</p>
-<h3 id="reputation">Reputation</h3>
-<p>WDAC rules can be based on the reputation of a piece of code. Reputation is determined entirely by Microsoft's Intelligent Security Graph (ISG) — a cloud-based service, not any local heuristic or on-device analysis.</p>
-<p>ISG is only consulted as a fallback, for binaries that are not explicitly allowed or denied by the WDAC policy. A file "not good" is not allowed to run.</p>
-<p>Important details:</p>
+<li>Header Compression: HTTP/2 includes header field compression, which reduces the amount of redundant and verbose header data sent over the network, leading to lower overhead and faster initial connection setup.</li>
+<li>Server Push: HTTP/2 introduces unsolicited push of representations from servers to clients. This allows a server to proactively send resources that a client is likely to need, potentially reducing latency. </li>
+<li>Most regular HTTP header fields from HTTP/1.1 are still used in HTTP/2. However, there are some important differences in how they are treated (connection-specific headers are no longer used, header field names must be lowercase and other).</li>
+<li>
+<p>HTTP/2 uses special <strong>pseudo-header</strong> fields (starting with a colon, :) to convey the target URI, the method of the request, and the status code for the response (which were part of the start-line in HTTP/1.1):</p>
 <ul>
-<li>The decision from the cloud can change over time. There is a corresponding policy option that forces periodic re-validation of previously-ISG-authorized files.</li>
-<li>Dynamically-generated or frequently-changing files require an explicit rule because they hardly collect a sufficient reputation.</li>
-<li>Apps signed by the Microsoft Store are not covered by ISG, thus they should be authorized via explicit signer rules.</li>
-<li>Boot-critical or business-critical binaries must never rely on ISG and must be allowed using explicit rules.</li>
-<li>Offline/air-gapped environments are a poor fit because they cannot query the ISG.</li>
-<li>When an installer runs that has good reputation according to the ISG, the files that the installer writes to disk will inherit the reputation from the installer — so reputation can propagate from an installer process to the files it drops, not just be evaluated file-by-file.</li>
+<li><code>:method</code> replaces the HTTP method from the request line.</li>
+<li><code>:authority</code> largely replaces the <code>Host</code> header field.</li>
+<li><code>:path</code> replaces the path and query parts of the request URI.</li>
+<li><code>:status</code> replaces the status code from the status line.</li>
 </ul>
-<h2 id="applocker">AppLocker</h2>
-<p>Older <strong>allowlist technology</strong> that applies only to domain-joined machines. It conists of a set of rules that can be targeted to specific users or groups.</p>
-<p>Every AppLocker rule is a static, deterministic match against one of three attributes:</p>
+</li>
+</ul>
+<h2 id="http3-quic-vs-http2">HTTP/3 (QUIC) vs HTTP/2</h2>
+<p>HTTP/3 uses QUIC as its transport protocol, which runs over <strong>UDP</strong>.</p>
+<p>QUIC provides stream multiplexing at the transport layer, whereas HTTP/2 implements it at the application layer as a framing layer on top of TCP. QUIC provides flow and congestion control across the entire connection, not at the stream level.</p>
+<p>QUIC provides <strong>reliability at the stream level</strong>: if a packet is lost, only the affected QUIC stream might be delayed, not necessarily all streams on the connection. HTTP/2 is instead susceptible to head-of-line blocking at the connection level: a lost or reordered TCP packet can stall all active HTTP/2 transactions on that connection.</p>
+<h3 id="connection-establishment">Connection establishment</h3>
+<p>QUIC incorporates TLS 1.3 at the transport layer. QUIC's handshake combines connection establishment and security negotiation, potentially reducing the number of round trips compared to establishing a separate TCP connection and then a TLS handshake as is typical with HTTP/2.</p>
+<p>TLS 1.3:</p>
 <ul>
-<li>Publisher rule — code-signing certificate (publisher name, product name, file name, version range).</li>
-<li>Path rule — file location.</li>
-<li>Hash rule — cryptographic hash of the specific binary.</li>
+<li>When establishing a new connection to a server that hasn't been seen before, it typically takes two RTT before data can be sent. TLS 1.3 aims to reduce this latency (<strong>1-RTT mode</strong>) by allowing the client to send Diffie-Hellman key shares in the first message. This is possible due to a simplified cipher negotiation model and a reduced set of key agreement options.</li>
+<li>TLS 1.3 also introduces zero-RTT resumption (<strong>0-RTT</strong>), which allows clients to send encrypted data in their first message, resulting in no additional latency cost compared to unencrypted HTTP. This is for resumed sessions where the client and server have previously established a shared secret (PSK).</li>
 </ul>
-<p>It is functionally similar to WDAC but with the fundamental limitation of being enforced at user level, not at the kernel level. Thus:</p>
+<p>QUIC:</p>
 <ul>
-<li>An adversary with sufficient privileges can tamper with the defined rules.</li>
-<li>It is unable to block execution of kernel-mode drivers.</li>
+<li>A full handshake for a new connection typically takes 1 RTT, as QUIC leverages TLS 1.3's optimized handshake. In rare situations where the server does not support the client's initial key share in a 1-RTT handshake, the server can send a HelloRetryRequest, requiring an additional RTT.</li>
+<li>A resumed handshake using pre-shared keys (PSK) can achieve 0 RTT.</li>
 </ul>
-<p>Another limitation is that it does not support reputation-based trust of executables.</p>
 
 
   
